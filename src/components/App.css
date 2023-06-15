@@ -1,0 +1,90 @@
+
+input[type="text"],
+input[type="password"] {
+  height: 25px;
+  border: 2px solid rgba(0, 0, 0, 0.2);
+}
+
+body
+{
+    margin: 0;
+    padding: 100px;
+    background-color:#FFFFFF;
+    background-image:url(https://wallpaperaccess.com/full/189067.jpg);
+    background-position: center; 
+    background-repeat: no-repeat; 
+    background-size: cover; 
+    font-family: 'Sans-Serif';
+}
+input[type="submit"] {
+  margin-top: 10px;
+  cursor: pointer;
+  font-size: 15px;
+  background: #29c8dd;
+  border: 2px solid #c00096;
+  color: #fff;
+  padding: 10px 20px;
+}
+
+input[type="submit"]:hover {
+  background: #aa6cf0;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+}
+
+.form {
+  width: 382px;
+  height: 320px;
+  font-size: 16px;
+  overflow: hidden;
+  margin: auto;
+  margin: 20 0 0 450px;
+  padding: 50px;
+  background-color: #EA674B;
+  border-radius: 25px ; 
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.list-container {
+  display: flex;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 10px;
+}
+
+.headings{
+  text-align: center;
+  letter-spacing: 2px;
+  color: #000000;
+  padding: 0px;
+  font-size: 16px
+}
+.adminmsg{
+  background-color: white;
+  padding: 30px;
+  text-align: center;
+  color: black;
+  font-size:18px
+}
+
+label{
+  color: #000000;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.option{
+  color: #000000;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+
+
