@@ -1,7 +1,7 @@
-import './App.css';
-import React, { useState } from "react";
+import './loginStyle.css';
+import React from "react";
 
-function LoginPage() {
+const LoginPage = ()=>{
 
   return(
     <body>

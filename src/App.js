@@ -1,13 +1,22 @@
 import React from "react"
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import LoginPage from './components/loginPage';
+import Login from './pages/loginPage.js';
+import Home from "./pages/homePage";
+import About from "./pages/aboutPage";
+import ServiceTicketPage from "./pages/serviceTicketPage";
+//import NavBar from "./components/headers/NavBar";
 function App() {
   return (
+    <>
     <Router>
       <Routes>
-        <Route exact path="/" Component={LoginPage} />
+        <Route exact path="/login" Component={Login} />
+        <Route exact path="/serviceTicketPage" Component={ServiceTicketPage}/>
+        <Route exact path="/" Component={Home}/>
+        <Route exact path="/about" Component={About}/>
       </Routes>
     </Router>
+    </>
   );
 }
 
