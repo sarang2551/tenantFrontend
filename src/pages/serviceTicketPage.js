@@ -1,13 +1,22 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Navbar from '../components/headers/NavBar';
-const ServiceTicketPage = ()=>{
+import ServiceTicketForm from '../components/tenantComponents/STForm';
+import Popup from 'reactjs-popup';
+import 'reactjs-popup/dist/index.css';
+
+const ServiceTicketPage = (props) => {
+
     return (
         <div>
         <Navbar/>
         <h1>
-        ServiceTickerPage
+        ServiceTicketPage
         </h1>
-        </div>
+        <Popup trigger={<button className="button"> Add Service Ticket </button>} modal>
+        <ServiceTicketForm/>
+        </Popup>
+        
+    </div>
     )
 }
 export default ServiceTicketPage;

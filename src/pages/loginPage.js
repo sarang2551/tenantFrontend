@@ -1,4 +1,4 @@
-import './loginStyle.css';
+//import './loginStyle.css';
 import React from "react";
 
 const LoginPage = ()=>{
