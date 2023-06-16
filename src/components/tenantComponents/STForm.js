@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import {useForm} from 'react-hook-form'
-import "./st_style.css"
+import "./st_form_style.css"
 
 const ServiceTicketForm = () => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
