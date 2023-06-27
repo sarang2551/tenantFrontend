@@ -4,7 +4,7 @@ import Navbar from '../components/headers/NavBar';
 import ServiceTicketForm from '../components/tenantComponents/STForm';
 
 import ServiceTicketHistoryTable from '../components/tenantComponents/STTable';
-
+import Stepper from "./components/tenantComponents/Stepper";
 
 const ServiceTicketPage = (props) => {
     // get all tenant service tickets
