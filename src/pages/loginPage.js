@@ -18,12 +18,12 @@ const LoginPage = ()=>{
           <label>User Type:</label>
             <br></br>
             <label className='option'>
-              <input type="radio" name="Tenant" value="Tenant" />
+              <input type="radio" name="UserType" value="Tenant" />
               Tenant
             </label>
             <br></br>
             <label className='option'>
-              <input type="radio" name="Landlord" value="Landlord" />
+              <input type="radio" name="UserType" value="Landlord" />
               Landlord
             </label>
             </p>
