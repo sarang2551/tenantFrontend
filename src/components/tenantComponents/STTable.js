@@ -4,7 +4,8 @@ import tableIcons from './MaterialIconComponents'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ServiceTicketForm from './STForm';
-import ServiceTicketStatus from './STStatus';
+// import ServiceTicketStatus from './STStatus';
+import ServiceTicketCard from './STCard';
 
 const ServiceTicketHistoryTable = () => {
   const [addTicketOpen, setAddTicketOpen] = useState(false);
@@ -25,7 +26,13 @@ const ServiceTicketHistoryTable = () => {
     ]
     const columns = [
         { title: "Name", field: "name" },
-        { title: "Surname", field: "surname", render:(rowData)=><button className='StatusInfo' onClick={handleInfoTicket}>Check Status</button> },
+        { title: "Surname", field: "surname", render:(rowData)=>
+        <div>
+          <button className='StatusInfo' onClick={handleInfoTicket}>
+            Check Status</button>{infoTicketOpen && <ServiceTicketCard />}
+            </div>
+        }
+      
   ];
 
   return (
@@ -59,7 +66,7 @@ const ServiceTicketHistoryTable = () => {
       </Popup>
 
       <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
-        <ServiceTicketStatus />
+        <ServiceTicketCard />
       </Popup>
 
     </div>
