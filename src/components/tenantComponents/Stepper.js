@@ -5,33 +5,10 @@ import {TiTick} from "react-icons/ti";
 
 const Stepper = (props) => {
     const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
-    const [currentStep, setCurrentStep] = useState(props.props);
+    const [currentStep, setCurrentStep] = useState(props.initialStep);
     const [complete, setComplete] = useState(false);
     console.log(props.props)
 
-    // useEffect(() => {
-    //     const storedStep = localStorage.getItem("currentStep");
-    
-    //     if (storedStep) {
-    //       setCurrentStep(Number(storedStep));
-    //     }
-    //   }, []);
-    
-    //   useEffect(() => {
-
-    //     localStorage.setItem("currentStep", currentStep.toString());
-    
-   
-    //     setComplete(currentStep === steps.length);
-    //   }, [currentStep, steps.length]);
-
-    // const handleNext = () => {
-    //     if (currentStep === steps.length) {
-    //         setComplete(true);
-    //     } else {
-    //         setCurrentStep(prevStep => prevStep +1);
-    //     }
-    // };
     return (
        <>
         <div className="flex justify-between">
@@ -41,7 +18,7 @@ const Stepper = (props) => {
                 className={'step-item ${currentStep ===  i + 1 && "active" } ${(i+1 < currentStep || complete)&& "complete"}' }
                 > 
                     <div className="step">
-                        {i + 1 < currentStep || complete ? <TiTick size={24} /> : i + 1 }
+                        {i  < currentStep || complete ? <TiTick size={24} /> : i + 1 }
                     </div> 
                     <p className = "text-gray-500">{step}</p>
               </div>
