@@ -4,11 +4,18 @@ import tableIcons from './MaterialIconComponents'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ServiceTicketForm from './STForm';
+// import ServiceTicketStatus from './STStatus';
+import ServiceTicketCard from './STCard';
 
 const ServiceTicketHistoryTable = () => {
-    const [isOpen,setOpen] = useState(false)
+  const [addTicketOpen, setAddTicketOpen] = useState(false);
+  const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const handleAddTicket = () => {
-        setOpen(true)
+      setAddTicketOpen(true)
+    }
+
+    const handleInfoTicket = () => {
+      setInfoTicketOpen(true)
     }
     const data = [
         // name: Service Ticket Name
@@ -19,7 +26,13 @@ const ServiceTicketHistoryTable = () => {
     ]
     const columns = [
         { title: "Name", field: "name" },
-        { title: "Surname", field: "surname", render:(rowData)=><button>Click this</button> },
+        { title: "Surname", field: "surname", render:(rowData)=>
+        <div>
+          <button className='StatusInfo' onClick={handleInfoTicket}>
+            Check Status</button>{infoTicketOpen && <ServiceTicketCard />}
+            </div>
+        }
+      
   ];
 
   return (
@@ -41,15 +54,21 @@ const ServiceTicketHistoryTable = () => {
           isFreeAction: true,
           onClick: (event) => handleAddTicket()
         },
+        
       ]}
       options={{
         search: true,
         paging: true,
       }}
     />
-    <Popup open={isOpen} onClose={()=>setOpen(false)} modal>
-        <ServiceTicketForm/>
-    </Popup>
+     <Popup open={addTicketOpen} onClose={() => setAddTicketOpen(false)} modal>
+        <ServiceTicketForm />
+      </Popup>
+
+      <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
+        <ServiceTicketCard />
+      </Popup>
+
     </div>
 
   );

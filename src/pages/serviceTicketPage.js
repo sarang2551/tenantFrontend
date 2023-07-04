@@ -5,7 +5,6 @@ import ServiceTicketForm from '../components/tenantComponents/STForm';
 
 import ServiceTicketHistoryTable from '../components/tenantComponents/STTable';
 
-
 const ServiceTicketPage = (props) => {
     // get all tenant service tickets
 
