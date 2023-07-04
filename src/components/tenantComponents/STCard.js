@@ -5,7 +5,7 @@ import Stepper from "./Stepper";
 
 const ServiceTicketCard = (props) => {
   const content = props.images; // list of images for this particular service ticket
-  return (
+  
     // <div>
     //   <Slider>
     //     {content.map((item, index) => (
@@ -23,26 +23,41 @@ const ServiceTicketCard = (props) => {
     //     ))}
     //   </Slider>
 
+    const ticketdata= {
+      ticketNameInfo:'Fix Aircon',
+      description:' aircon spoil',
+      landlordName: ' Franco',
+      documents:['fiefj','vnvif'],
+      progressStage: 2
+
+    };
+        // name: Service Ticket Name
+        // details: Ticket information
+        const allsteps = ["Processing request", "Acceptance quotation", "Service Scheduling", "Work In Progress", "Completed"];
+
+
+     return (
+
       <div>
         <div className='adminmsg'>
           <h1>Service Ticket Status</h1>
         </div>
         <div className="Status">
           <label>Ticket Name:</label>
-          <span className='FromDataBase'>Ticket Name Info</span>
+          <span className='ticketNameInfo'> {ticketdata.ticketNameInfo} </span>
           <br/>
           <label>Description:</label>
-          <span className='FromDataBase'>Description Info</span>
+          <span className='DescriptionInfo'>{ticketdata.description}</span>
           <br/>
           <label>Landlord:</label>
-          <span className='FromDataBase'>Landlord Info</span>
+          <span className='landlordName'>{ticketdata.landlordName}</span>
           <br/>
           <label>Files Submitted:</label>
-          <span className='FromDataBase'>Files submitted Info</span>
+          <span className='FromDataBase'>{ticketdata.documents}</span>
           <br/>
           <label>Progress:</label>
 		  <div className = "stepper-container">
-		  	<Stepper />
+		  	<Stepper  props = {ticketdata.progressStage}/>
 		  </div>
         </div>
         <br></br>

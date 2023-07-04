@@ -1,19 +1,44 @@
-import React, { useState } from "react";
-import "./Stepper.css";
+import React, { useState,useEffect } from "react";
+// import "./Stepper_style.css";
 import {TiTick} from "react-icons/ti";
 
 
-const Stepper = () => {
+const Stepper = (props) => {
     const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
-    const [currentStep, setCurrentStep] = useState(1);
+    const [currentStep, setCurrentStep] = useState(props.props);
     const [complete, setComplete] = useState(false);
+    console.log(props.props)
+
+    // useEffect(() => {
+    //     const storedStep = localStorage.getItem("currentStep");
+    
+    //     if (storedStep) {
+    //       setCurrentStep(Number(storedStep));
+    //     }
+    //   }, []);
+    
+    //   useEffect(() => {
+
+    //     localStorage.setItem("currentStep", currentStep.toString());
+    
+   
+    //     setComplete(currentStep === steps.length);
+    //   }, [currentStep, steps.length]);
+
+    // const handleNext = () => {
+    //     if (currentStep === steps.length) {
+    //         setComplete(true);
+    //     } else {
+    //         setCurrentStep(prevStep => prevStep +1);
+    //     }
+    // };
     return (
        <>
         <div className="flex justify-between">
             {steps?.map((step,i)=>(
                 <div 
                 key={i} 
-                className={'step-item ${currentStep === i + 1 && "active" } ${(i+1 < currentStep || complete)&& "complete"}' }
+                className={'step-item ${currentStep ===  i + 1 && "active" } ${(i+1 < currentStep || complete)&& "complete"}' }
                 > 
                     <div className="step">
                         {i + 1 < currentStep || complete ? <TiTick size={24} /> : i + 1 }
@@ -22,18 +47,17 @@ const Stepper = () => {
               </div>
             ))}
           </div>
-          {
-            !complete && <button 
-            className="btn" 
-            onClick={()=>{
-                currentStep === steps.length ? setComplete(true)
-                : setCurrentStep(prev =>prev+1);
-            }}
-            >
-                {currentStep === steps.length ? "Finish" : "Next"}
-                </button>
 
-          }
+      {!complete && (
+        <button
+          className="btn"
+          onClick={() => {
+            currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
+          }}
+        >
+          {currentStep === steps.length ? "Finish" : "Next"}
+        </button>
+      )}    
           
           </>
 
@@ -86,6 +110,15 @@ const Stepper = () => {
 //   );
 // };
 
+// !complete && <button 
+// className="btn" 
+// onClick={({handleNext})=>{
+//     currentStep === steps.length ? setComplete(true)
+//     : setCurrentStep(prev =>prev+1);
+// }}
+// >
+//     {currentStep === steps.length ? "Finish" : "Next"}
+//     </button>
 
 
 
