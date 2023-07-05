@@ -10,9 +10,9 @@ function App() {
     <>
     <Router>
       <Routes>
-        <Route exact path="/login" Component={Login} />
+        <Route exact path="/" Component={Login} />
         <Route exact path="/serviceTicketPage" Component={ServiceTicketPage}/>
-        <Route exact path="/" Component={Home}/>
+        <Route exact path="/home" Component={Home}/>
         <Route exact path="/about" Component={About}/>
       </Routes>
     </Router>

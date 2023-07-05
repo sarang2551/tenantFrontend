@@ -23,32 +23,21 @@ const ServiceTicketHistoryTable = (props) => {
     const data = [
         // name: Service Ticket Name
         // details: Ticket information
-        {name: 'Fix Aircon', surname: 'Baran',
-      ticketData:{
-        ticketNameInfo:'Fix Aircon',
-        description:' aircon spoil',
-        landlordName: ' Franco',
-        documents:['file1','file2'],
-        progressStage: 3
-      }
-    },
-        {name: 'Fix Plumbing', surname: 'Baran',
-      ticketData:{
-        ticketNameInfo:'Fix Plumbing',
-        description:' pipe burst',
-        landlordName: ' Alice',
-        documents:['file3','file6'],
-        progressStage: 2
-      }}
+        {title: 'Air conditioning repair', unit: 'B01',},
+        {title: 'Washing Machine replacement', unit: 'B02'}
         
     ]
     const columns = [
-        { title: "Name", field: "name" },
-        { title: "Surname", field: "surname", render:(rowData)=>
-        <div>
-          <button className='StatusInfo' onClick={() => handleInfoTicket(rowData.ticketData)}
-            >Check Status</button>{infoTicketOpen }
-            </div>
+        { title: "Title", field: "title" },
+        {title:"Unit", field:"unit"},
+        { title: "Status", render:(rowData)=>{
+            return <div>
+            <button className='StatusInfo' onClick={handleInfoTicket}>
+              Check Status</button>
+              {/* {infoTicketOpen && <ServiceTicketCard props = {rowData}/>} */}
+              </div>
+        }
+        
         }
       
   ];

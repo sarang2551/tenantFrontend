@@ -10,7 +10,7 @@ function LandlordHome() {
         name: 'test', 
         password: 'test123', 
       }; 
-    await axios.post("http://localhost:8000/tenant/tenantLogin",getTenant).then(response => { 
+    await axios.post("http://localhost:8000/landlord/verifyLogin",getTenant).then(response => { 
         console.log('Response:', response.data); 
       }) 
       .catch(error => { 

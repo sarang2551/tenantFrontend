@@ -32,12 +32,12 @@ const NotifBar = (props) => {
     //     fetchData();
     //   }, []);
     const itemsArray = [
-        {title:"Test Notif", 
-        text:"Sending to tenant",
-        landlordID:"123", tenantID:"456", dateSent:new Date().getDate()},
-        {title:"Test Notif 2", 
-        text:"Sending to tenant",
-        landlordID:"123", tenantID:"456", dateSent:new Date().getDate()}
+        {title:"Added Service Ticket for Unit B01", 
+        description:"Sending to tenant",
+        landlordID:"123", tenantID:"456", date:new Date().getDate()},
+        {title:"Updated Service Ticket to Stage 3", 
+        description:"Sending to tenant",
+        landlordID:"123", tenantID:"456", date:new Date().getDate()}
         ]
     const classes = useStyles();
     return (
