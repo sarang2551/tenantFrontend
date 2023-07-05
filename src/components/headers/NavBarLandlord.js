@@ -8,7 +8,7 @@ NavBtn,
 NavBtnLink, 
 } from './NavElements'; 
 import NotifBar from '../notifBar/NotifBar'; 
-import tableIcons from '../LandlordComponents/MaterialIconComponents'; 
+import tableIcons from '../tenantComponents/MaterialIconComponents';
 import "./assets/css/style.css"
 
 const NavbarLandlord = () => { 
@@ -16,16 +16,16 @@ const NavbarLandlord = () => {
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 
         setNotifOpen(!notifOpen); 
-        console.log(notifOpen) 
     } 
     return ( 
+        <>
         <nav className="nav flex-between"> 
       <div className="nav__menu-wrapper flex"> 
 
         <div className="nav__menu flex-between"> 
           <div className="nav__menu-list flex"> 
             <div className="nav__item nav__item--dropdown"> 
-              <a href="/" className="nav__link">Home</a> 
+              <a href="/landlord/home" className="nav__link">Home</a> 
 
               <div className="nav__dropdown with-icons"> 
               </div> 
@@ -41,15 +41,21 @@ const NavbarLandlord = () => {
             <div className="nav__item"> 
               <a href="#" className="nav__link">Profile</a> 
             </div> 
+            <div className="nav__item"> 
+            <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen' } : {}}/>
+            </div> 
           </div> 
           <div className="nav__item"> 
               <a href="/TenantInformationPage" className="nav__link">Tenant Information</a> 
             </div> 
+        
         </div> 
       </div> 
 
       <div className="nav__overlay"></div> 
     </nav> 
+    {notifOpen && <NotifBar props={notifOpen}/>}
+    </>
     ) 
 }; 
 export default NavbarLandlord;

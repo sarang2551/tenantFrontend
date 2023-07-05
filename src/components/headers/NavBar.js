@@ -24,7 +24,7 @@ const Navbar = () => {
         <div className="nav__menu flex-between"> 
           <div className="nav__menu-list flex"> 
             <div className="nav__item"> 
-              <a href="/" className="nav__link">Home</a> 
+              <a href="/tenant/home" className="nav__link">Home</a> 
             </div> 
             <div className="nav__item"> 
               <a href="/serviceTicketPage" className="nav__link">Make Requests</a> 

@@ -1,22 +1,26 @@
-import React from 'react' 
+import React,{useState} from 'react' 
 import NavbarLandlord from '../components/headers/NavBarLandlord' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
 
 function LandlordHome() { 
-  const testingServer = async()=>{ 
-    console.log("Clicked button") 
-    const getTenant = { 
-        name: 'test', 
-        password: 'test123', 
-      }; 
-    await axios.post("http://localhost:8000/landlord/verifyLogin",getTenant).then(response => { 
-        console.log('Response:', response.data); 
-      }) 
-      .catch(error => { 
-        console.error('Error:', error); 
-      }); 
-  } 
+//   const testingServer = async()=>{ 
+//     console.log("Clicked button") 
+//     const getTenant = { 
+//         name: 'test', 
+//         password: 'test123', 
+//       }; 
+//     await axios.post("http://localhost:8000/landlord/verifyLogin",getTenant).then(response => { 
+//         console.log('Response:', response.data); 
+//       }) 
+//       .catch(error => { 
+//         console.error('Error:', error); 
+//       }); 
+//   } 
+const  [notifOpen, setNotifOpen] = useState(false) 
+    const toggleNotifBar = () =>{ 
+        setNotifOpen(!notifOpen); 
+    } 
   return ( 
   <div> 
   <NavbarLandlord/> 

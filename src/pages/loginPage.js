@@ -19,7 +19,7 @@ const LoginPage = ()=>{
             await axios.post(`http://localhost:8000/${userType}/verifyLogin`,data).then(response=>{
                 
                 if(response.status === 200){
-                    navigate("/home")
+                    navigate(`/${userType}/home`)
                 } else {
                     setErrorShow(true);
                     setErrorMessage("Error loging in") /** TODO: Need to make this error dynamic */

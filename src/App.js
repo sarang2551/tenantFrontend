@@ -4,6 +4,7 @@ import Login from './pages/loginPage.js';
 import Home from "./pages/homePage";
 import About from "./pages/aboutPage";
 import ServiceTicketPage from "./pages/serviceTicketPage";
+import LandlordHome from "./pages/Landlordhomepage.js";
 //import NavBar from "./components/headers/NavBar";
 function App() {
   return (
@@ -12,8 +13,9 @@ function App() {
       <Routes>
         <Route exact path="/" Component={Login} />
         <Route exact path="/serviceTicketPage" Component={ServiceTicketPage}/>
-        <Route exact path="/home" Component={Home}/>
+        <Route exact path="/tenant/home" Component={Home}/>
         <Route exact path="/about" Component={About}/>
+        <Route exact path="/landlord/home" Component={LandlordHome}/>
       </Routes>
     </Router>
     </>
