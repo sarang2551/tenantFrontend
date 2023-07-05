@@ -32,7 +32,7 @@ const ServiceTicketHistoryTable = (props) => {
         {title:"Unit", field:"unit"},
         { title: "Status", render:(rowData)=>{
             return <div>
-            <button className='StatusInfo' onClick={handleInfoTicket}>
+            <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
               Check Status</button>
               {/* {infoTicketOpen && <ServiceTicketCard props = {rowData}/>} */}
               </div>

@@ -6,23 +6,7 @@ import Stepper from "./Stepper";
 const ServiceTicketCard = (props) => {
   const content = props.images; // list of images for this particular service ticket
   const ticketData = props.ticketData
-  
-    // <div>
-    //   <Slider>
-    //     {content.map((item, index) => (
-    //       <div
-    //         key={index}
-    //         style={{ background: `url('${item}') no-repeat center center` }}
-    //       >
-    //         <div className="center">
-    //           <Stepper />
-    //           {/* <h1>{item.title}</h1>
-    //           <p>{item.description}</p>
-    //           <button>{item.button}</button> */}
-    //         </div>
-    //       </div>
-    //     ))}
-    //   </Slider>
+
 
     // const ticketdata= {
     //   ticketNameInfo:'Fix Aircon',
@@ -38,17 +22,35 @@ const ServiceTicketCard = (props) => {
 
 
      return (
-
+        <div>
+        <Slider>
+          {content?.map((item, index) => (
+            <div
+              key={index}
+              style={{ background: `url('${item}') no-repeat center center` }}
+            >
+              <div className="center">
+                <Stepper />
+                {/* <h1>{item.title}</h1>
+                <p>{item.description}</p>
+                <button>{item.button}</button> */}
+              </div>
+            </div>
+          ))}
+        </Slider>
       <div>
         <div className='adminmsg'>
           <h1>Service Ticket Status</h1>
         </div>
         <div className="Status">
           <label>Ticket Name:</label>
-          <span className='ticketNameInfo'> {ticketData.ticketNameInfo} </span>
+          <span className='ticketNameInfo'> {ticketData.title} </span>
           <br/>
           <label>Description:</label>
-          <span className='DescriptionInfo'>{ticketData.description}</span>
+          <span className='DescriptionInfo'>{ticketData.description || "Air conditioning servicing needed for multiple rooms"}</span>
+          <br/>
+          <label>Unit:</label>
+          <span className='DescriptionInfo'>{ticketData.unit}</span>
           <br/>
           <label>Landlord:</label>
           <span className='landlordName'>{ticketData.landlordName}</span>
@@ -62,6 +64,7 @@ const ServiceTicketCard = (props) => {
 		  </div>
         </div>
         <br></br>
+      </div>
       </div>
   );
 };

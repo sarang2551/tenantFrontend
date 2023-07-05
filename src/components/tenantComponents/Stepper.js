@@ -7,7 +7,6 @@ const Stepper = (props) => {
     const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
     const [currentStep, setCurrentStep] = useState(props.initialStep);
     const [complete, setComplete] = useState(false);
-    console.log(props.props)
 
     return (
        <>
