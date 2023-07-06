@@ -22,7 +22,7 @@ const LoginPage = ()=>{
                     navigate(`/${userType}/home`)
                 } else {
                     setErrorShow(true);
-                    setErrorMessage("Error loging in") /** TODO: Need to make this error dynamic */
+                    setErrorMessage("Error logging in") /** TODO: Need to make this error dynamic */
                     const timer = setTimeout(() => {
                       setErrorShow(false)
                       setErrorMessage("")
@@ -32,7 +32,7 @@ const LoginPage = ()=>{
             })
         } catch (error) {
                 setErrorShow(true);
-                setErrorMessage("Error loging in") /** TODO: Need to make this error dynamic */
+                setErrorMessage("Error logging in") /** TODO: Need to make this error dynamic */
                 setTimeout(() => {
                   setErrorShow(false)
                   setErrorMessage("")
