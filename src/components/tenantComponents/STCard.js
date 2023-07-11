@@ -57,7 +57,7 @@ const ServiceTicketCard = ({ticketData}) => {
           <br/>
           <label>Progress:</label>
 		  <div className = "stepper-container">
-		  	<Stepper initialStep = {ticketData.progressStage}/>
+		  	<Stepper ticketData = {ticketData}/>
 		  </div>
         </div>
         <br></br>

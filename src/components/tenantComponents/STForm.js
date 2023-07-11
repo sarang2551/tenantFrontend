@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import "./st_form_style.css"
 import axios from "axios"
 
-const ServiceTicketForm = ({onClose}) => {
+const ServiceTicketForm = ({onClose, onAddition}) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [landlordOptions, setLandlordOptions] = useState([{landlordName:"landlord 1",landlordID:"ll1"}]); // change this to an empty object later
   const [unitOptions,setUnitOptions] = useState([{unitID:"B01"}]) 
@@ -23,11 +23,12 @@ const ServiceTicketForm = ({onClose}) => {
                 var {landlordID, landlordName} = landlordOptions[data.landlordIdx];
                 var {unitID} = unitOptions[data.unitIdx]
                 var tenantName = "test" /**TODO: Get user data from session  */
-                var tenantID = "64875a59bd2e5989a5e90e1d"
+                var tenantID = "64ad758ce3307f7723aa6330"
                 const serviceTicketObject = {tenantName,tenantID,unitID,landlordID,landlordName,title,description,images}
                 const result = await axios.post("http://localhost:8000/tenant/addServiceTicket",serviceTicketObject)
                 if(result.status === 200){
                     onClose()
+                    onAddition()
                 }
   }
   

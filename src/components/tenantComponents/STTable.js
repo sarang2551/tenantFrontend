@@ -17,6 +17,28 @@ const ServiceTicketHistoryTable = (props) => {
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }
+    const fetchData = async () => {
+      try {
+        const userID = "64ad758ce3307f7723aa6330" /** TODO: get ID from session */
+        const response = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
+        var data = response.data 
+        setData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+      }
+    };
+    const handleDeleteTicket = async(rowData) => {
+      
+      const response = await axios.delete("http://localhost:8000/tenant/deleteServiceTicket",{data:rowData})
+      var data = response.data
+      if(data.status === 200){
+          fetchData()
+          console.log(data.message)
+      } else {
+        console.log(data) /** TODO: Add UI Error component */
+      }
+    }
+
     const handleClosePopup = () => {
         setAddTicketOpen(false);
       };
@@ -27,19 +49,6 @@ const ServiceTicketHistoryTable = (props) => {
     }
     useEffect(() => {
         // Fetch data from the API endpoint
-        const fetchData = async () => {
-          try {
-            const userID = "64875a59bd2e5989a5e90e1d" /** TODO: get ID from session */
-            const response = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
-            var data = response.data 
-            console.log("Data retrieved")
-            console.log(data)
-            setData(data);
-          } catch (error) {
-            console.error('Error fetching data:', error);
-          }
-        };
-    
         fetchData();
       }, []);
     // const data = [
@@ -74,12 +83,12 @@ const ServiceTicketHistoryTable = (props) => {
       actions={[
         {
           icon: tableIcons.Delete,
-          tooltip: "Delete User",
-          onClick: (event, rowData) => alert("Deleting service ticket")
+          tooltip: "Delete Ticket",
+          onClick: (event, rowData) => handleDeleteTicket(rowData).then(()=>fetchData())
         },
         {
           icon: tableIcons.Add,
-          tooltip: "Add User",
+          tooltip: "Add Ticket",
           isFreeAction: true,
           onClick: (event) => handleAddTicket()
         },
@@ -91,7 +100,7 @@ const ServiceTicketHistoryTable = (props) => {
       }}
     />
      <Popup open={addTicketOpen} onClose={handleClosePopup} modal>
-        <ServiceTicketForm onClose={handleClosePopup}/>
+        <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData}/> 
       </Popup>
 
       {selectedTicket && (
