@@ -5,8 +5,8 @@ import axios from "axios"
 
 const ServiceTicketForm = ({onClose, onAddition}) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const [landlordOptions, setLandlordOptions] = useState([{landlordName:"landlord 1",landlordID:"ll1"}]); // change this to an empty object later
-  const [unitOptions,setUnitOptions] = useState([{unitID:"B01"}]) 
+  const [landlordName, setLandlordName] = useState(); // change this to an empty object later
+  const [unitData,setUnitData] = useState() 
   const onSubmit = async(data) => {
     // handle submission of serviceTicket
     // var document = {
@@ -20,11 +20,9 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
                 // "unitID":"" check
                 // }
                 const {title,description,images} = data
-                var {landlordID, landlordName} = landlordOptions[data.landlordIdx];
-                var {unitID} = unitOptions[data.unitIdx]
                 var tenantName = "test" /**TODO: Get user data from session  */
-                var tenantID = "64ad758ce3307f7723aa6330"
-                const serviceTicketObject = {tenantName,tenantID,unitID,landlordID,landlordName,title,description,images}
+                var userID = "64ad758ce3307f7723aa6330"
+                const serviceTicketObject = {tenantName,userID,landlordName,title,description,images}
                 const result = await axios.post("http://localhost:8000/tenant/addServiceTicket",serviceTicketObject)
                 if(result.status === 200){
                     onClose()
@@ -32,21 +30,26 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
                 }
   }
   
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch('https://localhost:8000/tenant/getLandlordList');
-//         const data = await response.json();
-//         setLandlordOptions(data);
-//         const unitResponse = await fetch('http://localhost:8000/tenant/getUnitsList)
-//          const unitData = await unitResponse.json();
-//       } catch (error) {
-//         console.error('Error fetching dropdown options:', error);
-//       }
-//     };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        var userID = "64ad758ce3307f7723aa6330"
+        const response = await axios.get(`http://localhost:8000/tenant/getUnit&LandlordData/${userID}`);
+        var data = response.data
+        if(data.status == 200){
+            const tenantObject = data.tenantObject
+            setUnitData(tenantObject.UnitID)
+            setLandlordName(tenantObject.landlordName)
+        }else{
+          console.log(`Error getting tenant data for tenant ${userID} for addition `)
+        }
+      } catch (error) {
+        console.error('Error fetching landlord and unit data', error);
+      }
+    };
   
-//     fetchData();
-//   }, []);
+    fetchData();
+  }, []);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -55,22 +58,23 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
     <input type='text' defaultValue="Description" {...register("description", { required: true })} />
     <br/>
     <label>
-    Choose a landlord
-    <select id="landlord_selection" {...register("landlordIdx", { required: true })}>
+    Landlord: <p id="landlord_name">{landlordName}</p>
+    {/* <select id="landlord_selection" {...register("landlordIdx", { required: true })}>
         {landlordOptions.map((option,idx) => (
           <option key={idx} value={idx} >
             {option.landlordName}
           </option>
         ))}
-      </select>
-    Choose a Unit
-      <select id="unit_selection" {...register("unitIdx", { required: true })}>
+      </select> */}
+    Unit: <p id="unit_name">{unitData}</p>
+    
+      {/* <select id="unit_selection" {...register("unitIdx", { required: true })}>
         {unitOptions.map((option,idx) => (
           <option key={idx} value={idx} >
             {option.unitID}
           </option>
         ))}
-      </select>
+      </select> */}
     </label>
       Attach Images 
       <input
@@ -82,8 +86,6 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
         <input type="submit" />
       {errors.ticket_name && <span>Name is required</span>}
       {errors.description && <span>Description is required</span>}
-      {errors.unitIdx && <span>A Unit needs to be selected</span>}
-      {errors.landlordIdx && <span>A Landlord needs to be selected</span>}
       {/* {errors.documents && <span>At least one document is required</span>} */}
     </form>
   );
