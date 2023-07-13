@@ -24,14 +24,14 @@ const NavbarLandlord = () => {
 
         <div className="nav__menu flex-between"> 
           <div className="nav__menu-list flex"> 
-            <div className="nav__item nav__item--dropdown"> 
+            <div className="nav__item "> 
               <a href="/landlord/home" className="nav__link">Home</a> 
 
               <div className="nav__dropdown with-icons"> 
               </div> 
             </div> 
-            <div className="nav__item nav__item--dropdown"> 
-              <a href="/serviceTicketPage" className="nav__link">Tenant Requests</a> 
+            <div className="nav__item "> 
+              <a href="/landlord/serviceTicketPage" className="nav__link">Tenant Requests</a> 
 
 
             </div> 

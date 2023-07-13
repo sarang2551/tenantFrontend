@@ -1,8 +1,9 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import MaterialTable from "material-table";
 import tableIcons from "../tenantComponents/MaterialIconComponents";
 import Popup from "reactjs-popup";
 import axios from "axios";
+import ServiceTicketCard from "../tenantComponents/STCard";
 
 const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
@@ -19,6 +20,11 @@ const LandlordServiceTicketTable = () => {
           console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
         }
       };
+
+      useEffect(() => {
+        // Fetch data from the API endpoint
+        fetchData();
+      }, []);
 
     const handleInfoTicket = (ticketData) => {
         setSelectedTicket(ticketData);
@@ -51,9 +57,6 @@ const LandlordServiceTicketTable = () => {
         paging: true,
       }}
     />
-    <Popup open={addTicketOpen} onClose={handleClosePopup} modal>
-    <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData}/> 
-  </Popup>
 
   {selectedTicket && (
     <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
