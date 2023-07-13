@@ -3,10 +3,8 @@ import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import Stepper from "./Stepper";
 
-const ServiceTicketCard = (props) => {
-  const content = props.images; // list of images for this particular service ticket
-  const ticketData = props.ticketData
-
+const ServiceTicketCard = ({ticketData}) => {
+  var content = Array.isArray(ticketData.images) ? ticketData.images : []; // list of images for this particular service ticket
 
     // const ticketdata= {
     //   ticketNameInfo:'Fix Aircon',
@@ -30,7 +28,6 @@ const ServiceTicketCard = (props) => {
               style={{ background: `url('${item}') no-repeat center center` }}
             >
               <div className="center">
-                <Stepper />
                 {/* <h1>{item.title}</h1>
                 <p>{item.description}</p>
                 <button>{item.button}</button> */}
@@ -60,7 +57,7 @@ const ServiceTicketCard = (props) => {
           <br/>
           <label>Progress:</label>
 		  <div className = "stepper-container">
-		  	<Stepper initialStep = {ticketData.progressStage}/>
+		  	<Stepper ticketData = {ticketData}/>
 		  </div>
         </div>
         <br></br>

@@ -1,35 +1,65 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import MaterialTable from 'material-table';
 import tableIcons from './MaterialIconComponents'
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import ServiceTicketForm from './STForm';
 // import ServiceTicketStatus from './STStatus';
+import axios from 'axios';
 import ServiceTicketCard from './STCard';
 
 const ServiceTicketHistoryTable = (props) => {
   const [addTicketOpen, setAddTicketOpen] = useState(false);
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState (false);
+  const [data,setData] = useState([])
+
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }
+    const fetchData = async () => {
+      try {
+        const userID = "64ad758ce3307f7723aa6330" /** TODO: get ID from session */
+        const response = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
+        var data = response.data 
+        setData(data);
+      } catch (error) {
+        console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+      }
+    };
+    const handleDeleteTicket = async(rowData) => {
+      
+      const response = await axios.delete("http://localhost:8000/tenant/deleteServiceTicket",{data:rowData})
+      var data = response.data
+      if(data.status === 200){
+          fetchData()
+          console.log(data.message)
+      } else {
+        console.log(data) /** TODO: Add UI Error component */
+      }
+    }
 
+    const handleClosePopup = () => {
+        setAddTicketOpen(false);
+      };
     const handleInfoTicket = (ticketData) => {
       setSelectedTicket(ticketData);
       setInfoTicketOpen(true)
       
     }
-    const data = [
-        // name: Service Ticket Name
-        // details: Ticket information
-        {title: 'Air conditioning repair', unit: 'B01',},
-        {title: 'Washing Machine replacement', unit: 'B02'}
-        
-    ]
+    useEffect(() => {
+        // Fetch data from the API endpoint
+        fetchData();
+      }, []);
+    // const data = [
+    //     // name: Service Ticket Name
+    //     // details: Ticket information
+    //     {title: 'Air conditioning repair', unit: 'B01',},
+    //     {title: 'Washing Machine replacement', unit: 'B02'}
+    // ]
     const columns = [
         { title: "Title", field: "title" },
-        {title:"Unit", field:"unit"},
+        {title:"Unit", field:"unitID"},
         { title: "Status", render:(rowData)=>{
             return <div>
             <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
@@ -52,12 +82,12 @@ const ServiceTicketHistoryTable = (props) => {
       actions={[
         {
           icon: tableIcons.Delete,
-          tooltip: "Delete User",
-          onClick: (event, rowData) => alert("Deleting service ticket")
+          tooltip: "Delete Ticket",
+          onClick: (event, rowData) => handleDeleteTicket(rowData).then(()=>fetchData())
         },
         {
           icon: tableIcons.Add,
-          tooltip: "Add User",
+          tooltip: "Add Ticket",
           isFreeAction: true,
           onClick: (event) => handleAddTicket()
         },
@@ -68,8 +98,8 @@ const ServiceTicketHistoryTable = (props) => {
         paging: true,
       }}
     />
-     <Popup open={addTicketOpen} onClose={() => setAddTicketOpen(false)} modal>
-        <ServiceTicketForm />
+     <Popup open={addTicketOpen} onClose={handleClosePopup} modal>
+        <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData}/> 
       </Popup>
 
       {selectedTicket && (
