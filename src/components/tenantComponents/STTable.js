@@ -56,7 +56,6 @@ const ServiceTicketHistoryTable = (props) => {
     //     // details: Ticket information
     //     {title: 'Air conditioning repair', unit: 'B01',},
     //     {title: 'Washing Machine replacement', unit: 'B02'}
-        
     // ]
     const columns = [
         { title: "Title", field: "title" },

@@ -5,6 +5,7 @@ import Home from "./pages/homePage";
 import About from "./pages/aboutPage";
 import ServiceTicketPage from "./pages/serviceTicketPage";
 import LandlordHome from "./pages/Landlordhomepage.js";
+import LandlordServiceTicketPage from "./pages/LandlordSTPage.js";
 //import NavBar from "./components/headers/NavBar";
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/tenant/home" Component={Home}/>
         <Route exact path="/about" Component={About}/>
         <Route exact path="/landlord/home" Component={LandlordHome}/>
+        <Route exact path="/landlord/serviceTicketPage" Component={LandlordServiceTicketPage}/>
       </Routes>
     </Router>
     </>

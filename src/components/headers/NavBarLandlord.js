@@ -31,7 +31,7 @@ const NavbarLandlord = () => {
               </div> 
             </div> 
             <div className="nav__item nav__item--dropdown"> 
-              <a href="#" className="nav__link">Tenant Requests</a> 
+              <a href="/serviceTicketPage" className="nav__link">Tenant Requests</a> 
 
 
             </div> 
