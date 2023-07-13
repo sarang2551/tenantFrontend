@@ -9,6 +9,8 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.4.0",
+    "chart.js": "^4.3.0",
+    "jquery": "^3.7.0",
     "material-table": "^1.69.0",
     "mongodb": "^5.5.0",
     "react": "^18.2.0",
@@ -29,7 +31,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build:css":"tailwindcss build ./path/to/your/css/input.css -o ./path/to/your/css/output.css"
+    "build:css": "tailwindcss build ./path/to/your/css/input.css -o ./path/to/your/css/output.css"
   },
   "eslintConfig": {
     "extends": [
