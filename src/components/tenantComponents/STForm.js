@@ -3,10 +3,48 @@ import {useForm} from 'react-hook-form'
 import "./st_form_style.css"
 import axios from "axios"
 
+
 const ServiceTicketForm = ({onClose}) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
   const [landlordOptions, setLandlordOptions] = useState([{landlordName:"landlord 1",landlordID:"ll1"}]); // change this to an empty object later
   const [unitOptions,setUnitOptions] = useState([{unitID:"B01"}]) 
+  const [images, setImages] = useState([]);
+
+//   const handleFileChange = (event) => {
+//     const selectedFiles = Array.from(event.target.files);
+//     setImages(selectedFiles);
+//     handleImageUpload();
+//   };
+
+
+//   const convertToBase64 = async (file) => {
+//     return new Promise((resolve, reject) => {
+//       const reader = new FileReader();
+//       reader.onload = () => resolve(reader.result.split(',')[1]);
+//       reader.onerror = (error) => reject(error);
+//       reader.readAsDataURL(file);
+//     });
+//   };
+
+//   const handleImageUpload = async () => {
+//     try {
+//       const base64Images = await Promise.all(images.map((file) => convertToBase64(file)));
+    
+
+//       const imagesData = images.map((file, index) => {
+//         return {
+//           name: file.name,
+//           base64: base64Images[index],
+//         };
+//       });
+
+//       const jsonData = JSON.stringify(imagesData);
+//       console.log('Images JSON', jsonData);
+//     } catch (error) {
+//       console.error('Error converting images to Base64:', error);
+//     }
+//   };
+
   const onSubmit = async(data) => {
     // handle submission of serviceTicket
     // var document = {
@@ -24,12 +62,27 @@ const ServiceTicketForm = ({onClose}) => {
                 var {unitID} = unitOptions[data.unitIdx]
                 var tenantName = "test" /**TODO: Get user data from session  */
                 var tenantID = "64875a59bd2e5989a5e90e1d"
-                const serviceTicketObject = {tenantName,tenantID,unitID,landlordID,landlordName,title,description,images}
-                const result = await axios.post("http://localhost:8000/tenant/addServiceTicket",serviceTicketObject)
-                if(result.status === 200){
-                    onClose()
+                // handleImageUpload();
+
+
+                const serviceTicketObject = {
+                  tenantName,tenantID,unitID,landlordID,landlordName,title,description,images}
+
+
+                try {
+                  const result = await axios.post("http://localhost:8000/tenant/addServiceTicket",
+                    serviceTicketObject
+                  );
+              
+                  if (result.status === 200) {
+                    onClose();
+                  }
+                } catch (error) {
+                  console.error("Error sending service ticket", error);
                 }
-  }
+              };
+
+      
   
 //   useEffect(() => {
 //     const fetchData = async () => {
@@ -48,10 +101,10 @@ const ServiceTicketForm = ({onClose}) => {
 //   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-    <input type='text' defaultValue="Ticket Title" {...register("title", { required: true })} />
+    <form onSubmit={handleSubmit(onSubmit)} >
+    <input type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
     <br/>
-    <input type='text' defaultValue="Description" {...register("description", { required: true })} />
+    <input type='text' placeholder="Description" {...register("description", { required: true })} />
     <br/>
     <label>
     Choose a landlord
@@ -75,10 +128,13 @@ const ServiceTicketForm = ({onClose}) => {
       <input
             type="file"
             id="fileInput"
-            multiple
+            multiple 
+            accept="image/*"
+            // onChange = {(e) => {handleFileChange}}
             {...register("images", { required: true })}
         />
-        <input type="submit" />
+
+        <input type="submit"/>
       {errors.ticket_name && <span>Name is required</span>}
       {errors.description && <span>Description is required</span>}
       {errors.unitIdx && <span>A Unit needs to be selected</span>}

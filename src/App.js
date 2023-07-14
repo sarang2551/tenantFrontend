@@ -5,6 +5,7 @@ import Home from "./pages/homePage";
 import About from "./pages/aboutPage";
 import ServiceTicketPage from "./pages/serviceTicketPage";
 import LandlordHome from "./pages/Landlordhomepage.js";
+import 'bootstrap/dist/css/bootstrap.min.css'
 //import NavBar from "./components/headers/NavBar";
 function App() {
   return (
