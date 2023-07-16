@@ -60,8 +60,9 @@ const ServiceTicketHistoryTable = (props) => {
     //     {title: 'Washing Machine replacement', unit: 'B02'}
     // ]
     const columns = [
-      { title: "Name", field: "name" },
-      { title: "Surname", field: "surname", render:(rowData)=>
+      { title: "Title", field: "title" },
+      { title:"Date", field:"startDate"},
+      { title: "Unit", field: "Status Check", render:(rowData)=>
       <div>
         <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
             >Check Status</button>

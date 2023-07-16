@@ -54,7 +54,7 @@ const LoginPage = ()=>{
             <div className='d-flex justify-content-center align-items-center'>
             </div>
             <div className='form'>
-              <form onSubmit={handleSubmit}>
+              <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='input-container'>
                     <label>User Type:</label>
                     <div className = 'd-flex'>
