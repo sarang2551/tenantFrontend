@@ -12,7 +12,6 @@ function ImageUpload() {
     const selectedFiles = Array.from(event.target.files);
     setImages(selectedFiles);
     console.log(selectedFiles)
-    onImageUpload(selectedFiles)
   };
 
   const convertToBase64 = async (file) => {
