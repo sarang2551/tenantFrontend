@@ -8,13 +8,12 @@ import ServiceTicketForm from './STForm';
 import axios from 'axios';
 import ServiceTicketCard from './STCard';
 
-import Slider from 'react-animated-slider';
-import 'react-animated-slider/build/horizontal.css';
 
 const ServiceTicketHistoryTable = (props) => {
   const [addTicketOpen, setAddTicketOpen] = useState(false);
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState (false);
+  const [data,setData] = useState([])
 
   
     const handleAddTicket = () => {
@@ -64,13 +63,10 @@ const ServiceTicketHistoryTable = (props) => {
       { title: "Name", field: "name" },
       { title: "Surname", field: "surname", render:(rowData)=>
       <div>
-        <button className='StatusInfo' onClick={() => handleInfoTicket(rowData.ticketData)}
-            >Check Status</button>{infoTicketOpen }
+        <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
+            >Check Status</button>
             </div>
-        }
-      
-      
-        ];
+        }];
 
   return (
     <div>
@@ -106,15 +102,9 @@ const ServiceTicketHistoryTable = (props) => {
         <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
         <ServiceTicketCard ticketData = {selectedTicket}/>
       </Popup>
-
       )}
-
-      
-
     </div>
-
   );
-  
 };
 
 export default ServiceTicketHistoryTable;
