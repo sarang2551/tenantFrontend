@@ -1,5 +1,21 @@
+.loginPage {
+  background: url('../gg.jpg');
+  background: linear-gradient(rgba(11, 11, 11, 0.5), rgba(10, 10, 10, 0.5)), url('../gg.jpg');
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  object-fit: cover;
+  background-attachment: fixed;
+}
 
-input[type="text"],
+.loginForm {
+  background-color: rgba(1, 32, 93, 0.6);
+  color: white;
+}
+
+
+
+/* input[type="text"],
 input[type="password"] {
   height: 25px;
   border: 2px solid rgba(0, 0, 0, 0.2);
@@ -84,7 +100,7 @@ label{
   color: #000000;
   font-size: 18px;
   font-weight: 500;
-}
+} */
 
 
 

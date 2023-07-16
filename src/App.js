@@ -4,6 +4,7 @@ import Login from './pages/loginPage.js';
 import Home from "./pages/homePage";
 import ServiceTicketPage from "./pages/serviceTicketPage";
 import LandlordHome from "./pages/Landlordhomepage.js";
+import 'bootstrap/dist/css/bootstrap.min.css'
 import LandlordServiceTicketPage from "./pages/LandlordSTPage.js";
 import UnitPage from "./pages/unitPage.js";
 //import NavBar from "./components/headers/NavBar";

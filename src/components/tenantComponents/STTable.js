@@ -8,12 +8,14 @@ import ServiceTicketForm from './STForm';
 import axios from 'axios';
 import ServiceTicketCard from './STCard';
 
+
 const ServiceTicketHistoryTable = (props) => {
   const [addTicketOpen, setAddTicketOpen] = useState(false);
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState (false);
   const [data,setData] = useState([])
 
+  
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }
@@ -45,7 +47,7 @@ const ServiceTicketHistoryTable = (props) => {
     const handleInfoTicket = (ticketData) => {
       setSelectedTicket(ticketData);
       setInfoTicketOpen(true)
-      
+
     }
     useEffect(() => {
         // Fetch data from the API endpoint
@@ -58,19 +60,13 @@ const ServiceTicketHistoryTable = (props) => {
     //     {title: 'Washing Machine replacement', unit: 'B02'}
     // ]
     const columns = [
-        { title: "Title", field: "title" },
-        {title:"Unit", field:"unitID"},
-        { title: "Status", render:(rowData)=>{
-            return <div>
-            <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
-              Check Status</button>
-              {/* {infoTicketOpen && <ServiceTicketCard props = {rowData}/>} */}
-              </div>
-        }
-        
-        }
-      
-  ];
+      { title: "Name", field: "name" },
+      { title: "Surname", field: "surname", render:(rowData)=>
+      <div>
+        <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
+            >Check Status</button>
+            </div>
+        }];
 
   return (
     <div>
@@ -106,15 +102,9 @@ const ServiceTicketHistoryTable = (props) => {
         <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
         <ServiceTicketCard ticketData = {selectedTicket}/>
       </Popup>
-
       )}
-
-      
-
     </div>
-
   );
-  
 };
 
 export default ServiceTicketHistoryTable;
