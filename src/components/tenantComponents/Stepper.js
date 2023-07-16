@@ -1,13 +1,21 @@
 import React, { useState,useEffect } from "react";
 // import "./Stepper_style.css";
 import {TiTick} from "react-icons/ti";
+import axios from "axios";
 
-
-const Stepper = (props) => {
+const Stepper = ({ticketData}) => {
     const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
-    const [currentStep, setCurrentStep] = useState(props.initialStep);
+    const [currentStep, setCurrentStep] = useState(ticketData.progressStage);
     const [complete, setComplete] = useState(false);
-
+    const updateServiceTicket = async(stepNumber) => {
+      const result = await axios.put("http://localhost:8000/tenant/updateServiceTicketProgress",ticketData);
+      var data = result.data
+      if(data.status === 200){
+          setCurrentStep(stepNumber)
+      } else {
+        console.log(data.message) /**TODO: Show UI error component */
+      }
+    }
     return (
        <>
         <div className="flex justify-between">
@@ -28,7 +36,7 @@ const Stepper = (props) => {
         <button
           className="btn"
           onClick={() => {
-            currentStep === steps.length ? setComplete(true) : setCurrentStep((prev) => prev + 1);
+            currentStep === steps.length ? setComplete(true) : updateServiceTicket((prev) => prev + 1);
           }}
         >
           {currentStep === steps.length ? "Finish" : "Next"}

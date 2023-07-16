@@ -5,44 +5,44 @@ import Stepper from "./Stepper";
 
 
 const ServiceTicketCard = ({ticketData}) => {
+  const [images, setImages] = useState([]);
 
-  // useEffect(() => {
-  //   const fetchImages = async () => {
-  //     try {
-  //       const imageData = await fetch('http://localhost:8000/tenant/getAllServiceTickets');
-  //       const imagesData = await imageData.json();
-  
-  //       const processedImages = await Promise.all(imagesData.map(processImage));
-  //       setProcessedImages(processedImages);
-  //     } catch (error) {
-  //       console.error('Error fetching and processing images:', error);
-  //     }
-  //   };
-  
-  //   fetchImages();
-  // }, []);
+  useEffect(() => {
+    const fetchImages = async () => {
+      try {
+        const imageUrls = ticketData.images; 
+        const processedImages = await Promise.all(imageUrls.map(convertToImage));
+        setImages(processedImages);
+      } catch (error) {
+        console.error('Error fetching images:', error);
+      }
+    };
 
-  //convert back to image
-  // const processImage = async (imageData) => {
-  //   const { name, base64 } = imageData;
-  //   try {
-  //     const response = await fetch(base64);
-  //     const blob = await response.blob();
-  //     const file = new File([blob], name, { type: blob.type });
-  
-  //     const compressedFile = await imageCompression(file, { maxSizeMB: 1 });
-  //     const compressedBase64 = await convertToBase64(compressedFile);
-  
-  //     return {
-  //       name: compressedFile.name,
-  //       base64: compressedBase64,
-  //     };
-  //   } catch (error) {
-  //     console.error('Error processing image:', error);
-  //     return null;
-  //   }
-  // };
+    fetchImages();
+  }, [ticketData]);
 
+  const convertToImage = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const objectURL = URL.createObjectURL(blob);
+      return objectURL;
+    } catch (error) {
+      console.error('Error converting image:', error);
+      return null;
+    }
+  };
+
+  const imageStyles = {
+    objectFit: 'cover',
+    width: '100%',
+    height: '100%',
+  };
+
+  const sliderContainerStyles = {
+    width: '100%',
+     
+  };
   // var content = Array.isArray(ticketData.images) ? ticketData.images : []; // list of images for this particular service ticket
 
     // const ticketdata= {
@@ -61,21 +61,21 @@ const ServiceTicketCard = ({ticketData}) => {
 
 
      return (
-      <div className="images">
-      {ticketData.images && ticketData.images.length > 0 && (
-      <Slider>
-         {ticketData.images.map((image, index) => (
-         <div
-             key={index}
-            // style={{ background: `url('${item}') no-repeat center center` }}
-           >
-           <img src={image.base64} alt = {'Image ${index}'}/>
-            <div className="center">
-            </div>
-           </div>
-           ))}
-        </Slider> 
-      )}
+      <div>
+      <div className="images" style={sliderContainerStyles}>
+        {images.length > 0 && (
+          <Slider>
+            {images.map((imageUrl, index) => (
+              <div key={index}>
+                <div className='slider-image'>
+                  <img src={imageUrl} alt={`Image ${index}`} style={imageStyles} />
+                  <div className="center"></div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+        )}
+      </div>
       <div>
         <div className='adminmsg'>
           <h1>Service Ticket Status</h1>
@@ -98,17 +98,19 @@ const ServiceTicketCard = ({ticketData}) => {
           <br/>
           <label>Progress:</label>
 		  <div className = "stepper-container">
-		  	<Stepper initialStep = {ticketData.progressStage}/>
-
-
+		  	<Stepper ticketData = {ticketData}/>
 		  </div>
         </div>
         <br></br>
       </div>
       </div>
-    
-  );
+      );
 };
+
+
+
+
+    
 
 export default ServiceTicketCard;
 

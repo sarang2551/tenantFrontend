@@ -30,7 +30,7 @@ const Navbar = () => {
               <a href="/serviceTicketPage" className="nav__link">Make Requests</a> 
             </div> 
             <div className="nav__item"> 
-              <a href="/about" className="nav__link">About</a> 
+              <a href="/tenant/unitPage" className="nav__link">Unit</a> 
             </div> 
             <div className="nav__item"> 
               <a href="#" className="nav__link">Profile</a> 
