@@ -45,9 +45,6 @@ const NavbarLandlord = () => {
             <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen' } : {}}/>
             </div> 
           </div> 
-          <div className="nav__item"> 
-              <a href="/TenantInformationPage" className="nav__link">Tenant Information</a> 
-            </div> 
         
         </div> 
       </div> 

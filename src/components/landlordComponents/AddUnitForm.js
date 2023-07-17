@@ -24,7 +24,7 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
                   };
                 
                   try {
-                    const result = await axios.post("http://localhost:8000/tenant/addServiceTicket", unitObject); 
+                    const result = await axios.post("http://localhost:8000/landlord/addUnit", unitObject); 
                     if (result.status === 200) {
                       onClose();
                       onAddition();

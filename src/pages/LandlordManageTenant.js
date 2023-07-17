@@ -49,6 +49,7 @@ const LandlordManageTenantsPage = () => {
         <div>
             <Navbar/>
             <MaterialTable
+            title={"Manage Buildings"}
             data={data}
             columns={columns}
             actions={[
