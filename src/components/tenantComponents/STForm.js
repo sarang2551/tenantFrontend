@@ -6,21 +6,11 @@ import axios from "axios"
 
 const ServiceTicketForm = ({onClose, onAddition}) => {
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
-  const [landlordName, setLandlordName] = useState(); // change this to an empty object later
+  const [landlordName, setLandlordName] = useState(); 
+  
   const [unitData,setUnitData] = useState() 
 
   const onSubmit = async(data) => {
-    // handle submission of serviceTicket
-    // var document = {
-                // "tenantID":"Sarang",check
-                // "description":"", check
-                // "images":[], check
-                // "title":"", check
-                // "landlordName":"", check
-                // "landlordID":"", check
-                // "tenantName":"testID", check
-                // "unitID":"" check
-                // }
                 const {title,description,images} = data
                 var tenantName = "test" /**TODO: Get user data from session  */
                 var userID = "64ad758ce3307f7723aa6330"
@@ -71,7 +61,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        var userID = "64ad758ce3307f7723aa6330"
+        var userID = "64ad758ce3307f7723aa6330" /** TODO: Get user data from session */
         const response = await axios.get(`http://localhost:8000/tenant/getUnit&LandlordData/${userID}`);
         var data = response.data
         if(data.status == 200){

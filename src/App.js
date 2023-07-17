@@ -7,6 +7,8 @@ import LandlordHome from "./pages/Landlordhomepage.js";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import LandlordServiceTicketPage from "./pages/LandlordSTPage.js";
 import UnitPage from "./pages/unitPage.js";
+import LandlordManageTenantsPage from "./pages/LandlordManageTenant.js";
+import BuildingManageTable from "./components/landlordComponents/BuildSelectTable.js";
 //import NavBar from "./components/headers/NavBar";
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
         <Route exact path="/tenant/unitPage" Component={UnitPage}/>
         <Route exact path="/landlord/home" Component={LandlordHome}/>
         <Route exact path="/landlord/serviceTicketPage" Component={LandlordServiceTicketPage}/>
+        <Route exact path="/landlord/manageTenants" Component={LandlordManageTenantsPage}/>
+        <Route exact path="/landlord/buildingManage" Component={BuildingManageTable}/>
       </Routes>
     </Router>
     </>
