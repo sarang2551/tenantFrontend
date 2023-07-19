@@ -39,15 +39,12 @@ const NavbarLandlord = () => {
               <a href="#" className="nav__link">Quotations</a> 
             </div> 
             <div className="nav__item"> 
-              <a href="#" className="nav__link">Profile</a> 
+              <a href="/landlord/manageTenants" className="nav__link">Manage Tenants</a> 
             </div> 
             <div className="nav__item"> 
             <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen' } : {}}/>
             </div> 
           </div> 
-          <div className="nav__item"> 
-              <a href="/TenantInformationPage" className="nav__link">Tenant Information</a> 
-            </div> 
         
         </div> 
       </div> 
