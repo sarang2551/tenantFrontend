@@ -19,6 +19,8 @@ const LoginPage = ()=>{
             await axios.post(`http://localhost:8000/${userType}/verifyLogin`,data).then(response=>{
                 
                 if(response.status === 200){
+                    sessionStorage.setItem("userID","hello there")
+                    sessionStorage.setItem("userType",userType)
                     navigate(`/${userType}/home`)
                 } else {
                     setErrorShow(true);
@@ -45,7 +47,6 @@ const LoginPage = ()=>{
     
     return (
       <>
-      <Navbar />
       <div className='container-fluid d-flex justify-content-center align-items-center vh-100 vw-100 loginPage'>
           <div className='p-3 rounded w-25 loginForm'>
             <div className='adminmsg'>
