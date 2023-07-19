@@ -768,7 +768,7 @@ body {
 
 .home-container3 {
 
-  width: 600px;
+  width: 1000px;
   height: 590px;
   display: grid;
   grid-template-columns: 2fr 1fr; 
@@ -969,10 +969,10 @@ body {
   background-color: #f4f5f6;
 }
 .ticket {
-  display: grid;
+  display: block;
   grid-template-rows: auto 1fr auto;
   max-width: 24rem;
-  width: 250px;
+  width: 230px;
 }
 .ticket__header, .ticket__body, .ticket__footer {
   padding: 0.1rem;
@@ -1051,7 +1051,7 @@ body {
 }
 .ticket__header, .ticket__footer {
   font-weight: bold;
-  font-size: 1.25rem;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
 }

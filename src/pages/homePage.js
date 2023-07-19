@@ -4,6 +4,7 @@ import axios from "axios"
 import "../components/headers/assets/css/style.css" 
 import Pie from '../components/Pie'
 import DesTable from '../components/ST_Des_summary'
+import Ticket from '../components/STTicketsNew'
 
 
 function Home() { 
@@ -48,36 +49,11 @@ function Home() {
    
                 <div class="home-container3">
 
-                  <div class="item">
-                  <article class="ticket">
-  <header class="ticket__wrapper">
-    <div class="ticket__header">
-      2 🎟
-    </div>
-  </header>
-  <div class="ticket__divider">
-    <div class="ticket__notch"></div>
-    <div class="ticket__notch ticket__notch--right"></div>
-  </div>
-  <div class="ticket__body">
-    <section class="ticket__section">
-      <h3>Description</h3>
-      <p>Level 1 Aircon</p>
-    </section>
-  </div>
-    <div class="ticket__body">
-    <section class="ticket__section">
-      <h3>Date</h3>
-      <p>20 Oct 2023</p>
-    </section>
-  </div>
-  <footer class="ticket__footer">
-    <span>Comments</span>
 
-  </footer>
-</article>
+                    <Ticket/>
+                    <Ticket/>
                     {/* <DesTable/> */}
-                  </div>
+
 
 
 
