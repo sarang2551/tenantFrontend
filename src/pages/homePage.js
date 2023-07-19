@@ -3,7 +3,7 @@ import Navbar from '../components/headers/NavBar'
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
 import Pie from '../components/Pie'
-import DesTable from '../components/ST_Des_summary'
+
 import Ticket from '../components/STTicketsNew'
 
 
@@ -21,6 +21,25 @@ function Home() {
         console.error('Error:', error); 
       }); 
   } 
+  const ticketData = [
+    {
+      description: 'Level 1 Aircon',
+      date: '20 Oct 2023',
+      comments: 'the aircon smoking'
+    },
+    {
+      description: 'Level 2 Aircon',
+      date: '21 Oct 2023',
+      comments: 'cooling issue'
+    },
+    {
+      description: 'Level 3 Aircon',
+      date: '22 Oct 2023',
+      comments: 'strange noise'
+    }
+    // Add more 
+  ];
+  
   return ( 
   <div> 
   <Navbar/> 
@@ -50,9 +69,8 @@ function Home() {
                 <div class="home-container3">
 
 
-                    <Ticket/>
-                    <Ticket/>
-                    {/* <DesTable/> */}
+                    <Ticket tickets = {ticketData}/>
+
 
 
 

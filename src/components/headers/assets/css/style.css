@@ -768,16 +768,16 @@ body {
 
 .home-container3 {
 
-  width: 1000px;
+  width: 600px;
   height: 590px;
   display: grid;
-  grid-template-columns: 2fr 1fr; 
+  /* grid-template-columns: 1fr 1fr;  */
   grid-template-rows: auto; 
   grid-gap: 10px; 
-  border-color: #808080;
-  border-style: solid;
+  /* border-color: #808080; */
+  /* border-style: solid;
   border-width: 2px;
-  border-radius: 2.5%;
+  border-radius: 2.5%; */
   flex-direction: column;
   margin-left: 5px;
   margin-top: -100px;
@@ -969,10 +969,12 @@ body {
   background-color: #f4f5f6;
 }
 .ticket {
-  display: block;
+  grid-template-columns: 1fr 1fr; 
   grid-template-rows: auto 1fr auto;
-  max-width: 24rem;
+  /* max-width: 24rem; */
   width: 230px;
+  height: 300px;
+
 }
 .ticket__header, .ticket__body, .ticket__footer {
   padding: 0.1rem;
