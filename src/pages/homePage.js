@@ -2,6 +2,9 @@ import React from 'react'
 import Navbar from '../components/headers/NavBar' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
+import Pie from '../components/Pie'
+import DesTable from '../components/ST_Des_summary'
+import Ticket from '../components/STTicketsNew'
 
 
 function Home() { 
@@ -25,10 +28,50 @@ function Home() {
             <div class="hero__left"> 
               <section class="home-collection">
                 <div class="home-content">
-                  <span class="home-caption">DASHBOARD</span>
+                  <Pie/>
                 </div>
-                <div class="home-main">
-                  <div class="home-card">
+
+                <div class="home-container4">
+
+                  {/* <div class="home-container5">
+                    <span class="home-text08">Description</span>
+                  </div> */}
+{/* 
+                  <div class="home-container7"><span class="home-text10">Date</span></div> */}
+
+                </div>
+              </section>
+              
+            </div> 
+            <div class ="hero_right">
+              <section class="home-collection-right">
+              <div class="home-main">
+   
+                <div class="home-container3">
+
+
+                    <Ticket/>
+                    <Ticket/>
+                    {/* <DesTable/> */}
+
+
+
+
+
+              </div> 
+              </div>
+                
+              </section>
+            </div>
+        </div> 
+  </div>
+)} 
+export default Home
+
+//change
+
+                  // {/* /* <span class="home-caption">DASHBOARD</span> */ */}
+                                    {/* <div class="home-card">
                     <div class="home-image2">
                       <img
                         alt="image"
@@ -57,41 +100,14 @@ function Home() {
                     <div class="home-content3">
                       <span class="home-caption3">Ongoing: 05</span>
                     </div>
-                  </div>
-                  <div class="home-container3">
-                  <div class="home-container9">
-
-                  </div>
-                </div>
-
-
-                </div>
-                <div class="home-container4">
-                  <div class = "wrapper">
-                    <div>Description</div>
-                    <div>Date</div>
-                    <div>Status</div>
-                  </div>
-                  {/* <div class="home-container5">
-                    <span class="home-text08">Description</span>
                   </div> */}
-{/* 
-                  <div class="home-container7"><span class="home-text10">Date</span></div> */}
-                  <div class="home-container8">
-                    <input type="checkbox" checked="true" class="home-checkbox" />
-                    <input type="checkbox" checked="true" class="home-checkbox1" />
-                    <input type="checkbox" checked="true" class="home-checkbox2" />
-                    <input type="checkbox" checked="true" class="home-checkbox3" />
-                    <input type="checkbox" checked="true" class="home-checkbox4" />
-                    <input type="checkbox" checked="true" class="home-checkbox5" />
-                  </div>
-                </div>
-              </section>
-            </div> 
-        </div> 
-  </div>
-)} 
-export default Home
 
-//change
 
+                //   <div class="home-container8">
+                //   <input type="checkbox" checked="true" class="home-checkbox" />
+                //   <input type="checkbox" checked="true" class="home-checkbox1" />
+                //   <input type="checkbox" checked="true" class="home-checkbox2" />
+                //   <input type="checkbox" checked="true" class="home-checkbox3" />
+                //   <input type="checkbox" checked="true" class="home-checkbox4" />
+                //   <input type="checkbox" checked="true" class="home-checkbox5" />
+                // </div>
