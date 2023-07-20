@@ -2,8 +2,8 @@ import React from 'react'
 import Navbar from '../components/headers/NavBar' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
+import "../components/headers/assets/css/STstyle.css" 
 import Pie from '../components/Pie'
-
 import Ticket from '../components/STTicketsNew'
 
 
