@@ -961,13 +961,13 @@ body {
   box-sizing: border-box;
   margin: 0;
 }
-body {
+/* body {
   display: flex;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
   background-color: #f4f5f6;
-}
+} */
 .ticket {
   display: block;
   grid-template-rows: auto 1fr auto;

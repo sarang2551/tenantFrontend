@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {useForm} from 'react-hook-form'
 import "../components/tenantComponents/st_form_style.css"
-import Navbar from "../components/headers/NavBar";
 import axios from "axios";
 import ErrorMessage from "../components/errorBox";
 import { useNavigate } from "react-router-dom";
@@ -17,12 +16,13 @@ const LoginPage = ()=>{
     const onSubmit = async(data) => {
         try {
             await axios.post(`http://localhost:8000/${userType}/verifyLogin`,data).then(response=>{
-                
+                var data = response.data
                 if(response.status === 200){
-                    sessionStorage.setItem("userID","hello there")
+                    sessionStorage.setItem("userID",data.userID)
                     sessionStorage.setItem("userType",userType)
                     navigate(`/${userType}/home`)
                 } else {
+                  console.log(response)
                     setErrorShow(true);
                     setErrorMessage("Error logging in") /** TODO: Need to make this error dynamic */
                     const timer = setTimeout(() => {
@@ -76,7 +76,7 @@ const LoginPage = ()=>{
                   <input type='password' required placeholder='Password' {...register('password', { required: true })} style={{ color: 'black' }}/>
                 </div>
                 <div className='button-container'>
-                  <input type='submit' onClick={handleSubmit} />
+                  <button type='submit' onClick={handleSubmit}>Submit</button>
                 </div>
               </form>
             </div>

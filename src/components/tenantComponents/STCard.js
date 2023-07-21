@@ -43,23 +43,7 @@ const ServiceTicketCard = ({ticketData}) => {
     width: '100%',
      
   };
-  // var content = Array.isArray(ticketData.images) ? ticketData.images : []; // list of images for this particular service ticket
-
-    // const ticketdata= {
-    //   ticketNameInfo:'Fix Aircon',
-    //   description:' aircon spoil',
-    //   unit : 'B01',
-    //   landlordName: ' Franco',
-    //   documents:['file1','file2'],
-    //   progressStage: 3
-
-
-    // };
-        // name: Service Ticket Name
-        // details: Ticket information
-        const allsteps = ["Processing request", "Acceptance quotation", "Service Scheduling", "Work In Progress", "Completed"];
-
-
+      
      return (
       <div>
       <div className="images" style={sliderContainerStyles}>
@@ -85,7 +69,7 @@ const ServiceTicketCard = ({ticketData}) => {
           <span className='ticketNameInfo'> {ticketData.title} </span>
           <br/>
           <label>Description:</label>
-          <span className='DescriptionInfo'>{ticketData.description || "Air conditioning servicing needed for multiple rooms"}</span>
+          <span className='DescriptionInfo'>{ticketData.description}</span>
           <br/>
           <label>Unit:</label>
           <span className='DescriptionInfo'>{ticketData.unit}</span>

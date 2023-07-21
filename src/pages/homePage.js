@@ -1,26 +1,22 @@
-import React from 'react' 
+import React, { useEffect, useState } from 'react' 
 import Navbar from '../components/headers/NavBar' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
 import Pie from '../components/Pie'
-import DesTable from '../components/ST_Des_summary'
 import Ticket from '../components/STTicketsNew'
 
-
 function Home() { 
-  const testingServer = async()=>{ 
-    console.log("Clicked button") 
-    const getTenant = { 
-        name: 'test', 
-        password: 'test123', 
-      }; 
-    await axios.post("http://localhost:8000/tenant/tenantLogin",getTenant).then(response => { 
-        console.log('Response:', response.data); 
-      }) 
-      .catch(error => { 
-        console.error('Error:', error); 
-      }); 
-  } 
+  const [ticketData,setTicketData] = useState([])
+  const getSTData = async()=>{
+    const userID = sessionStorage.getItem('userID')
+
+    const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
+    var data_2 = response_2.data
+    if(data_2){ setTicketData(data_2)} else console.log("Error getting all service tickets")
+  }
+  useEffect(()=>{
+    getSTData()
+  },[])
   return ( 
   <div> 
   <Navbar/> 
@@ -46,18 +42,11 @@ function Home() {
             <div class ="hero_right">
               <section class="home-collection-right">
               <div class="home-main">
-   
                 <div class="home-container3">
-
-
-                    <Ticket/>
-                    <Ticket/>
+                  {
+                    ticketData.map((serviceTicket,idx)=><Ticket STData={{idx,...serviceTicket}}/>)
+                  }
                     {/* <DesTable/> */}
-
-
-
-
-
               </div> 
               </div>
                 
@@ -65,7 +54,8 @@ function Home() {
             </div>
         </div> 
   </div>
-)} 
+)
+} 
 export default Home
 
 //change
