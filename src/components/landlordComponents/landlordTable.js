@@ -12,7 +12,7 @@ const LandlordServiceTicketTable = () => {
 
     const fetchData = async () => {
         try {
-          const userID = "64873c12bd2e5989a5e90e1c" /** TODO: get ID from session */
+          const userID = sessionStorage.getItem("userID") 
           const response = await axios.get(`http://localhost:8000/landlord/getAllServiceTickets/${userID}`)
           var data = response.data 
           setData(data);
@@ -33,7 +33,7 @@ const LandlordServiceTicketTable = () => {
       }
     const columns = [
         { title: "Title", field: "title" },
-        {title:"Unit", field:"unitID"},
+        {title:"Unit", field:"unit"},
         { title: "Status", render:(rowData)=>{
             return <div>
             <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
