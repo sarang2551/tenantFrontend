@@ -20,7 +20,7 @@ export const UserData = [
   {
     id: 4,
     year: "Step4",
-    userGain: 7,
+    userGain: 4,
 
   },
   {

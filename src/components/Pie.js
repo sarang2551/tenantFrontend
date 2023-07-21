@@ -19,7 +19,7 @@ function Pie() {
           "#ee9b00",
           "#bb3e03",
         ],
-        borderColor: "black",
+        borderColor: ["white"],
         borderWidth: 2,
       },
     ],
@@ -29,7 +29,7 @@ function Pie() {
   return (
     <div className="Piechart">
 
-      <div style={{ width: 500 }}>
+      <div style={{ width: 450 }}>
         <PieChart chartData={userData} />
       </div>
     </div>

@@ -13,11 +13,22 @@
     grid-template-columns: 1fr 1fr; 
     grid-template-rows: auto 1fr auto;
     /* max-width: 24rem; */
-    width: 180px;
+    width: 170px;
     height: 300px;
   
   }
-  .ticket__header, .ticket__body, .ticket__footer {
+
+  .ticket-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .ticket-row {
+    flex: 0 0 33%; /* Adjust the width as needed */
+    padding: 10px;
+  }
+  
+   .ticket__body, .ticket__footer {
     padding: 0.1rem;
     background-color: #fff;
     border: 1px solid #abb5ba;

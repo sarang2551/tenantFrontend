@@ -28,14 +28,19 @@ function Home() {
       comments: 'the aircon smoking'
     },
     {
-      description: 'Level 2 Aircon',
+      description: 'Level 2 windows',
       date: '21 Oct 2023',
-      comments: 'cooling issue'
+      comments: 'loose screws'
     },
     {
-      description: 'Level 3 Aircon',
+      description: 'Level 3 Fan',
       date: '22 Oct 2023',
       comments: 'strange noise'
+    },
+    {
+      description: 'Level 4 Toilet',
+      date: '22 Oct 2023',
+      comments: 'Haunted'
     }
     // Add more 
   ];
@@ -52,12 +57,6 @@ function Home() {
 
                 <div class="home-container4">
 
-                  {/* <div class="home-container5">
-                    <span class="home-text08">Description</span>
-                  </div> */}
-{/* 
-                  <div class="home-container7"><span class="home-text10">Date</span></div> */}
-
                 </div>
               </section>
               
@@ -70,11 +69,6 @@ function Home() {
 
 
                     <Ticket tickets = {ticketData}/>
-
-
-
-
-
 
               </div> 
               </div>
