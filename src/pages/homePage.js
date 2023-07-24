@@ -54,22 +54,19 @@ function Home() {
                 <div class="home-content">
                   <Pie/>
                 </div>
-
                 <div class="home-container4">
-
                 </div>
               </section>
-              
             </div> 
             <div class ="hero_right">
               <section class="home-collection-right">
               <div class="home-main">
-   
+  
                 <div class="home-container3">
-
-
+                <div className="header">
+                  Tickets
+                </div>
                     <Ticket tickets = {ticketData}/>
-
               </div> 
               </div>
                 

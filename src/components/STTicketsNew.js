@@ -3,6 +3,7 @@ import React from 'react';
 function Ticket({ tickets }) {
   return (
     <div className="ticket-container">
+
       {tickets.map((ticket, index) => (
         <div className="ticket-row" key={index}>
           <article className="ticket">
