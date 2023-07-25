@@ -20,7 +20,12 @@ const LoginPage = ()=>{
                 if(response.status === 200){
                     sessionStorage.setItem("userID",data.userID)
                     sessionStorage.setItem("userType",userType)
-                    navigate(`/${userType}/home`)
+                    if(data.firstLogin && userType === "tenant"){
+                      navigate('/tenant/firstLogin')
+                    }else{
+                      navigate(`/${userType}/home`)
+                    }
+                    
                 } else {
                   console.log(response)
                     setErrorShow(true);
