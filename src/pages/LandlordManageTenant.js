@@ -73,7 +73,7 @@ const LandlordManageTenantsPage = () => {
         <div>
             <NavbarLandlord/>
             <div className = "App" >
-            <h2 style={{textAlign:"center",fontSize:25,marginTop:50}}>
+            <h2 style={{textAlign:"center",fontFamily:"sans-serif",fontSize:25,marginTop:50}}>
                 Manage Buildings
             </h2>
             <Grid container spacing ={0}>
@@ -86,7 +86,7 @@ const LandlordManageTenantsPage = () => {
             icons={tableIcons}
             options = {{
                 selection:true,
-                headerStyle: { background: "lightgrey"},
+                headerStyle: { background: "lightgrey"}, 
                 exportButton:true,
                 exportAllData:true,
                 actionsColumnIndex:-1,
