@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import {useForm} from 'react-hook-form'
-import "../components/tenantComponents/st_form_style.css"
 import axios from "axios";
 import ErrorMessage from "../components/errorBox";
 import { useNavigate } from "react-router-dom";
