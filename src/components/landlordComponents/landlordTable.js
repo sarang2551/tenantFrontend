@@ -54,7 +54,6 @@ const LandlordServiceTicketTable = () => {
       data={data}
       icons={tableIcons}
       options={{
-        headerStyle: { background: "lightgrey"},
         search: true,
         paging: true,
 
