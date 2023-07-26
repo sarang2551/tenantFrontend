@@ -11,13 +11,15 @@ NavBtnLink,
 import NotifBar from '../notifBar/NotifBar'; 
 import tableIcons from '../tenantComponents/MaterialIconComponents';
 import "./assets/css/style.css"
-
+import {useNavigate} from 'react-router-dom'
 
 
 const NavbarLandlord = () => { 
-
+  const navigate = useNavigate()
   const handleLogout = () => {
-    window.location.href = '/';
+    sessionStorage.removeItem('userID')
+    sessionStorage.removeItem('userType')
+    navigate("/")
   };
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 
@@ -45,8 +47,9 @@ const NavbarLandlord = () => {
 
               <div className="nav__icon-item">
                 <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen', marginRight: '20px' } : { marginRight: '20px' }} />
-                <tableIcons.Logout onClick={handleLogout} />
+                
             </div>
+            <div className="nav__icon-item"><tableIcons.Logout onClick={handleLogout} /></div>
           </div>
         </div>
       </div>
