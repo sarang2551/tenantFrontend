@@ -13,7 +13,7 @@
   }
 }
 
-/* .Pie-header {
+.Pie-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
@@ -23,7 +23,7 @@
   font-size: calc(10px + 2vmin);
   color: white;
   margin-top: 50px;
-} */
+}
 
 .Pie-link {
   color: #61dafb;

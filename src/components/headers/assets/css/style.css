@@ -579,28 +579,13 @@ body {
 }
 .home-main {
   gap: var(--dl-space-space-twounits);
-  width: 600px;
-  width: 50% ;
-  height: 700px;
+  width: 50%;
+  height: 131px;
   display: grid;
   align-items: flex-start;
   flex-direction: column;
   grid-template-columns: repeat(4, 1fr);
-
 }
-.home-container3 {
-  width: 600px;
-  height: 700px;
-  display: flex;
-  grid-template-rows: auto; 
-  grid-gap: 10px; 
-  flex-direction: column;
-  margin-left: 5px;
-  margin-top: -130px;
-  z-index: 1;
-  box-shadow: 2px 5px 5px 5px rgba(128, 128, 128, 0.3);
-  border-radius: 2.5%;
-} 
 .home-card {
   width: 152px;
   height: 110px;
@@ -781,11 +766,28 @@ body {
   background-color: white;
 }
 
+.home-container3 {
 
+  width: 1000px;
+  height: 590px;
+  display: grid;
+  grid-template-columns: 2fr 1fr; 
+  grid-template-rows: auto; 
+  grid-gap: 10px; 
+  border-color: #808080;
+  border-style: solid;
+  border-width: 2px;
+  border-radius: 2.5%;
+  flex-direction: column;
+  margin-left: 5px;
+  margin-top: -100px;
+
+} 
 
 
 
 .Des {
+
   padding: 10px;
 }
 

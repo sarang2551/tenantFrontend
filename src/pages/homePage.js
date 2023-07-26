@@ -2,44 +2,21 @@ import React, { useEffect, useState } from 'react'
 import Navbar from '../components/headers/NavBar' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
-import "../components/headers/assets/css/STstyle.css" 
-import Pie from '../components/tenantComponents/Pie'
-import Ticket from '../components/STTicketsTenant'
+import Pie from '../components/Pie'
+import Ticket from '../components/STTicketsNew'
 
 function Home() { 
-  const testingServer = async()=>{ 
-    console.log("Clicked button") 
-    const getTenant = { 
-        name: 'test', 
-        password: 'test123', 
-      }; 
-    await axios.post("http://localhost:8000/tenant/tenantLogin",getTenant).then(response => { 
-        console.log('Response:', response.data); 
-      }) 
-      .catch(error => { 
-        console.error('Error:', error); 
-      }); 
-  } 
-  const ticketData = [
-    {
-      description: 'Level 1 Aircon',
-      date: '20 Oct 2023',
-      comments: 'the aircon smoking'
-    },
-    {
-      description: 'Level 2 windows',
-      date: '21 Oct 2023',
-      comments: 'loose screws'
-    },
-    {
-      description: 'Level 3 Fan',
-      date: '22 Oct 2023',
-      comments: 'strange noise'
-    },
+  const [ticketData,setTicketData] = useState([])
+  const getSTData = async()=>{
+    const userID = sessionStorage.getItem('userID')
 
-    // Add more 
-  ];
-  
+    const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
+    var data_2 = response_2.data
+    if(data_2){ setTicketData(data_2)} else console.log("Error getting all service tickets")
+  }
+  useEffect(()=>{
+    getSTData()
+  },[])
   return ( 
   <div> 
   <Navbar/> 
@@ -49,19 +26,27 @@ function Home() {
                 <div class="home-content">
                   <Pie/>
                 </div>
+
                 <div class="home-container4">
+
+                  {/* <div class="home-container5">
+                    <span class="home-text08">Description</span>
+                  </div> */}
+{/* 
+                  <div class="home-container7"><span class="home-text10">Date</span></div> */}
+
                 </div>
               </section>
+              
             </div> 
             <div class ="hero_right">
               <section class="home-collection-right">
               <div class="home-main">
-  
                 <div class="home-container3">
-                <div className="header">
-                  Tickets
-                </div>
-                    <Ticket tickets = {ticketData}/>
+                  {
+                    ticketData.map((serviceTicket,idx)=><Ticket STData={{idx,...serviceTicket}}/>)
+                  }
+                    {/* <DesTable/> */}
               </div> 
               </div>
                 
