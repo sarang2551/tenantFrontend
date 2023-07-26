@@ -1,6 +1,6 @@
 import React,{ useEffect, useState } from "react";
 import "./Piechart.css";
-import PieChart from "./PieChart";
+import PieChart from "./tenantComponents/PieChart";
 import axios from "axios";
 
 function Pie() {
@@ -49,7 +49,7 @@ function Pie() {
           "#ee9b00",
           "#bb3e03",
         ],
-        borderColor: ["white"],
+        borderColor: "black",
         borderWidth: 2,
       },
     ],
@@ -59,7 +59,7 @@ function Pie() {
   return (
     <div className="Piechart">
 
-      <div style={{ width: 450 }}>
+      <div style={{ width: 500 }}>
         <PieChart chartData={userData} />
       </div>
     </div>
