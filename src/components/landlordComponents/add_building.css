@@ -1,0 +1,84 @@
+.add-building-form {
+  max-width: 3200px;
+  max-height: 2800px;
+  margin: 0 auto;
+  padding: 10px;
+  background-color: white;
+  border-radius: 8px;
+}
+
+.custom-popup-content {
+  max-width: 2100px;
+  max-height: 1900px;
+  margin: 0 auto;
+  padding: 0px;
+  background-color:white;
+  border-radius: 30px;
+  position: relative;
+}
+
+.close-icon {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+.add-building-form h4 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.add-building-form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding-left: 40px;
+}
+
+.add-building-form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.add-building-form span {
+  color: red;
+  font-size: 12px;
+}
+
+.add-building-form input[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%;
+}
+
+.add-building-form input[type="submit"]:hover {
+  background-color: #45a049;
+}
+
+.input-with-icon {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 10px; 
+  pointer-events: none;
+  margin-bottom: 9px;
+}
+
+.add-building-form-container{
+  position: absolute;
+  top: 10px;
+  right: 30px;
+  cursor: pointer;
+  padding-top: 3%;
+}
