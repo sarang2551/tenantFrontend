@@ -1,5 +1,4 @@
 import React, { forwardRef } from "react";
-
 import AddBox from "@material-ui/icons/AddBox";
 import ArrowDownward from "@material-ui/icons/ArrowDownward";
 import Check from "@material-ui/icons/Check";
@@ -15,7 +14,14 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
-import Notifications from "@material-ui/icons/Notifications"
+import Notifications from "@material-ui/icons/Notifications";
+import Logout from "@mui/icons-material/Logout";
+import Home from '@mui/icons-material/Home';
+import Location from '@mui/icons-material/LocationOnOutlined';
+import Camera from '@mui/icons-material/CameraAltOutlined';
+import Close from '@mui/icons-material/CloseOutlined';
+import Postal from '@mui/icons-material/ApprovalOutlined';
+
 
 const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
@@ -35,7 +41,14 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
-  Notifications: forwardRef((props, ref) => <Notifications {...props} ref={ref} />)
+  Notifications: forwardRef((props, ref) => <Notifications {...props} ref={ref} />),
+  Logout: forwardRef((props, ref) => <Logout {...props} ref={ref} />),
+  Home: forwardRef((props, ref) => <Home {...props} ref={ref} />),
+  Location: forwardRef((props, ref) => <Location {...props} ref={ref} />),
+  Camera: forwardRef((props, ref) => <Camera {...props} ref={ref} />),
+  Close: forwardRef((props, ref) => <Close {...props} ref={ref} />),
+  Postal: forwardRef((props, ref) => <Postal {...props} ref={ref} />),
+  
 };
 
 export default tableIcons;

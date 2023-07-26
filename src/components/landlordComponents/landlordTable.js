@@ -10,6 +10,7 @@ const LandlordServiceTicketTable = () => {
     const [selectedTicket, setSelectedTicket] = useState (false);
     const [data,setData] = useState([])
 
+
     const fetchData = async () => {
         try {
           const userID = sessionStorage.getItem("userID") 
@@ -30,7 +31,7 @@ const LandlordServiceTicketTable = () => {
         setSelectedTicket(ticketData);
         setInfoTicketOpen(true)
         
-      }
+      };
     const columns = [
         { title: "Title", field: "title" },
         {title:"Unit", field:"unit"},
@@ -55,6 +56,7 @@ const LandlordServiceTicketTable = () => {
       options={{
         search: true,
         paging: true,
+
       }}
     />
 

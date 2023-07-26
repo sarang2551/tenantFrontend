@@ -957,6 +957,36 @@ body {
   }
 }
 
+.nav__menu-list.flex {
+  display: flex;
+  justify-content: center;
+}
+.nav {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px; 
+}
+
+
+
+
+
+
+
+.nav__menu-list.flex {
+  display: flex;
+  justify-content: center;
+}
+.nav {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 10px; 
+}
+
+
+
+
+
+
+
 *, *::after {
   box-sizing: border-box;
   margin: 0;
@@ -1059,3 +1089,4 @@ body {
   border-top: 2px dashed #e9ebed;
   border-radius: 0 0 0.325rem 0.325rem;
 }
+

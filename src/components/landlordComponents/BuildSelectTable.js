@@ -112,3 +112,6 @@ const BuildingManageTable = ()=> {
 }
 
 export default BuildingManageTable;
+
+
+
