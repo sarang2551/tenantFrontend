@@ -10,6 +10,7 @@ import UnitPage from "./pages/unitPage.js";
 import LandlordManageTenantsPage from "./pages/LandlordManageTenant.js";
 import BuildingManageTable from "./components/landlordComponents/BuildSelectTable.js";
 import PrivateRoute from "./components/PrivateRoute.js";
+import FirstLoginPage from "./pages/firstLogin.js";
 //import NavBar from "./components/headers/NavBar";
 
 function App() {
@@ -23,7 +24,13 @@ function App() {
     <Router>
       <Routes>
         <Route exact path="/" Component={Login} />
-
+        
+        <Route exact path="/tenant/firstLogin" element={
+          <PrivateRoute desiredUser={"tenant"} isAuthenticated={isSignedIn}>
+          <FirstLoginPage/>
+          </PrivateRoute>
+        }/>
+        
         <Route exact path="/serviceTicketPage" element={
           <PrivateRoute desiredUser={"tenant"} isAuthenticated={isSignedIn}>
             <ServiceTicketPage/>
