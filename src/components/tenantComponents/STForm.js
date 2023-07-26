@@ -13,7 +13,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
   const onSubmit = async(data) => {
                 const {title,description,images} = data
                 var tenantName = "test" /**TODO: Get user data from session  */
-                var userID = "64ad758ce3307f7723aa6330"
+                var userID = sessionStorage.getItem('userID')
                 const updateServiceTicket = async () => {
                   const imageList = [];
                 
@@ -61,7 +61,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        var userID = "64ad758ce3307f7723aa6330" /** TODO: Get user data from session */
+        var userID = sessionStorage.getItem('userID')
         const response = await axios.get(`http://localhost:8000/tenant/getUnit&LandlordData/${userID}`);
         var data = response.data
         if(data.status == 200){
@@ -80,7 +80,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
   }, []);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} >
+    <form onSubmit={handleSubmit(onSubmit)}>
     <input type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
     <br/>
     <input type='text' placeholder="Description" {...register("description", { required: true })} />
@@ -110,12 +110,13 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
             id="fileInput"
             multiple 
             accept="image/*"
-            {...register("images", { required: true })}
+            {...register("images",)}
         />
-        <input type="submit"/>
+      <br/>
+       <button type='submit'>Submit</button>
       {errors.ticket_name && <span>Name is required</span>}
       {errors.description && <span>Description is required</span>}
-      {/* {errors.documents && <span>At least one document is required</span>} */}
+      
     </form>
   );
   

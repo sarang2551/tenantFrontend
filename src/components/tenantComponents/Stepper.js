@@ -8,7 +8,8 @@ const Stepper = ({ticketData}) => {
     const [currentStep, setCurrentStep] = useState(ticketData.progressStage);
     const [complete, setComplete] = useState(false);
     const updateServiceTicket = async(stepNumber) => {
-      const result = await axios.put("http://localhost:8000/tenant/updateServiceTicketProgress",ticketData);
+      const userType = sessionStorage.getItem("userType")
+      const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
       var data = result.data
       if(data.status === 200){
           setCurrentStep(stepNumber)

@@ -21,7 +21,7 @@ const ServiceTicketHistoryTable = (props) => {
     }
     const fetchData = async () => {
       try {
-        const userID = "64ad758ce3307f7723aa6330" /** TODO: get ID from session */
+        const userID = sessionStorage.getItem('userID')
         const response = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`)
         var data = response.data 
         setData(data);
@@ -30,12 +30,11 @@ const ServiceTicketHistoryTable = (props) => {
       }
     };
     const handleDeleteTicket = async(rowData) => {
-      
+      const idx = rowData.tableData.id
       const response = await axios.delete("http://localhost:8000/tenant/deleteServiceTicket",{data:rowData})
-      var data = response.data
-      if(data.status === 200){
-          fetchData()
-          console.log(data.message)
+      var res_data = response.data
+      if(res_data.status === 200){
+        setData([...data.splice(0,idx),...data.splice(idx,data.length)])
       } else {
         console.log(data) /** TODO: Add UI Error component */
       }
@@ -52,13 +51,8 @@ const ServiceTicketHistoryTable = (props) => {
     useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
-      }, []);
-    // const data = [
-    //     // name: Service Ticket Name
-    //     // details: Ticket information
-    //     {title: 'Air conditioning repair', unit: 'B01',},
-    //     {title: 'Washing Machine replacement', unit: 'B02'}
-    // ]
+      }, [data]);
+
     const columns = [
       { title: "Title", field: "title" },
       { title:"Date", field:"startDate"},
@@ -80,7 +74,7 @@ const ServiceTicketHistoryTable = (props) => {
         {
           icon: tableIcons.Delete,
           tooltip: "Delete Ticket",
-          onClick: (event, rowData) => handleDeleteTicket(rowData).then(()=>fetchData())
+          onClick: (event, rowData) => handleDeleteTicket(rowData)
         },
         {
           icon: tableIcons.Add,
@@ -100,7 +94,11 @@ const ServiceTicketHistoryTable = (props) => {
       </Popup>
 
       {selectedTicket && (
-        <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
+        <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} contentStyle={{
+          width: '50%', // Set the desired width for the Popup (adjust as needed)
+          height: '50vh', // Set the desired height for the Popup (adjust as needed)
+          overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
+        }} modal>
         <ServiceTicketCard ticketData = {selectedTicket}/>
       </Popup>
       )}

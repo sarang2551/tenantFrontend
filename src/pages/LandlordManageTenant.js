@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Navbar from "../components/headers/NavBar";
 import MaterialTable from "material-table";
 import axios from "axios";
 import tableIcons from "../components/tenantComponents/MaterialIconComponents";
 import AddBuildForm from "../components/landlordComponents/AddBuildForm";
 import Popup from "reactjs-popup";
 import {Link, createSearchParams, useNavigate} from 'react-router-dom'
+import NavbarLandlord from "../components/headers/NavBarLandlord";
 
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
@@ -47,7 +47,7 @@ const LandlordManageTenantsPage = () => {
           }];
     return (
         <div>
-            <Navbar/>
+            <NavbarLandlord/>
             <MaterialTable
             title={"Manage Buildings"}
             data={data}

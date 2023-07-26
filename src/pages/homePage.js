@@ -1,11 +1,10 @@
-import React from 'react' 
+import React, { useEffect, useState } from 'react' 
 import Navbar from '../components/headers/NavBar' 
 import axios from "axios" 
 import "../components/headers/assets/css/style.css" 
 import "../components/headers/assets/css/STstyle.css" 
-import Pie from '../components/Pie'
-import Ticket from '../components/STTicketsNew'
-
+import Pie from '../components/tenantComponents/Pie'
+import Ticket from '../components/STTicketsTenant'
 
 function Home() { 
   const testingServer = async()=>{ 
@@ -37,11 +36,7 @@ function Home() {
       date: '22 Oct 2023',
       comments: 'strange noise'
     },
-    {
-      description: 'Level 4 Toilet',
-      date: '22 Oct 2023',
-      comments: 'Haunted'
-    }
+
     // Add more 
   ];
   
@@ -74,7 +69,8 @@ function Home() {
             </div>
         </div> 
   </div>
-)} 
+)
+} 
 export default Home
 
 //change
