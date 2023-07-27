@@ -768,16 +768,16 @@ body {
 
 .home-container3 {
 
-  width: 1000px;
-  height: 590px;
-  display: grid;
-  grid-template-columns: 2fr 1fr; 
+  width: 500%;
+  height: 700%;
+  display: flex;
+  /* grid-template-columns: 2fr 1fr; 
   grid-template-rows: auto; 
-  grid-gap: 10px; 
-  border-color: #808080;
+  grid-gap: 10px;  */
+  /* border-color: #808080;
   border-style: solid;
   border-width: 2px;
-  border-radius: 2.5%;
+  border-radius: 2.5%; */
   flex-direction: column;
   margin-left: 5px;
   margin-top: -100px;
