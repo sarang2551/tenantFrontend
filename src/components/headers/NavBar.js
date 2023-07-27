@@ -14,11 +14,15 @@ import "./assets/css/style.css"
 
 const Navbar = () => {
   const [notifOpen, setNotifOpen] = useState(false);
-
+  
   const toggleNotifBar = () => {
     setNotifOpen(!notifOpen);
   };
-
+  const handleLogout = ()=>{
+    sessionStorage.removeItem('userID')
+    sessionStorage.removeItem('userType')
+    navigate("/")
+  }
   return (
     <>
       <nav className="nav flex-between">
