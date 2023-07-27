@@ -20,6 +20,7 @@ const LoginPage = ()=>{
                 if(response.status === 200){
                     sessionStorage.setItem("userID",data.userID)
                     sessionStorage.setItem("userType",userType)
+                    if(userType === "tenant") sessionStorage.setItem("tenantName",data.tenantName)
                     if(data.firstLogin && userType === "tenant"){
                       navigate('/tenant/firstLogin')
                     }else{
@@ -47,8 +48,6 @@ const LoginPage = ()=>{
         }
         
     }
-
-
     
     return (
       <>

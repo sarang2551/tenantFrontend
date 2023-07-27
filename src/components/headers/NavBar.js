@@ -20,8 +20,7 @@ const Navbar = () => {
     setNotifOpen(!notifOpen);
   };
   const handleLogout = ()=>{
-    sessionStorage.removeItem('userID')
-    sessionStorage.removeItem('userType')
+    sessionStorage.clear()
     navigate("/")
   }
   return (

@@ -12,7 +12,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
 
   const onSubmit = async(data) => {
                 const {title,description,images} = data
-                var tenantName = "test" /**TODO: Get user data from session  */
+                var tenantName = sessionStorage.getItem('tenantName')
                 var userID = sessionStorage.getItem('userID')
                 const updateServiceTicket = async () => {
                   const imageList = [];
@@ -25,6 +25,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
                   const serviceTicketObject = {
                     tenantName,
                     userID,
+                    unitName:unitData,
                     landlordName,
                     title,
                     description,
@@ -66,7 +67,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
         var data = response.data
         if(data.status == 200){
             const tenantObject = data.tenantObject
-            setUnitData(tenantObject.UnitID)
+            setUnitData(tenantObject.unitName)
             setLandlordName(tenantObject.landlordName)
         }else{
           console.log(`Error getting tenant data for tenant ${userID} for addition `)
@@ -81,6 +82,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      <h3>Add Service Ticket Form</h3>
     <input type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
     <br/>
     <input type='text' placeholder="Description" {...register("description", { required: true })} />
@@ -104,6 +106,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
         ))}
       </select> */}
     </label>
+    <br/>
       Attach Images 
       <input
             type="file"

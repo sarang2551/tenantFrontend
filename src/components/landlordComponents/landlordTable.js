@@ -25,7 +25,7 @@ const LandlordServiceTicketTable = () => {
       useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
-      }, []);
+      }, [data]);
 
     const handleInfoTicket = (ticketData) => {
         setSelectedTicket(ticketData);
@@ -34,7 +34,8 @@ const LandlordServiceTicketTable = () => {
       };
     const columns = [
         { title: "Title", field: "title" },
-        {title:"Unit", field:"unit"},
+        {title:"Unit", field:"unitName"},
+        {title:"Start Date", field:"startDate"},
         { title: "Status", render:(rowData)=>{
             return <div>
             <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
@@ -56,12 +57,16 @@ const LandlordServiceTicketTable = () => {
       options={{
         search: true,
         paging: true,
-
+        sorting: true
       }}
     />
 
   {selectedTicket && (
-    <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
+    <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} contentStyle={{
+      width: '50%', // Set the desired width for the Popup (adjust as needed)
+      height: '80vh', // Set the desired height for the Popup (adjust as needed)
+      overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
+    }} modal>
     <ServiceTicketCard ticketData = {selectedTicket}/>
   </Popup>
     

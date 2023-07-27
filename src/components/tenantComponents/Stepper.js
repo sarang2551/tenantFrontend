@@ -2,23 +2,42 @@ import React, { useState,useEffect } from "react";
 // import "./Stepper_style.css";
 import {TiTick} from "react-icons/ti";
 import axios from "axios";
+import QuotationForm from "../quotationForm";
 
 const Stepper = ({ticketData}) => {
-    const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
+    const userType = sessionStorage.getItem("userType")
     const [currentStep, setCurrentStep] = useState(ticketData.progressStage);
     const [complete, setComplete] = useState(false);
-    const updateServiceTicket = async(stepNumber) => {
-      const userType = sessionStorage.getItem("userType")
-      const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
-      var data = result.data
-      if(data.status === 200){
-          setCurrentStep(stepNumber)
-      } else {
+    const [letLandlordAddQuotation,setLandlordAddQuotation] = useState(!ticketData.quotationDocument && userType === "landlord" && ticketData.progressStage == 1)
+    const [letTenantAcceptQuotation,setTenantAcceptQuotation] = useState(!!ticketData.quotationDocument && userType === "tenant" && ticketData.progressStage == 1)
+
+    const updateServiceTicket = async() => {
+      try{
+        const userType = sessionStorage.getItem("userType")
+        const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
+        var data = result.data
+        if(result.status === 200){
+          console.log(data)
+          setCurrentStep(data.stepNumber)
+        } else {
         console.log(data.message) /**TODO: Show UI error component */
+        }
+      }catch(err){
+        console.log(`Error updating service ticket`) /**TODO: Show UI error component */
       }
+      
     }
+
+    const steps = ["Processing request" , 
+    userType === "tenant"?
+    ticketData.quotation ? 
+      "Accept/Reject Quotation": "Awaiting Quotation":
+    ticketData.quotation ? 
+    "Awaiting Acceptance/Rejection" : "Submit Quotation Below"
+    , 
+    "Work In Progress" , "Completed"];
     return (
-       <>
+       <div>
         <div className="flex justify-between">
             {steps?.map((step,i)=>(
                 <div 
@@ -32,82 +51,29 @@ const Stepper = ({ticketData}) => {
               </div>
             ))}
           </div>
-
+       
       {!complete && (
         <button
           className="btn"
           onClick={() => {
-            currentStep === steps.length ? setComplete(true) : updateServiceTicket((prev) => prev + 1);
+            currentStep === steps.length ? setComplete(true) : updateServiceTicket();
           }}
         >
-          {currentStep === steps.length ? "Finish" : "Next"}
+          {ticketData.endDate ? "Finish" : "Next"}
         </button>
       )}    
-          
-          </>
+      {letLandlordAddQuotation?
+      <QuotationForm onSubmission={()=>setLandlordAddQuotation(false)} ticketData={ticketData}/>:
+      userType === "landlord"?<span><br/>Awaiting response from tenant</span>:<></>
+      }
+      {letTenantAcceptQuotation? 
+      <QuotationForm onSubmission={()=>setTenantAcceptQuotation(false)} ticketData={ticketData}/>: 
+      userType === "tenant" ? <span><br/>Waiting for Landlord to add Quotation</span>:<></>
+    } 
+      </div>
 
    );
+   
 };
-
-
-//     const steps = ["Processing request" , "Acception quotation" , "Service Scheduling", "Work In Progress" , "Completed"];
-//     const [currentStep, setCurrentStep] = useState(0);
-//     const [completedSteps, setCompletedSteps] = useState([]);
-
-//     const goToPreviousStep = () => {
-//         setCurrentStep(prevStep => prevStep - 1);
-//       };
-    
-//       const goToNextStep = () => {
-//         if (!completedSteps.includes(currentStep)) {
-//           setCompletedSteps(prevSteps => [...prevSteps, currentStep]);
-//         }
-//         setCurrentStep(prevStep => prevStep + 1);
-//       };
-
-//     return (
-//     <div className="stepper">
-//       {steps.map((step, index) => (
-//         <div
-//           key={index}
-//           className={`step ${
-//             index === currentStep ? 'active' : ''
-//           } ${completedSteps.includes(index) ? 'complete' : ''}`}
-//         >
-//           <div className="step-icon">
-//             {completedSteps.includes(index) ? <TiTick /> : index + 1}
-//           </div>
-//           <div className="step-label">{step}</div>
-//         </div>
-//       ))}
-//       <div className="stepper-buttons">
-//         <button onClick={goToPreviousStep} disabled={currentStep === 0}>
-//           Previous
-//         </button>
-//         <button
-//           onClick={goToNextStep}
-//           disabled={currentStep === steps.length - 1}
-//         >
-//           Next
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// !complete && <button 
-// className="btn" 
-// onClick={({handleNext})=>{
-//     currentStep === steps.length ? setComplete(true)
-//     : setCurrentStep(prev =>prev+1);
-// }}
-// >
-//     {currentStep === steps.length ? "Finish" : "Next"}
-//     </button>
-
-
-
-
-
 
 export default Stepper;
