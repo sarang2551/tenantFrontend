@@ -66,7 +66,6 @@ const ServiceTicketHistoryTable = (props) => {
             >Check Status</button>
             </div>
         }];
-
   return (
     <div>
     <Swiper
@@ -119,7 +118,7 @@ const ServiceTicketHistoryTable = (props) => {
           height: '50vh', // Set the desired height for the Popup (adjust as needed)
           overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
         }} modal>
-        <ServiceTicketCard ticketData = {selectedTicket}/>
+        <ServiceTicketCard _id = {selectedTicket._id}/>
       </Popup>
       )}
     </div>

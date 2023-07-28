@@ -33,7 +33,16 @@ const fileupload = {
 
     marginTop: "10px",
     marginLeft: "100px"
-
+  }
+  const spanStyle = {
+    fontFamily: ["Arial", "sans-serif"],
+    fontSize: "16px",
+    color: "#333", /* Change this to the desired text color */
+    fontWeight: "bold",
+    padding: "5px", /* Add some padding around the text */
+    backgroundColor: "#f2f2f2", /* Add a background color */
+    border: "1px solid #ccc", /* Add a border around the text */
+    borderRadius: "4px", /* Rounded corners for the border */
   }
 
 
@@ -42,18 +51,19 @@ const QuotationForm = ({onSubmission,ticketData})=>{
     const userType = sessionStorage.getItem("userType")
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No File Selected");
-    const [processedImage,setProcessedImage] = useState()
-    const convertToImage = async (imageUrl) => {
-      try {
-        const response = await fetch(imageUrl)
-        const blob = await response.blob();
-        const objectURL = URL.createObjectURL(blob);
-        return objectURL;
-      } catch (error) {
-        console.error('Error converting image:', error);
-        return null;
-      }
-    };
+
+    const convertToBase64 = (image) => {
+        return new Promise((resolve, reject) => {
+          const reader = new FileReader();
+          reader.onload = () => {
+            resolve(reader.result);
+          };
+          reader.onerror = () => {
+            reject(new Error("Failed to read image file."));
+          };
+          reader.readAsDataURL(image);
+        });
+      };
     
     const handleFileChange = (e) => {
       if (e.target.files[0]) {
@@ -64,6 +74,8 @@ const QuotationForm = ({onSubmission,ticketData})=>{
     };
     const landlordSubmit = async(data) => {
       const {quotationAmount} = data
+      const image = await convertToBase64(data.images[0]);
+
       const response = await axios.put("http://localhost:8000/landlord/updateQuotation",
       {quotationAmount,quotationDocument:image,serviceTicketID:ticketData._id})
       if(response.status === 200){
@@ -86,8 +98,8 @@ const QuotationForm = ({onSubmission,ticketData})=>{
     return (
        userType === "tenant" ? 
        <form>
-        {/* {ticketData.quotationDocument && <img src={processedImage}/>} */}
-        <span>Quotation Amount: {ticketData.quotationAmount}</span>
+        {ticketData.quotationDocument && <img src={ticketData.quotationDocument}/>}
+        <span style={spanStyle}>Quotation Amount: {ticketData.quotationAmount}</span>
         <button type="submit" onClick={()=>tenantSubmit(true)}>Accept Quotation</button>
         <button type="submit" onClick={()=>tenantSubmit(false)}>Reject Quotation</button>
        </form> : 
@@ -95,7 +107,7 @@ const QuotationForm = ({onSubmission,ticketData})=>{
         <div className="input-with-icon">
               <div style={fileupload} onClick={() => 
                 document.querySelector(".input-field").click()}>
-                <input type="file" className="input-field" hidden onChange={handleFileChange} multiple />
+                <input type="file" className="input-field" hidden onChange={handleFileChange} />
                 {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
               </div>
               <section style={fileinfo}>
