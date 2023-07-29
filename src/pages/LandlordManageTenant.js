@@ -9,11 +9,16 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NavbarLandlord from "../components/headers/NavBarLandlord";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
+
 
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
     const [data,setData] = useState([])
     const [buildFormOpen,setBuildFormOpen] = useState(false)
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
     const handleAddBuilding = async() =>{
         setBuildFormOpen(true)
     }
@@ -32,6 +37,7 @@ const LandlordManageTenantsPage = () => {
             setData(data.buildings)
         } else {
             console.log("Error getting buildings") /** TODO: Display error component */
+            showError('Error getting buildings', 3000);
         }
     }
     useEffect(()=>{
@@ -39,6 +45,7 @@ const LandlordManageTenantsPage = () => {
             fetchData()
         } catch(error){
             console.log(`Error getting building data`)
+            showError('Error getting building data', 3000);
         }
         
     },[])
