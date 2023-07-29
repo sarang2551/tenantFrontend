@@ -4,13 +4,14 @@ import {useForm} from "react-hook-form"
 import "../components/tenantComponents/st_form_style.css"
 import {useNavigate} from 'react-router-dom'
 import "./loginStyle.css"
-import ErrorMessage from "../components/errorBox";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
 
 const FirstLoginPage = ({userDetails}) => {
     // page to allow the change of password
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [errorShow,setErrorShow] = useState(false)
-    const [errorMessage,setErrorMessage] = useState()
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
     const navigate = useNavigate()
     const onSubmit = async(data)=>{
         const {password_first,password_second} = data
@@ -18,22 +19,13 @@ const FirstLoginPage = ({userDetails}) => {
             const userID = sessionStorage.getItem('userID')
             const response = await axios.put("http://localhost:8000/tenant/changePassword",{password:password_first,userID})
             if(response.status === 200){
+                showSuccess('Password has been successfuly changed', 3000);
                 navigate('/')
             }else{
-                setErrorShow(true);
-                setErrorMessage("Server error changing password") 
-                setTimeout(() => {
-                  setErrorShow(false)
-                  setErrorMessage("")
-                }, 3000);
+                showError('Server error changing password', 3000);
                 }
         } else {
-            setErrorShow(true);
-            setErrorMessage("Passwords do not match") 
-            setTimeout(() => {
-              setErrorShow(false)
-              setErrorMessage("")
-            }, 3000);
+             showError('Passwords do not match', 3000);
         }
     }
     return (
@@ -49,7 +41,7 @@ const FirstLoginPage = ({userDetails}) => {
             {errors.password_first && <span>New password is required</span>}
             {errors.password_second && <span>Confirm password</span>}
         </form>
-        {errorShow && <ErrorMessage message={errorMessage} />}
+        {<showError />}
         </div>
     )
 }
