@@ -1,61 +1,68 @@
 import React,{useState} from 'react'; 
-import { 
-Nav, 
-NavLink, 
-Bars, 
-NavMenu, 
-NavBtn, 
-NavBtnLink, 
-} from './NavElements'; 
+// import { 
+// Nav, 
+// NavLink, 
+// Bars, 
+// NavMenu, 
+// NavBtn, 
+// NavBtnLink, 
+// } from './NavElements'; 
 import NotifBar from '../notifBar/NotifBar'; 
 import tableIcons from '../tenantComponents/MaterialIconComponents'; 
 import "./assets/css/style.css"
+import {useNavigate} from 'react-router-dom'
  
-const Navbar = () => { 
- 
-    const  [notifOpen, setNotifOpen] = useState(false) 
-    const toggleNotifBar = () =>{ 
-        setNotifOpen(!notifOpen); 
-        console.log(notifOpen) 
-    } 
-    return ( 
-        <nav className="nav flex-between"> 
-      <div className="nav__menu-wrapper flex"> 
- 
-        <div className="nav__menu flex-between"> 
-          <div className="nav__menu-list flex"> 
-            <div className="nav__item nav__item--dropdown"> 
-              <a href="/" className="nav__link">Home</a> 
- 
-              <div className="nav__dropdown with-icons"> 
-              </div> 
-            </div> 
-            <div className="nav__item nav__item--dropdown"> 
-              <a href="#" className="nav__link">Make Requests</a> 
- 
-               
-            </div> 
-            <div className="nav__item"> 
-              <a href="#" className="nav__link">Quotations</a> 
-            </div> 
-            <div className="nav__item"> 
-              <a href="#" className="nav__link">Profile</a> 
-            </div> 
-          </div> 
-          <div className="nav__item"> 
-              <a href="/serviceTicketPage" className="nav__link">Service Request Page</a> 
- 
-               
-            </div> 
-        </div> 
-      </div> 
- 
-      <div className="nav__overlay"></div> 
-    </nav> 
-    ) 
-      
-         
-     
-}; 
- 
+
+const Navbar = () => {
+  const [notifOpen, setNotifOpen] = useState(false);
+  const navigate = useNavigate()
+  const toggleNotifBar = () => {
+    setNotifOpen(!notifOpen);
+  };
+  const handleLogout = ()=>{
+    sessionStorage.clear()
+    navigate("/")
+  }
+  return (
+    <>
+      <nav className="nav flex-between">
+        <div className="nav__menu-wrapper flex">
+          <div className="nav__menu flex-between">
+            <div className="nav__menu-list flex">
+              <div className="nav__item">
+                <a href="/tenant/home" className="nav__link">
+                  Home
+                </a>
+              </div>
+              <div className="nav__item">
+                <a href="/serviceTicketPage" className="nav__link">
+                  Make Requests
+                </a>
+              </div>
+              <div className="nav__item">
+                <a href="/tenant/unitPage" className="nav__link">
+                  Unit
+                </a>
+              </div>
+              <div className="nav__item">
+                <a href="#" className="nav__link">
+                  Profile
+                </a>
+              </div>
+              <div className="nav__item">
+                <tableIcons.Notifications
+                  onClick={toggleNotifBar}
+                  style={notifOpen ? { color: 'lightgreen' } : {}}
+                />
+              </div>
+              <div className="nav__icon-item"><tableIcons.Logout onClick={handleLogout} /></div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      {notifOpen && <NotifBar props={notifOpen} />}
+    </>
+  );
+};
+
 export default Navbar;
