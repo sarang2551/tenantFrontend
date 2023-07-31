@@ -6,16 +6,17 @@ import axios from "axios"
 const AddUnitForm = ({onClose,onAddition,buildingID})=>{
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const onSubmit = async(data)=>{
-        const {unitNumber,monthlyRental,images} = data
+        const {unitName,unitNumber,monthlyRental,images} = data
         const addUnit = async()=>{
             const imageList = [];
-            const userID = "64873c12bd2e5989a5e90e1c" /** TODO: Get userID from user session */   
+            const userID = sessionStorage.getItem('userID')
                   for (let i = 0; i < images.length; i++) {
                     const base64Image = await convertToBase64(images[i]);
                     imageList.push(base64Image);
                   }
                 
                   const unitObject = {
+                    unitName,
                     unitNumber,
                     buildingID,
                     userID,
@@ -52,6 +53,8 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
     }
     return(
             <form onSubmit={handleSubmit(onSubmit)} >
+            <input type='text' placeholder="Unit Name" {...register("unitName", { required: true })} />
+            <br/>
             <input type='text' placeholder="Unit Number" {...register("unitNumber", { required: true })} />
             <br/>
             <input type='text' placeholder="Monthly Rental" {...register("monthlyRental", { required: true })} />
@@ -67,6 +70,7 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
                 <input type="submit"/>
               {errors.unitNumber && <span>Unit Number is required</span>}
               {errors.monthlyRental && <span>Monthly Rental is required</span>}
+              {errors.unitName && <span>Unit Name is required</span>}
               
             </form>
           );

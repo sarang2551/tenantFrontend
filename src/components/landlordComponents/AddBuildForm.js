@@ -140,7 +140,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
             <label>Attach Images</label>
             <div className="input-with-icon">
               <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
-                <input type="file" accept="png/*" className="input-field" hidden onChange={handleFileChange} multiple />
+                <input type="file" className="input-field" hidden onChange={handleFileChange} multiple />
                 {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
               </div>
               <section style={fileinfo}>

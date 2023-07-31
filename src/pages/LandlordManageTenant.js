@@ -25,7 +25,7 @@ const LandlordManageTenantsPage = () => {
     }
 
     const fetchData = async() => {
-        const userID = "647f393928c6e292aebd9999"
+        const userID = sessionStorage.getItem('userID')
         const response = await axios.get(`http://localhost:8000/landlord/buildingsOwned/${userID}`)
         var data = response.data
         if(data.status === 200){
@@ -46,6 +46,7 @@ const LandlordManageTenantsPage = () => {
     const columns = [
         { title: 'Building Name', field: 'buildingName',fontFamily:'Calibri'},
         { title: 'Address', field: 'address', align:'center' },
+        {title: "Registration Date", field:"registrationDate",align:'center'},
         {
           title: 'Details', align:'center',
           render: (rowData) => (
@@ -85,6 +86,7 @@ const LandlordManageTenantsPage = () => {
             columns={columns}
             icons={tableIcons}
             options = {{
+                sorting:true,
                 selection:true,
                 headerStyle: { background: "lightgrey"}, 
                 exportButton:true,

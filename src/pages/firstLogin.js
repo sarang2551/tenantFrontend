@@ -38,12 +38,14 @@ const FirstLoginPage = ({userDetails}) => {
     }
     return (
         <div className='d-flex justify-content-center align-items-center'>
+            <h3> Change of Password</h3>
         <form onSubmit={handleSubmit(onSubmit)} >
             <input type="password" placeholder="New password" {...register('password_first', { required: true })}></input>
             <br/>
             <input type="password" placeholder="Confirm password" {...register('password_second', { required: true })}></input>
             <br/>
             <button type="submit">Submit</button>
+            
             {errors.password_first && <span>New password is required</span>}
             {errors.password_second && <span>Confirm password</span>}
         </form>

@@ -7,6 +7,11 @@ import ServiceTicketForm from './STForm';
 // import ServiceTicketStatus from './STStatus';
 import axios from 'axios';
 import ServiceTicketCard from './STCard';
+import {Swiper, SwiperSlide} from "swiper/react";
+import "swiper/css"
+import 'swiper/css/scrollbar';
+import {Scrollbar,Mousewheel} from "swiper/modules"
+import Ticket from ".././STTicketsNew"
 
 
 const ServiceTicketHistoryTable = (props) => {
@@ -15,7 +20,6 @@ const ServiceTicketHistoryTable = (props) => {
   const [selectedTicket, setSelectedTicket] = useState (false);
   const [data,setData] = useState([])
 
-  
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }
@@ -65,6 +69,23 @@ const ServiceTicketHistoryTable = (props) => {
 
   return (
     <div>
+    <Swiper
+      spaceBetween={5}
+      slidesPerView={5}
+      modules={[Scrollbar,Mousewheel]}
+      mousewheel={{
+        enable: true,
+        sensitivity: 10,}
+      }
+      scrollbar={{ draggable: true }}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
+      {data.map((ticketData,idx)=><SwiperSlide>
+        <Ticket STData={{idx,...ticketData}}/>
+      </SwiperSlide>)}
+    </Swiper>
+    <br style={{marginTop:"20px"}}/>
     <MaterialTable
       title="Service Tickets History"
       columns={columns}
@@ -86,7 +107,6 @@ const ServiceTicketHistoryTable = (props) => {
       ]}
       options={{
         search: true,
-        paging: true,
       }}
     />
      <Popup open={addTicketOpen} onClose={handleClosePopup} modal>
