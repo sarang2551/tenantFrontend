@@ -37,7 +37,7 @@
   input[type=checkbox] {
     display: none;
   }
-  label{
+  .customLabel{
     background: #17594A;
     height: 69px;
     width: 100%;

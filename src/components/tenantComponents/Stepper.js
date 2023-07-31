@@ -3,6 +3,7 @@ import React, { useState,useEffect } from "react";
 import {TiTick} from "react-icons/ti";
 import axios from "axios";
 import QuotationForm from "../quotationForm";
+import StepperButton from "./StepperButton";
 
 const Stepper = ({ticketData}) => {
     const userType = sessionStorage.getItem("userType")
@@ -28,6 +29,7 @@ const Stepper = ({ticketData}) => {
       
     }
 
+
     const steps = ["Processing request" , 
     userType === "tenant"?
     ticketData.quotation ? 
@@ -36,6 +38,9 @@ const Stepper = ({ticketData}) => {
     "Awaiting Acceptance/Rejection" : "Submit Quotation Below"
     , 
     "Work In Progress" , "Completed"];
+
+
+
     return (
        <div>
         <div className="flex justify-between">
@@ -51,8 +56,11 @@ const Stepper = ({ticketData}) => {
               </div>
             ))}
           </div>
-       
-      {!complete && (
+          <div className= "Stepperbutton">
+            {currentStep !== 2 && <StepperButton/>} 
+            {/* hide Stepperbutton for awaiting quotation */}
+          </div>
+      {!complete && currentStep !== 2 &&( //hide "finish" for Awaiting quotation
         <button
           className="btn"
           onClick={() => {

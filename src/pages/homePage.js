@@ -5,6 +5,11 @@ import "../components/headers/assets/css/style.css";
 import "../components/headers/assets/css/STstyle.css"; 
 import Pie from '../components/Pie';
 import Ticket from '../components/STTicketsNew';
+import {Swiper, SwiperSlide} from "swiper/react";
+import "swiper/css"
+import 'swiper/css/scrollbar';
+import {Scrollbar,Mousewheel} from "swiper/modules";
+import "../components/headers/assets/css/swipe.css"; /* swiper-custom.css */
 
 
 
@@ -47,10 +52,23 @@ function Home() {
           <section class="home-collection-right">
             <div class="home-main">
               <div class="home-container3">
-                {ticketData.map((serviceTicket, idx) => (
-                  <Ticket key={idx} STData={{ idx, ...serviceTicket }} />
-                ))}
-
+                {/* Render the SwiperComponent and pass the ticketData */}
+                <Swiper
+                spaceBetween={5}
+                slidesPerView={5}
+                modules={[Scrollbar,Mousewheel]}
+                mousewheel={{
+                  enable: true,
+                  sensitivity: 10,}
+                }
+                scrollbar={{ draggable: true }}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+              >
+                {ticketData.map((ticket,idx)=><SwiperSlide>
+                  <Ticket STData={{idx,...ticket}}/>
+                </SwiperSlide>)}
+              </Swiper>
               </div> 
             </div>
           </section>

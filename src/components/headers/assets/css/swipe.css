@@ -1,0 +1,8 @@
+/* swiper-custom.css */
+.swiper-slide {
+  width: 250px !important;
+}
+
+.swiper-wrapper{
+  width: 500%;
+}

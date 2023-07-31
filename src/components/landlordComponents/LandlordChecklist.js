@@ -29,7 +29,7 @@ const Checklist = () => {
             checked={task.checked}
             onChange={() => handleCheckboxChange(task.id)}
           />
-          <label htmlFor={task.id}>
+          <label htmlFor={task.id} className='customLabel'>
             <div>
               <h2>{task.tenant}</h2>
             </div>
