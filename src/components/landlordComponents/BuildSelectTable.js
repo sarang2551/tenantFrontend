@@ -8,6 +8,8 @@ import AddTenantForm from "./AddTenantForm";
 import AddUnitForm from "./AddUnitForm";
 import NavbarLandlord from "../headers/NavBarLandlord";
 import UnitDetailsForm from "./UnitDetailsForm";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
 
 const BuildingManageTable = ()=> {
     const location = useLocation()
@@ -23,6 +25,8 @@ const BuildingManageTable = ()=> {
     const [selectedUnitDetails,setSelectedUnitDetails] = useState()
     // for adding tenants to units
     const [AddTenant,setAddTenant] = useState()
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
 
     const handleOpenUnitDetailsPopUp = (rowData)=>{
         setSelectedUnitDetails(rowData)
@@ -48,6 +52,7 @@ const BuildingManageTable = ()=> {
             setData(data.unitsList)
         } else {
             console.log("Error getting building information") /**TODO: Add Error component */
+            showError('Error getting building information', 3000);
         }
     }
     const handleDeleteUnit = ()=>{
