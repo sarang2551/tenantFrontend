@@ -4,8 +4,8 @@ import tableIcons from "../tenantComponents/MaterialIconComponents";
 import Popup from "reactjs-popup";
 import axios from "axios";
 import ServiceTicketCard from "../tenantComponents/STCard";
-import { useError } from "../components/errorBox";
-import { useSuccess } from "../components/successBox";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 
 const LandlordServiceTicketTable = () => {

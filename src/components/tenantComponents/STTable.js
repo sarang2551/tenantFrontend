@@ -12,8 +12,8 @@ import "swiper/css"
 import 'swiper/css/scrollbar';
 import {Scrollbar,Mousewheel} from "swiper/modules"
 import Ticket from ".././STTicketsNew"
-import { useError } from "../components/errorBox";
-import { useSuccess } from "../components/successBox";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 
 const ServiceTicketHistoryTable = (props) => {

@@ -3,8 +3,8 @@ import React, { useState,useEffect } from "react";
 import {TiTick} from "react-icons/ti";
 import axios from "axios";
 import QuotationForm from "../quotationForm";
-import { useError } from "../components/errorBox";
-import { useSuccess } from "../components/successBox";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const Stepper = ({ticketData}) => {
     const userType = sessionStorage.getItem("userType")

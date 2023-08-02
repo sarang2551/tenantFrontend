@@ -8,8 +8,8 @@ import AddTenantForm from "./AddTenantForm";
 import AddUnitForm from "./AddUnitForm";
 import NavbarLandlord from "../headers/NavBarLandlord";
 import UnitDetailsForm from "./UnitDetailsForm";
-import { useError } from "../components/errorBox";
-import { useSuccess } from "../components/successBox";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const BuildingManageTable = ()=> {
     const location = useLocation()
