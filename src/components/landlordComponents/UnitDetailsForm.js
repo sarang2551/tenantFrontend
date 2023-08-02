@@ -3,45 +3,45 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 
-const UnitDetailsForm = ({buildingName,unitDetails})=>{
-    const [tenantData,setTenantData] = useState(undefined)
-    const fetchData = async()=>{
-        if(unitDetails.tenantRef){
+const UnitDetailsForm = ({ buildingName, unitDetails }) => {
+    const [tenantData, setTenantData] = useState(undefined)
+    const fetchData = async () => {
+        if (unitDetails.tenantRef) {
             const response = await axios.get(`http://localhost:8000/landlord/getTenantInfo/${unitDetails.tenantRef}`)
             var data = response.data
-            if(data.status === 200){
+            if (data.status === 200) {
                 setTenantData(data.tenantInfo)
-            }else{
+            } else {
                 console.log("error getting tenant data for unit details")
             }
         }
-        
+
     }
-    useEffect(()=>{
-        try{
+    useEffect(() => {
+        try {
             fetchData()
-        }catch(err){
+        } catch (err) {
             console.log("Error getting unit data")
         }
-    },[])
-    const {} = unitDetails
+    }, [])
+    const { } = unitDetails
     return (
         <div>
             <span>In building: {buildingName}</span>
-            <br/>
+            <br />
             <span>Unit Number: {unitDetails?.unitNumber}</span>
-            <br/>
+            <br />
             <span>Monthly Rental: {unitDetails?.monthlyRental}</span>
-            {unitDetails.tenantRef && 
-            <div>
-            <span>
-                Tenant name: {tenantData?.tenantName}
-            </span>
-            <br/>
-            <span>
-                Tenant Contact Number: {tenantData?.contactNumber}
-            </span>
-            </div>
+            {unitDetails.tenantRef &&
+                <div>
+                    <span>
+                        Tenant name: {tenantData?.tenantName}
+                    </span>
+                    <br />
+                    <span>
+                        Tenant Contact Number: {tenantData?.contactNumber}
+                    </span>
+                </div>
             }
         </div>
     )
