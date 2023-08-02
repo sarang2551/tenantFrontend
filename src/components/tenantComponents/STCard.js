@@ -108,7 +108,7 @@ const ServiceTicketCard = ({_id}) => {
 		  	{ticketData.progressStage < 4 &&  
             <Stepper ticketData = {ticketData}/>
             } 
-            {(showLandlordFeedback || showTenantFeedback) ? <FeedbackForm ticketData={ticketData}/> : <h5>Feedback submitted</h5>}
+            {/* {(showLandlordFeedback || showTenantFeedback) ? <FeedbackForm ticketData={ticketData}/> : <h5>Feedback submitted</h5>} */}
 		  </div>
         </div>
         <br></br>

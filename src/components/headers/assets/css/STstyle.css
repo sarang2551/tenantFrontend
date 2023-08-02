@@ -13,7 +13,7 @@
     grid-template-columns: 1fr 1fr; 
     grid-template-rows: auto 1fr auto;
     /* max-width: 24rem; */
-    /* width: 50%; */
+    /* width: 300%; */
     height: 100%;
   
   }
@@ -52,7 +52,7 @@
   }
   .ticket__header {
     font-size: 1rem;
-    border-top: 0.25rem solid #dc143c;
+    border-top: 0.25rem solid #1D5B79;
     border-bottom: none;
     box-shadow: none;
   }
@@ -73,6 +73,7 @@
     position: absolute;
     height: 50%;
     width: 100%;
+    left:0%;
     top: 0;
     border-bottom: 2px dashed #e9ebed;
   }
@@ -129,3 +130,7 @@
     border-top: 2px dashed #e9ebed;
     border-radius: 0 0 0.325rem 0.325rem;
   }
+
+
+
+  

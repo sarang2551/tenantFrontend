@@ -69,7 +69,7 @@ const ServiceTicketHistoryTable = (props) => {
   return (
     <div>
     <Swiper
-      spaceBetween={5}
+      spaceBetween={150}
       slidesPerView={5}
       modules={[Scrollbar,Mousewheel]}
       mousewheel={{

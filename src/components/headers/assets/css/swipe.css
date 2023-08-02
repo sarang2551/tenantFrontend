@@ -1,8 +1,15 @@
 /* swiper-custom.css */
 .swiper-slide {
-  width: 250px !important;
+  width: 15px !important;
 }
 
 .swiper-wrapper{
-  width: 500%;
+  width: 50%;
+  
 }
+
+.swiper-container{
+  height: auto;
+}
+
+
