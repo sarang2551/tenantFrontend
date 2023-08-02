@@ -30,6 +30,8 @@ const FeedbackForm = ({ticketData}) => {
             showError('Error sending feedback form', 3000);
         }
     }
+
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)} style={{alignContent:"center"}}>
         <h3>Feedback Form</h3>

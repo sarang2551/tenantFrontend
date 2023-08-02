@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import"./add_building.css";
+import"./style_form.css";
 import { Grid, Typography } from "@material-ui/core";
 import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdUploadFile, MdDelete } from 'react-icons/md';
@@ -98,8 +98,8 @@ const AddBuildForm = ({ onClose, onAddition }) => {
 
   return (
       <div className="custom-popup-content">
-        <form onSubmit={handleSubmit(onSubmit)} className="add-building-form">
-          <div className="add-building-form-container">
+        <form onSubmit={handleSubmit(onSubmit)} className="style-form">
+          <div className="style-form-container">
             <tableIcons.Close onClick={onClose} />
           </div>
           <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>

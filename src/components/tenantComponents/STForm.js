@@ -2,13 +2,43 @@ import React, { useState, useEffect } from 'react';
 import {useForm} from 'react-hook-form'
 import "./st_form_style.css"
 import axios from "axios"
+import"../landlordComponents/style_form.css";
+import { Grid, Typography } from "@material-ui/core";
+import tableIcons from "../tenantComponents/MaterialIconComponents";
+import { MdUploadFile, MdDelete } from 'react-icons/md';
+import { AiFillFileImage } from 'react-icons/ai';
 
 
 const ServiceTicketForm = ({onClose, onAddition}) => {
-  const { register, handleSubmit, watch, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
   const [landlordName, setLandlordName] = useState(); 
+  const [image, setImage] = useState(null);
+  const [fileName, setFileName] = useState("No File Selected");
   
   const [unitData,setUnitData] = useState() 
+
+  const fileupload = {
+    width: "100px",
+    height: "100px",
+    border: "2px solid rgba(49, 54, 56, 0.33)",
+    background: "#F2F4F8",
+    borderRadius: "30px",
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    marginLeft: "100px"
+  };
+
+  const fileinfo = {
+    color: "#535353",
+    fontFamily: "KoHo",
+    fontSize: "20px",
+    fontStyle: "normal",
+    lineHeight: "normal",
+    letterSpacing: "0.17px",
+    marginTop: "10px",
+    marginLeft: "30px"
+  };
 
   const onSubmit = async(data) => {
                 const {title,description,images} = data
@@ -80,48 +110,75 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
     fetchData();
   }, []);
 
+  const handleFileChange = (e) => {
+    if (e.target.files[0]) {
+      setImage(URL.createObjectURL(e.target.files[0]));
+      setFileName(e.target.files[0].name);
+      setValue("images", e.target.files);
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <h3>Add Service Ticket Form</h3>
-    <input type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
-    <br/>
-    <input type='text' placeholder="Description" {...register("description", { required: true })} />
-    <br/>
-    <label>
-    Landlord: <p id="landlord_name">{landlordName}</p>
-    {/* <select id="landlord_selection" {...register("landlordIdx", { required: true })}>
-        {landlordOptions.map((option,idx) => (
-          <option key={idx} value={idx} >
-            {option.landlordName}
-          </option>
-        ))}
-      </select> */}
-    Unit: <p id="unit_name">{unitData}</p>
+    <div className="custom-popup-content">
+      <form onSubmit={handleSubmit(onSubmit)} className="style-form">
+        <div className="style-form-container">
+          <tableIcons.Close onClick={onClose} />
+        </div>
+        <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>
+          Add Service Ticket
+        </Typography>
+        <Grid item xs={20}>
+          <input 
+          
+          type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
+          <input type='text' placeholder="Description" {...register("description", { required: true })} />
     
-      {/* <select id="unit_selection" {...register("unitIdx", { required: true })}>
-        {unitOptions.map((option,idx) => (
-          <option key={idx} value={idx} >
-            {option.unitID}
-          </option>
-        ))}
-      </select> */}
-    </label>
-    <br/>
-      Attach Images 
-      <input
-            type="file"
-            id="fileInput"
-            multiple 
-            accept="image/*"
-            {...register("images",)}
-        />
-      <br/>
-       <button type='submit'>Submit</button>
-      {errors.ticket_name && <span>Name is required</span>}
-      {errors.description && <span>Description is required</span>}
-      
-    </form>
+          <label>
+            Landlord: <p id="landlord_name">{landlordName}</p>
+            Unit: <p id="unit_name">{unitData}</p>
+          </label>
+          <label>Attach Images</label>
+          <div
+            className="input-with-icon"
+            onClick={() => document.querySelector(".input-field").click()}
+          >
+            <div style={fileupload}>
+              <input
+                type="file"
+                className="input-field"
+                hidden
+                onChange={handleFileChange}
+                multiple
+                accept="image/*"
+                {...register("images")}
+              />
+              {image ? (
+                <img src={image} alt="Preview" />
+              ) : (
+                <MdUploadFile color="#535353" size={50} />
+              )}
+            </div>
+            <section style={fileinfo}>
+              <AiFillFileImage color="#535353" />
+              <span>
+                {fileName}
+                <MdDelete
+                  color="#535353"
+                  onClick={() => {
+                    setFileName("No File Selected");
+                    setImage(null);
+                    setValue("images", null);
+                  }}
+                />
+              </span>
+            </section>
+          </div>
+          </Grid>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
+          <input type="submit" />
+        </Grid>
+      </form>
+    </div>
   );
-  
 };
 export default ServiceTicketForm;
