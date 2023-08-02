@@ -1,10 +1,44 @@
-import React from "react";
+import React, { useState }  from "react";
 import {useForm} from 'react-hook-form'
-import "../tenantComponents/st_form_style.css"
+// import "../tenantComponents/st_form_style.css"
 import axios from "axios"
+import { Grid, Typography } from "@material-ui/core";
+import tableIcons from "../tenantComponents/MaterialIconComponents";
+import { MdUploadFile, MdDelete } from 'react-icons/md';
+import { AiFillFileImage } from 'react-icons/ai';
+import"./style_form.css";
+
 
 const AddUnitForm = ({onClose,onAddition,buildingID})=>{
-    const { register, handleSubmit, watch, formState: { errors } } = useForm();
+    const { register, handleSubmit, watch, formState: { errors }, setValue} = useForm();
+
+    const [image, setImage] = useState(null);
+    const [fileName, setFileName] = useState("No File Selected");
+  
+    const fileupload = {
+      width: "100px",
+      height: "100px",
+      border: "2px solid rgba(49, 54, 56, 0.33)",
+      background: "#F2F4F8",
+      borderRadius: "30px",
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      marginLeft: "100px"
+    };
+  
+    const fileinfo = {
+      color: "#535353",
+      fontFamily: "KoHo",
+      fontSize: "20px",
+      fontStyle: "normal",
+      lineHeight: "normal",
+      letterSpacing: "0.17px",
+      marginTop: "10px",
+      marginLeft: "30px"
+    };
+
+
     const onSubmit = async(data)=>{
         const {unitName,unitNumber,monthlyRental,images} = data
         const addUnit = async()=>{
@@ -51,29 +85,106 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
       
         addUnit()
     }
+
+    const handleFileChange = (e) => {
+      if (e.target.files[0]) {
+        setImage(URL.createObjectURL(e.target.files[0]));
+        setFileName(e.target.files[0].name);
+        setValue("images", e.target.files);
+      }
+    };
+
     return(
-            <form onSubmit={handleSubmit(onSubmit)} >
-            <input type='text' placeholder="Unit Name" {...register("unitName", { required: true })} />
-            <br/>
-            <input type='text' placeholder="Unit Number" {...register("unitNumber", { required: true })} />
-            <br/>
-            <input type='text' placeholder="Monthly Rental" {...register("monthlyRental", { required: true })} />
-            <br/>
-              Attach Images 
+      <div className="custom-popup-content">
+      <form onSubmit={handleSubmit(onSubmit)} className="style-form">
+        <div className ="style-form-container">
+          <tableIcons.Close onClick={onClose} />
+        </div>
+        <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>
+          Add Unit
+        </Typography>
+        <Grid item xs={20}>
+          <div className="input-with-icon">
+            <tableIcons.Home className="icon" />
+            <input
+              type="text"
+              placeholder="Unit Name"
+              {...register("unitName", { required: true })}
+            />
+            {errors.unitName && <span>Unit Name is required</span>}
+          </div>
+
+          <div className="input-with-icon">
+            <tableIcons.Location className="icon" />
+            <input
+              type="text"
+              placeholder="Unit Number"
+              {...register("unitNumber", { required: true })}
+            />
+            {errors.unitNumber && <span>Unit Number is required</span>}
+          </div>
+
+          <div className="input-with-icon">
+            <tableIcons.Postal className="icon" />
+            <input
+              type="text"
+              placeholder="Monthly Rental"
+              {...register("monthlyRental", { required: true })}
+            />
+            {errors.monthlyRental && <span>Monthly Rental is required</span>}
+          </div>
+
+          <label>Attach Images</label>
+          <div
+            className="input-with-icon"
+            onClick={() => document.querySelector(".input-field").click()}
+          >
+            <div style={fileupload}>
               <input
-                    type="file"
-                    id="fileInput"
-                    multiple 
-                    accept="image/*"
-                    {...register("images")}
+                type="file"
+                className="input-field"
+                hidden
+                onChange={handleFileChange}
+                multiple
+                accept="image/*"
+                {...register("images")}
+              />
+              {image ? (
+                <img src={image} alt="Preview" />
+              ) : (
+                <MdUploadFile color="#535353" size={130} />
+              )}
+            </div>
+            <section style={fileinfo}>
+              <AiFillFileImage color="#535353" />
+              <span>
+                {fileName}
+                <MdDelete
+                  color="#535353"
+                  onClick={() => {
+                    setFileName("No File Selected");
+                    setImage(null);
+                    setValue("images", null);
+                  }}
                 />
-                <input type="submit"/>
-              {errors.unitNumber && <span>Unit Number is required</span>}
-              {errors.monthlyRental && <span>Monthly Rental is required</span>}
-              {errors.unitName && <span>Unit Name is required</span>}
-              
-            </form>
-          );
-}
+              </span>
+            </section>
+          </div>
+        </Grid>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
+          <input type="submit" />
+        </Grid>
+      </form>
+    </div>
+  );
+};
 
 export default AddUnitForm;
+
+
+
+
+
+
+
+

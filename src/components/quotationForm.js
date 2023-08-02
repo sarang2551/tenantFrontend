@@ -3,7 +3,7 @@ import {useForm} from 'react-hook-form'
 import "./tenantComponents/st_form_style.css"
 import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
-import "./landlordComponents/add_building.css"
+import "./landlordComponents/style_form.css"
 import axios from "axios";
 
 const fileupload = {

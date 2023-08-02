@@ -9,6 +9,7 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NavbarLandlord from "../components/headers/NavBarLandlord";
+import CustomPopup from "../components/landlordComponents/CustomPopup";
 
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
@@ -112,29 +113,9 @@ const LandlordManageTenantsPage = () => {
       </Grid>
       <Grid item xs={1}></Grid>
         </Grid>
-        <Popup
-  open={buildFormOpen}
-  onClose={handleClosePopup}
-  modal
-  contentStyle={{
-    maxWidth: "400px",
-    maxHeight: "500px",
-    margin: "0 auto",
-    padding: "20px",
-    backgroundColor: "white",
-    borderRadius: "8px",
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  }}
-  overlayStyle={{
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-  }}
->
-  <AddBuildForm onClose={handleClosePopup} onAddition={fetchData} />
-</Popup>
-
+        <CustomPopup open={buildFormOpen} onClose={handleClosePopup} modal>
+        <AddBuildForm onClose={handleClosePopup} onAddition={fetchData} />
+        </CustomPopup>
     </div>
 </div>
     )

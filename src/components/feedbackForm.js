@@ -23,6 +23,8 @@ const FeedbackForm = ({ticketData}) => {
             console.log(`Error sending feedback form`) /**TODO: Add Error component */
         }
     }
+
+    
     return (
         <form onSubmit={handleSubmit(onSubmit)} style={{alignContent:"center"}}>
         <h3>Feedback Form</h3>
