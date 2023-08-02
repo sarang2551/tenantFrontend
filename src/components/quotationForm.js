@@ -5,6 +5,8 @@ import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import "./landlordComponents/add_building.css"
 import axios from "axios";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
 
 const fileupload = {
     display: 'flex',
@@ -51,6 +53,8 @@ const QuotationForm = ({onSubmission,ticketData})=>{
     const userType = sessionStorage.getItem("userType")
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No File Selected");
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
 
     const convertToBase64 = (image) => {
         return new Promise((resolve, reject) => {
@@ -82,6 +86,7 @@ const QuotationForm = ({onSubmission,ticketData})=>{
         onSubmission()
       }else{
         console.log(`Error updating quotation`) /**TODO: Add Error component here */
+        showError(`Error updating quotation`, 3000);
       }
     }
     const tenantSubmit = async(quotationAcceptance) => {
