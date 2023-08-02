@@ -2,14 +2,15 @@ import React, { useState } from "react";
 import {useForm} from 'react-hook-form'
 import "../components/tenantComponents/st_form_style.css"
 import axios from "axios";
-import ErrorMessage from "../components/errorBox";
+import { useError } from "../components/errorBox";
 import { useNavigate } from "react-router-dom";
 import './loginStyle.css';
+import { useSuccess } from "../components/successBox";
 
 const LoginPage = ()=>{
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
-    const [errorShow,setErrorShow] = useState(false)
-    const [errorMessage,setErrorMessage] = useState("")
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
     var [userType,setUserType] = useState()
     const navigate = useNavigate();
 
@@ -23,28 +24,19 @@ const LoginPage = ()=>{
                     if(userType === "tenant") sessionStorage.setItem("tenantName",data.tenantName)
                     if(data.firstLogin && userType === "tenant"){
                       navigate('/tenant/firstLogin')
+                      showSuccess('Successfully logged in', 2000);
                     }else{
                       navigate(`/${userType}/home`)
+                      showSuccess('Successfully logged in', 2000);
                     }
                     
                 } else {
                   console.log(response)
-                    setErrorShow(true);
-                    setErrorMessage("Error logging in") /** TODO: Need to make this error dynamic */
-                    const timer = setTimeout(() => {
-                      setErrorShow(false)
-                      setErrorMessage("")
-                    }, 1000);
-                    clearTimeout(timer)
+                  showError('Error logging in', 3000);
                 }
             })
         } catch (error) {
-                setErrorShow(true);
-                setErrorMessage("Error logging in") /** TODO: Need to make this error dynamic */
-                setTimeout(() => {
-                  setErrorShow(false)
-                  setErrorMessage("")
-                }, 3000);
+                showError('Error logging in', 3000);
         }
         
     }
@@ -90,7 +82,7 @@ const LoginPage = ()=>{
             </div>
           </div>
         </div>
-        {errorShow && <ErrorMessage message={errorMessage} />}
+        {<showError />}
       </>
     );
   };

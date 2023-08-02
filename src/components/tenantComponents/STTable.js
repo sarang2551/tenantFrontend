@@ -13,6 +13,9 @@ import {Scrollbar,Mousewheel} from "swiper/modules"
 import Ticket from ".././STTicketsNew"
 import CustomPopup from '../landlordComponents/CustomPopup';
 import styled from 'styled-components';
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
+
 
 const Title = styled.h2`
   text-align: center;
@@ -30,6 +33,8 @@ const ServiceTicketHistoryTable = (props) => {
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState (false);
   const [data,setData] = useState([])
+  const { showError } = useError();
+  const { showSuccess } = useSuccess();
 
     const handleAddTicket = () => {
       setAddTicketOpen(true)
@@ -46,6 +51,7 @@ const ServiceTicketHistoryTable = (props) => {
         setData(data);
       } catch (error) {
         console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+        showError(('Error fetching data:', error), 3000);
       }
     };
     const handleDeleteTicket = async(rowData) => {
@@ -56,6 +62,7 @@ const ServiceTicketHistoryTable = (props) => {
         setData([...data.splice(0,idx),...data.splice(idx,data.length)])
       } else {
         console.log(data) /** TODO: Add UI Error component */
+        showError(data, 3000);
       }
     }
   

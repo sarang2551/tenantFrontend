@@ -9,6 +9,8 @@ import CustomPopup from "./CustomPopup";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import"./style_form.css";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
 
 
 
@@ -16,6 +18,8 @@ const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState (false);
     const [data,setData] = useState([])
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
 
     const handleDeleteTicket = ()=>{
       /**TODO */
@@ -28,6 +32,7 @@ const LandlordServiceTicketTable = () => {
           setData(data);
         } catch (error) {
           console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+          showError(('Error fetching data:', error), 3000);
         }
       };
 
@@ -109,4 +114,7 @@ const LandlordServiceTicketTable = () => {
 };
 
 
+}
+
 export default LandlordServiceTicketTable;
+

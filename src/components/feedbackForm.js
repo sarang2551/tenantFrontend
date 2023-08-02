@@ -2,11 +2,15 @@ import React from "react";
 import axios from "axios";
 import {useForm} from "react-hook-form"
 import "./tenantComponents/st_form_style.css"
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
 
 const FeedbackForm = ({ticketData}) => {
     // send feedback to backend
     // attach feedback attribute to the service ticket
     const { register, handleSubmit, watch, formState: { errors }, setValue } = useForm();
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
     const onSubmit = async(data) =>{
         try{
             
@@ -16,11 +20,14 @@ const FeedbackForm = ({ticketData}) => {
             const response = await axios.put(`http://localhost:8000/${userType}/submitFeedback`,{...data,serviceTicketID})
             if(response.status === 200){
                 console.log(`Successfully sent feedback`)
+                showSuccess(`Successfully sent feedback`, 3000);
             } else {
                 console.log(`Error sending feedback form`) /**TODO: Add Error component */
+                showError('Error sending feedback form', 3000);
             }
         }catch(err){
             console.log(`Error sending feedback form`) /**TODO: Add Error component */
+            showError('Error sending feedback form', 3000);
         }
     }
 
