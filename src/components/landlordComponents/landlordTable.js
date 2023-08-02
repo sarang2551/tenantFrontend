@@ -4,11 +4,16 @@ import tableIcons from "../tenantComponents/MaterialIconComponents";
 import Popup from "reactjs-popup";
 import axios from "axios";
 import ServiceTicketCard from "../tenantComponents/STCard";
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
+
 
 const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState (false);
     const [data,setData] = useState([])
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
 
 
     const fetchData = async () => {
@@ -19,6 +24,7 @@ const LandlordServiceTicketTable = () => {
           setData(data);
         } catch (error) {
           console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+          showError(('Error fetching data:', error), 3000);
         }
       };
 
