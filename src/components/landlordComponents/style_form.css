@@ -1,4 +1,6 @@
-.add-building-form {
+/* Add building form */
+.style-form {
+  font-family: "Raleway", Raleway; 
   max-width: 3200px;
   max-height: 2800px;
   margin: 0 auto;
@@ -24,12 +26,14 @@
   cursor: pointer;
 }
 
-.add-building-form h4 {
+.style-form h4 {
+  font-family: "Raleway", Raleway; 
   text-align: center;
   margin-bottom: 20px;
 }
 
-.add-building-form input {
+.style-form input {
+  font-family: "Raleway", Raleway; 
   width: 100%;
   padding: 10px;
   margin-bottom: 15px;
@@ -38,17 +42,18 @@
   padding-left: 40px;
 }
 
-.add-building-form label {
+.style-form label {
+  font-family: "Raleway", Raleway; 
   display: block;
   margin-bottom: 5px;
 }
 
-.add-building-form span {
+.style-form span {
   color: red;
   font-size: 12px;
 }
 
-.add-building-form input[type="submit"] {
+.style-form input[type="submit"] {
   background-color: #4caf50;
   color: white;
   border: none;
@@ -58,7 +63,7 @@
   width: 100%;
 }
 
-.add-building-form input[type="submit"]:hover {
+.style-form input[type="submit"]:hover {
   background-color: #45a049;
 }
 
@@ -75,10 +80,11 @@
   margin-bottom: 9px;
 }
 
-.add-building-form-container{
+.style-form-container{
   position: absolute;
   top: 0px;
   right: 20px;
   cursor: pointer;
   padding-top: 3%;
 }
+
