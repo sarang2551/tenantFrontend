@@ -4,6 +4,9 @@ import {TiTick} from "react-icons/ti";
 import axios from "axios";
 import QuotationForm from "../quotationForm";
 import StepperButton from "./StepperButton";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
+
 
 const Stepper = ({ticketData}) => {
     const userType = sessionStorage.getItem("userType")
@@ -11,7 +14,9 @@ const Stepper = ({ticketData}) => {
     const [complete, setComplete] = useState(false);
     const [letLandlordAddQuotation,setLandlordAddQuotation] = useState(!ticketData.quotationDocument && userType === "landlord" && ticketData.progressStage == 1)
     const [letTenantAcceptQuotation,setTenantAcceptQuotation] = useState(!!ticketData.quotationDocument && userType === "tenant" && ticketData.progressStage == 1)
-
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
+    
     const updateServiceTicket = async() => {
       try{
         const userType = sessionStorage.getItem("userType")
@@ -22,9 +27,11 @@ const Stepper = ({ticketData}) => {
           setCurrentStep(data.stepNumber)
         } else {
         console.log(data.message) /**TODO: Show UI error component */
+        showError(data.message, 3000);
         }
       }catch(err){
         console.log(`Error updating service ticket`) /**TODO: Show UI error component */
+        showError(`Error updating service ticket`, 3000);
       }
       
     }

@@ -10,9 +10,6 @@ const ServiceTicketPage = (props) => {
     return (
         <div>
         <Navbar/>
-        <h1>
-        ServiceTicketPage
-        </h1>
         <ServiceTicketHistoryTable/>
     </div>
     )

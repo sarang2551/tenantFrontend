@@ -974,33 +974,36 @@ body {
   }
 }
 
-.nav__menu-list.flex {
-  display: flex;
+/* .nav__menu-list.absolute {
+  display: absolute;
   justify-content: center;
-}
+} */
 .nav {
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px; 
   padding-right: 40%;
 }
+.nav__menu-wrapper {
+  display: grid; 
+  grid-template-columns: auto 1fr;
+  align-items: center; /* Vertically center the items */
+  gap: 0px; /* Add some gap between items */
+}
 
-
-
-
-
-
-
-.nav__menu-list.flex {
+.nav__portal-text {
+  font-weight: bold;
+  font-size: 26px;
+  color: #000;
+  font-family: 'Raleway',Raleway;
+}
+.nav__logo-image {
+  width: 50px; /* Set the desired width of the logo image */
+  height: auto; /* Adjust the height automatically to maintain aspect ratio */ /* Add some spacing between the image and the menu items */
+}
+.nav__item {
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
-.nav {
-  border-bottom: 1px solid #ccc;
-  margin-bottom: 10px; 
-}
-
-
-
 
 
 
