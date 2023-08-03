@@ -15,6 +15,7 @@ import CustomPopup from '../landlordComponents/CustomPopup';
 import styled from 'styled-components';
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import FeedbackForm from '../feedbackForm';
 
 
 const Title = styled.h2`
@@ -36,6 +37,7 @@ const ServiceTicketHistoryTable = (props) => {
   const { showError } = useError();
   const { showSuccess } = useSuccess();
 
+  const [showFeedBack,setShowFeedback] = useState(false)
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }
@@ -74,6 +76,10 @@ const ServiceTicketHistoryTable = (props) => {
       setInfoTicketOpen(true)
 
     }
+    const handleOpenFeedback = (rowData)=> {
+      setSelectedTicket(rowData)
+      setShowFeedback(true)
+    }
     useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
@@ -84,8 +90,12 @@ const ServiceTicketHistoryTable = (props) => {
       { title:"Date", field:"startDate"},
       { title: "Unit", field: "Status Check", render:(rowData)=>
       <div>
-        <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
-            >Check Status</button>
+        {rowData.progressStage < 4? <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
+            >Check Status</button> : 
+            <button onClick={()=>handleOpenFeedback(rowData)}>
+              Submit Feedback
+            </button>
+          }
             </div>
         }];
   return (
@@ -139,12 +149,17 @@ const ServiceTicketHistoryTable = (props) => {
         <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData} />
       </CustomPopup>
 
-
-      {selectedTicket && (
-        <CustomPopup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
-          <ServiceTicketCard _id={selectedTicket._id} />
-        </CustomPopup>
-      )}
+      
+      <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} contentStyle={{
+          width: '50%', // Set the desired width for the Popup (adjust as needed)
+          height: '50vh', // Set the desired height for the Popup (adjust as needed)
+          overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
+        }} modal>
+        <ServiceTicketCard _id = {selectedTicket._id} onPopupClose={()=>setInfoTicketOpen(false)}/>
+      </Popup>
+      <Popup open={showFeedBack} onClose={()=>setShowFeedback(false)} modal>
+        <FeedbackForm ticketData={selectedTicket} onSubmission={()=>setShowFeedback(false)}/>
+      </Popup>
     </TicketsContainer>
   );
 };
