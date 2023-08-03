@@ -38,7 +38,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
 
 
   const onSubmit = async (data) => {
-    var userID = sessionStorage.getItem('userID')
+    var userID = "64873c12bd2e5989a5e90e1c"; /**TODO: Get user data from session  */
     const { buildingName, address, postalCode } = data;
 
     const addBuilding = async () => {

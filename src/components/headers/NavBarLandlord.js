@@ -15,12 +15,11 @@ import {useNavigate} from 'react-router-dom'
 import anacle from "./assets/images/anacle.jpg"
 
 
+
 const NavbarLandlord = () => { 
-  const navigate = useNavigate()
+
   const handleLogout = () => {
-    sessionStorage.removeItem('userID')
-    sessionStorage.removeItem('userType')
-    navigate("/")
+    window.location.href = '/';
   };
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 
@@ -52,9 +51,8 @@ const NavbarLandlord = () => {
 
               <div className="nav__icon-item">
                 <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen', marginRight: '20px' } : { marginRight: '20px' }} />
-                
+                <tableIcons.Logout onClick={handleLogout} />
             </div>
-            <div className="nav__icon-item"><tableIcons.Logout onClick={handleLogout} /></div>
           </div>
         </div>
       </div>

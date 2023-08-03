@@ -196,6 +196,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
               <div className="adminmsg">
                 <h1>Service Ticket Status</h1>
               </div>
+
               <div className="Status">
                 <label>Ticket Name:</label>
                 <span className="ticketNameInfo">{ticketData.title}</span>
@@ -224,6 +225,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
       )}
     </>
   );
+
 };
 
 //<div >

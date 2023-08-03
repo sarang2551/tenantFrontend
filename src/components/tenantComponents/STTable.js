@@ -89,6 +89,7 @@ const ServiceTicketHistoryTable = (props) => {
             </div>
         }];
   return (
+
     <TicketsContainer>
       <Title>Service Tickets</Title>
       <Swiper
@@ -137,6 +138,7 @@ const ServiceTicketHistoryTable = (props) => {
       <CustomPopup open={addTicketOpen} onClose={handleClosePopup} modal>
         <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData} />
       </CustomPopup>
+
 
       {selectedTicket && (
         <CustomPopup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
