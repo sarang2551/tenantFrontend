@@ -1,7 +1,11 @@
 import React,{useState} from 'react' 
 import NavbarLandlord from '../components/headers/NavBarLandlord' 
-
 import "../components/headers/assets/css/style.css" 
+import "../components/landlordComponents/LandlordChecklist.css" 
+import LandlordPie from '../components/landlordComponents/LandlordPie'
+import Checklist from '../components/landlordComponents/LandlordChecklist'
+
+
 
 function LandlordHome() { 
 
@@ -14,23 +18,30 @@ const  [notifOpen, setNotifOpen] = useState(false)
   <NavbarLandlord/> 
   <div class="container hero"> 
             <div class="hero__left"> 
-                <div class="hero__heading-wrapper"> 
-                    <h1 class="hero__heading">hello hello&nbsp;hello</h1> 
-                </div> 
-
-                <div class="hero__subheading-wrapper"> 
-                    <p> 
-                        hello hello hello hello hello hello hello 
-                        hello hello hello hello hello hello hello 
-                        hello hello hello hello hello hello hello 
-                        hello hello hello hello hello hello hello 
-                    </p> 
-
-                    <button class="button button--secondary">Learn more</button> 
-                </div> 
-
-
+              <section class="home-collection">
+                <div class="home-content">
+                  <LandlordPie/>
+                </div>
+                <div class="home-container4">
+                </div>
+              </section>
             </div> 
+            <div class ="hero_right">
+              <section class="home-collection-right">
+              <div class="home-main">
+  
+                <div class="home-container3">
+                <Checklist/>
+                <div className="header">
+                  
+                </div>
+
+                    
+              </div> 
+              </div>
+                
+              </section>
+            </div>
         </div> 
   </div>) 
 } 

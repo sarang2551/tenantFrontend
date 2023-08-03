@@ -10,7 +10,6 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
   console.log(unitDetails)
   const onSubmit = async (data) => {
     const {tenantName, email, contact, images} = data
-    const userID = "64873c12bd2e5989a5e90e1c" /** TODO: Get from user session */
     console.log("Updating Tenant Details")
     console.log(unitDetails)
     const editTenant = async() => {
@@ -29,7 +28,8 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
 
       try {
         const result = await axios.put(`http://localhost:8000/landlord/editTenant/${unitDetails.tenantRef}`, tenantObject);
-        if (result.status == 200) {
+        const data = result.data
+        if (data.status === 200) {
           onClose();
           onAddition();
         }

@@ -12,6 +12,8 @@ import BuildingManageTable from "./components/landlordComponents/BuildSelectTabl
 import PrivateRoute from "./components/PrivateRoute.js";
 import FirstLoginPage from "./pages/firstLogin.js";
 //import NavBar from "./components/headers/NavBar";
+import { ErrorProvider } from './components/errorBox.js';
+import { SuccessProvider } from "./components/successBox.js";
 
 function App() {
   const [isSignedIn,setSignedIn] = useState()
@@ -21,6 +23,8 @@ function App() {
   },[])
   return (
     <>
+    <SuccessProvider>
+    <ErrorProvider>
     <Router>
       <Routes>
         <Route exact path="/" Component={Login} />
@@ -71,6 +75,8 @@ function App() {
         }/>
       </Routes>
     </Router>
+    </ErrorProvider>
+    </SuccessProvider>
     </>
   );
 }

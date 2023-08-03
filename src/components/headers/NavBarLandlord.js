@@ -12,14 +12,14 @@ import NotifBar from '../notifBar/NotifBar';
 import tableIcons from '../tenantComponents/MaterialIconComponents';
 import "./assets/css/style.css"
 import {useNavigate} from 'react-router-dom'
+import anacle from "./assets/images/anacle.jpg"
+
 
 
 const NavbarLandlord = () => { 
-  const navigate = useNavigate()
+
   const handleLogout = () => {
-    sessionStorage.removeItem('userID')
-    sessionStorage.removeItem('userType')
-    navigate("/")
+    window.location.href = '/';
   };
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 
@@ -29,8 +29,12 @@ const NavbarLandlord = () => {
     return ( 
       <nav className="nav">
       <div className="nav__menu-wrapper flex-center">
+      <div className="nav__item" >
+          <img src={anacle} alt="Logo" className="nav__logo-image" />
+          <span className="nav__portal-text">Landlord Portal</span>
+        </div>
         <div className="nav__menu">
-          <div className="nav__menu-list flex" style={{ justifyContent: 'center' }}>
+          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'100px' }}>
             <div className="nav__item">
               <a href="/landlord/home" className="nav__link">Home</a>
               <div className="nav__dropdown with-icons"></div>
@@ -47,9 +51,8 @@ const NavbarLandlord = () => {
 
               <div className="nav__icon-item">
                 <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen', marginRight: '20px' } : { marginRight: '20px' }} />
-                
+                <tableIcons.Logout onClick={handleLogout} />
             </div>
-            <div className="nav__icon-item"><tableIcons.Logout onClick={handleLogout} /></div>
           </div>
         </div>
       </div>

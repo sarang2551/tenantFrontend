@@ -3,6 +3,10 @@ import React, { useState,useEffect } from "react";
 import {TiTick} from "react-icons/ti";
 import axios from "axios";
 import QuotationForm from "../quotationForm";
+import StepperButton from "./StepperButton";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
+
 
 const Stepper = ({ticketData}) => {
     const userType = sessionStorage.getItem("userType")
@@ -10,7 +14,9 @@ const Stepper = ({ticketData}) => {
     const [complete, setComplete] = useState(false);
     const [letLandlordAddQuotation,setLandlordAddQuotation] = useState(!ticketData.quotationDocument && userType === "landlord" && ticketData.progressStage == 1)
     const [letTenantAcceptQuotation,setTenantAcceptQuotation] = useState(!!ticketData.quotationDocument && userType === "tenant" && ticketData.progressStage == 1)
-
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
+    
     const updateServiceTicket = async() => {
       try{
         const userType = sessionStorage.getItem("userType")
@@ -21,12 +27,15 @@ const Stepper = ({ticketData}) => {
           setCurrentStep(data.stepNumber)
         } else {
         console.log(data.message) /**TODO: Show UI error component */
+        showError(data.message, 3000);
         }
       }catch(err){
         console.log(`Error updating service ticket`) /**TODO: Show UI error component */
+        showError(`Error updating service ticket`, 3000);
       }
       
     }
+
 
     const steps = ["Processing request" , 
     userType === "tenant"?
@@ -36,6 +45,9 @@ const Stepper = ({ticketData}) => {
     "Awaiting Acceptance/Rejection" : "Submit Quotation Below"
     , 
     "Work In Progress" , "Completed"];
+
+
+
     return (
        <div>
         <div className="flex justify-between">
@@ -51,8 +63,11 @@ const Stepper = ({ticketData}) => {
               </div>
             ))}
           </div>
-       
-      {!complete && (
+          <div className= "Stepperbutton">
+            {currentStep !== 2 && <StepperButton/>} 
+            {/* hide Stepperbutton for awaiting quotation */}
+          </div>
+      {!complete && currentStep !== 2 &&( //hide "finish" for Awaiting quotation
         <button
           className="btn"
           onClick={() => {

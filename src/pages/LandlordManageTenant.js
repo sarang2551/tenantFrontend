@@ -10,10 +10,17 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NavbarLandlord from "../components/headers/NavBarLandlord";
 
+import CustomPopup from "../components/landlordComponents/CustomPopup";
+
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
+
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
     const [data,setData] = useState([])
     const [buildFormOpen,setBuildFormOpen] = useState(false)
+    const { showError } = useError();
+    const { showSuccess } = useSuccess();
     const handleAddBuilding = async() =>{
         setBuildFormOpen(true)
     }
@@ -32,6 +39,7 @@ const LandlordManageTenantsPage = () => {
             setData(data.buildings)
         } else {
             console.log("Error getting buildings") /** TODO: Display error component */
+            showError('Error getting buildings', 3000);
         }
     }
     useEffect(()=>{
@@ -39,6 +47,7 @@ const LandlordManageTenantsPage = () => {
             fetchData()
         } catch(error){
             console.log(`Error getting building data`)
+            showError('Error getting building data', 3000);
         }
         
     },[])
@@ -49,8 +58,8 @@ const LandlordManageTenantsPage = () => {
         {title: "Registration Date", field:"registrationDate",align:'center'},
         {
           title: 'Details', align:'center',
-          render: (rowData) => (
-            <Link to="/landlord/buildingManage" state={{ rowData }}>
+          render: (buildingData) => (
+            <Link to="/landlord/buildingManage" state={{ buildingData }}>
               Manage Tenants
             </Link>
           ),},
@@ -112,29 +121,9 @@ const LandlordManageTenantsPage = () => {
       </Grid>
       <Grid item xs={1}></Grid>
         </Grid>
-        <Popup
-  open={buildFormOpen}
-  onClose={handleClosePopup}
-  modal
-  contentStyle={{
-    maxWidth: "400px",
-    maxHeight: "500px",
-    margin: "0 auto",
-    padding: "20px",
-    backgroundColor: "white",
-    borderRadius: "8px",
-    position: "fixed",
-    top: "50%",
-    left: "50%",
-    transform: "translate(-50%, -50%)",
-  }}
-  overlayStyle={{
-    backgroundColor: "rgba(0, 0, 0, 0.6)",
-  }}
->
-  <AddBuildForm onClose={handleClosePopup} onAddition={fetchData} />
-</Popup>
-
+        <CustomPopup open={buildFormOpen} onClose={handleClosePopup} modal>
+        <AddBuildForm onClose={handleClosePopup} onAddition={fetchData} />
+        </CustomPopup>
     </div>
 </div>
     )
