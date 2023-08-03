@@ -11,6 +11,8 @@ NavBtnLink,
 import NotifBar from '../notifBar/NotifBar'; 
 import tableIcons from '../tenantComponents/MaterialIconComponents';
 import "./assets/css/style.css"
+import {useNavigate} from 'react-router-dom'
+import anacle from "./assets/images/anacle.jpg"
 
 
 
@@ -27,8 +29,12 @@ const NavbarLandlord = () => {
     return ( 
       <nav className="nav">
       <div className="nav__menu-wrapper flex-center">
+      <div className="nav__item" >
+          <img src={anacle} alt="Logo" className="nav__logo-image" />
+          <span className="nav__portal-text">Landlord Portal</span>
+        </div>
         <div className="nav__menu">
-          <div className="nav__menu-list flex" style={{ justifyContent: 'center' }}>
+          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'100px' }}>
             <div className="nav__item">
               <a href="/landlord/home" className="nav__link">Home</a>
               <div className="nav__dropdown with-icons"></div>

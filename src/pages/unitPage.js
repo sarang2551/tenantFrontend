@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from '../components/headers/NavBar'
 import axios from 'axios'
+import { useError } from "../components/errorBox";
+import { useSuccess } from "../components/successBox";
+
 
 function UnitPage() {
   const [unitData, setUnitData] = useState()
+  const { showError } = useError();
+  const { showSuccess } = useSuccess();
   const fetchData = async() => {
     const userID = "64ad758ce3307f7723aa6330" /**TODO: get userID from session management */
     const response = await axios.get(`http://localhost:8000/tenant/getUnitData/${userID}`);
@@ -13,6 +18,7 @@ function UnitPage() {
          setUnitData(data.unitData)
     }else{
       console.log(`Error getting unit data: ${response}`) /**TODO: UI Component for Error */
+      showError(`Error getting unit data: ${response}`, 3000);
     }
 
   }
