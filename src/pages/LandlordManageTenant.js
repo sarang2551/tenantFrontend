@@ -58,8 +58,8 @@ const LandlordManageTenantsPage = () => {
         {title: "Registration Date", field:"registrationDate",align:'center'},
         {
           title: 'Details', align:'center',
-          render: (rowData) => (
-            <Link to="/landlord/buildingManage" state={{ rowData }}>
+          render: (buildingData) => (
+            <Link to="/landlord/buildingManage" state={{ buildingData }}>
               Manage Tenants
             </Link>
           ),},

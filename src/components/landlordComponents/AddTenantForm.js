@@ -37,7 +37,7 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     };
     
     const onSubmit = async(data)=>{
-        const {images,tenantName} = data // data collected from form
+        const {images,tenantName, email, contact} = data // data collected from form
         const userID = "64873c12bd2e5989a5e90e1c" /** TODO: Get from user session */
         console.log("Sending unit details")
         console.log(unitDetails)
@@ -49,6 +49,8 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
             imageList.push(base64Image);
           }
           const tenantObject = {
+            email,
+            contact,
             tenantName,
             unitNumber,
             unitRef:_id,
@@ -108,6 +110,22 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
               {...register("tenantName", { required: true })}
             />
             {errors.tenantName && <span>Tenant Name is required</span>}
+          </div>
+          <div className="input-with-icon">
+          <tableIcons.Home className="icon" />
+            <input
+              type="text"
+              placeholder="Email"
+              {...register("email", { required: true })}
+            />
+          </div>
+          <div className="input-with-icon">
+          <tableIcons.Home className="icon" />
+            <input
+              type="text"
+              placeholder="Contact Number"
+              {...register("contact", { required: true })}
+            />
           </div>
 
           <div className="input-with-icon">
