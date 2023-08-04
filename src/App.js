@@ -11,6 +11,10 @@ import LandlordManageTenantsPage from "./pages/LandlordManageTenant.js";
 import BuildingManageTable from "./components/landlordComponents/BuildSelectTable.js";
 import PrivateRoute from "./components/PrivateRoute.js";
 import FirstLoginPage from "./pages/firstLogin.js";
+import Landlordprofilepage from "./pages/Landlordprofilepage.js";
+import Tenantprofilepage from "./pages/Tenantprofilepage.js";
+import UnitOwned from "./pages/unitOwned.js";
+import Overallrevenue from "./pages/Overallrevenue.js";
 //import NavBar from "./components/headers/NavBar";
 import { ErrorProvider } from './components/errorBox.js';
 import { SuccessProvider } from "./components/successBox.js";
@@ -71,6 +75,26 @@ function App() {
         <Route exact path="/landlord/buildingManage" element={
           <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
             <BuildingManageTable/>
+          </PrivateRoute>
+        }/>
+          <Route exact path="/landlord/profilepage" element={
+          <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
+            <Landlordprofilepage/>
+          </PrivateRoute>
+        }/>
+        <Route exact path="/tenant/profilepage" element={
+          <PrivateRoute desiredUser={"tenant"} isAuthenticated={isSignedIn}>
+            <Tenantprofilepage/>
+          </PrivateRoute>
+        }/>
+        <Route exact path="/landlord/unitOwned" element={
+          <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
+            <UnitOwned/>
+          </PrivateRoute>
+        }/>
+        <Route exact path="/landlord/Overallrevenue" element={
+          <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
+            <Overallrevenue/>
           </PrivateRoute>
         }/>
       </Routes>
