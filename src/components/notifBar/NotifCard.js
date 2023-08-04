@@ -13,8 +13,8 @@ const NotifCard = (props) => {
             <CardContainer>
               <NotificationTitle>{title}</NotificationTitle>
               <NotificationText>{description}</NotificationText>
-              <NotificationText>Landlord ID: {landlordID}</NotificationText>
-              <NotificationText>Tenant ID: {tenantID}</NotificationText>
+              {/* <NotificationText>Landlord ID: {landlordID}</NotificationText>
+              <NotificationText>Tenant ID: {tenantID}</NotificationText> */}
               <NotificationText>Date Sent: {date}</NotificationText>
               <button type="button" onClick={() => setModalOpen(false)}>
                 Close

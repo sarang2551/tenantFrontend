@@ -34,7 +34,7 @@ const NotifBar = (props) => {
     const userID = sessionStorage.getItem('userID')
     const userType = sessionStorage.getItem('userType')
     const response = await axios.get(`http://localhost:8000/${userType}/getNotifications/${userID}`)
-    
+
     if(response.status === 200){
         setNotifData(response.data.notifications)
     }
@@ -42,14 +42,7 @@ const NotifBar = (props) => {
     useEffect(() => {
         fetchData();
       }, [notifData]);
-    // const itemsArray = [
-    //     {title:"Added Service Ticket for Unit B01", 
-    //     description:"Sending to tenant",
-    //     landlordID:"123", tenantID:"456", date:new Date().getDate()},
-    //     {title:"Updated Service Ticket to Stage 3", 
-    //     description:"Sending to tenant",
-    //     landlordID:"123", tenantID:"456", date:new Date().getDate()}
-    //     ]
+    
     const classes = useStyles();
     return (
     <Drawer anchor="right" 
@@ -57,7 +50,7 @@ const NotifBar = (props) => {
     open={props.props} 
     classes={{ paper: classes.drawerPaper }}
     >
-        <div>
+       <div>
           {notifData?.map((item, index) => (
             <div key={index}>
               <NotifCard props={item} />
@@ -65,7 +58,6 @@ const NotifBar = (props) => {
           )) }
         </div>
 
-      
       </Drawer>
     );
 };
