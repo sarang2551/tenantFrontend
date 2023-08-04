@@ -46,7 +46,7 @@ const LoginPage = ()=>{
       <div className='container-fluid d-flex justify-content-center align-items-center vh-100 vw-100 loginPage'>
           <div className='p-3 rounded w-25 loginForm'>
             <div className='adminmsg'>
-              <h1>Login </h1>
+              <h1  style={{ color: "white" }}>Login </h1>
             </div>
             <div className='d-flex justify-content-center align-items-center'>
             </div>
@@ -78,7 +78,7 @@ const LoginPage = ()=>{
             </div>
             <br />
             <div className='adminmsg'>
-              <p>Contact administrator in case of forgetting your password.</p>
+              <p style={{ color: "white" }}>Contact administrator in case of forgetting your password.</p>
             </div>
           </div>
         </div>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
-import"./add_building.css";
+import"./style_form.css";
 import { Grid, Typography } from "@material-ui/core";
 import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdUploadFile, MdDelete } from 'react-icons/md';
@@ -32,13 +32,13 @@ const AddBuildForm = ({ onClose, onAddition }) => {
     fontStyle: "normal",
     lineHeight: "normal",
     letterSpacing: "0.17px",
-    marginTop: "10px",   
+    marginTop: "10px",
     marginLeft: "30px"
   };
 
 
   const onSubmit = async (data) => {
-    var userID = sessionStorage.getItem('userID')
+    var userID = "64873c12bd2e5989a5e90e1c"; /**TODO: Get user data from session  */
     const { buildingName, address, postalCode } = data;
 
     const addBuilding = async () => {
@@ -92,14 +92,14 @@ const AddBuildForm = ({ onClose, onAddition }) => {
     if (e.target.files[0]) {
       setImage(URL.createObjectURL(e.target.files[0]));
       setFileName(e.target.files[0].name);
-      setValue("images", e.target.files); 
+      setValue("images", e.target.files);
     }
   };
 
   return (
       <div className="custom-popup-content">
-        <form onSubmit={handleSubmit(onSubmit)} className="add-building-form">
-          <div className="add-building-form-container">
+        <form onSubmit={handleSubmit(onSubmit)} className="style-form">
+          <div className="style-form-container">
             <tableIcons.Close onClick={onClose} />
           </div>
           <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>
@@ -128,42 +128,42 @@ const AddBuildForm = ({ onClose, onAddition }) => {
 
           <div className="input-with-icon">
             <tableIcons.Postal className="icon" />
-          <input
+            <input
               type="text"
               placeholder="Postal Code"
               {...register("postalCode", { required: true })}
             />
-            </div>
-            {errors.postalCode && <span>Postal Code is required</span>}
+          </div>
+          {errors.postalCode && <span>Postal Code is required</span>}
 
 
-            <label>Attach Images</label>
-            <div className="input-with-icon">
-              <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
-                <input type="file" className="input-field" hidden onChange={handleFileChange} multiple />
-                {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
-              </div>
-              <section style={fileinfo}>
-                <AiFillFileImage color="#535353" />
-                <span>
-                  {fileName}
-                  <MdDelete
-                    color="#535353"
-                    onClick={() => {
-                      setFileName("No File Selected");
-                      setImage(null);
-                      setValue("images", null);
-                    }}
-                  />
-                </span>
-              </section>
+          <label>Attach Images</label>
+          <div className="input-with-icon">
+            <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
+              <input type="file" accept="png/*" className="input-field" hidden onChange={handleFileChange} multiple />
+              {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
             </div>
-          </Grid>
-          <Grid item xs={12} style={{ textAlign: "center" }}>
-            <input type="submit" />
-          </Grid>
-        </form>
-      </div>
+            <section style={fileinfo}>
+              <AiFillFileImage color="#535353" />
+              <span>
+                {fileName}
+                <MdDelete
+                  color="#535353"
+                  onClick={() => {
+                    setFileName("No File Selected");
+                    setImage(null);
+                    setValue("images", null);
+                  }}
+                />
+              </span>
+            </section>
+          </div>
+        </Grid>
+        <Grid item xs={12} style={{ textAlign: "center" }}>
+          <input type="submit" />
+        </Grid>
+      </form>
+    </div>
   );
 };
 
