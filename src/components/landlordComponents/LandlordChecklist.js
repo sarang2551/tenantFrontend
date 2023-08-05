@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import axios from 'axios';
+import React, { useState,useEffect } from 'react';
+
 
 const Checklist = () => {
   // State to manage the checkbox status
@@ -8,7 +10,14 @@ const Checklist = () => {
     { id: 'label-3', checked: false, tenant: 'Tenant 3', task: 'Fan strange noise' },
     { id: 'label-4', checked: false, tenant: 'Tenant 4', task: 'loose screws on the door' },
   ]);
-
+  const fetchData = async() =>{
+    const userID = sessionStorage.getItem('userID')
+    const response  = await axios.get(`http://localhost:8000/landlord/getTenantList/${userID}`)
+    // use the data above
+  }
+  useEffect(()=>{
+    fetchData()
+  })
   // Function to handle checkbox state change
   const handleCheckboxChange = (taskId) => {
     setTasks((prevTasks) =>

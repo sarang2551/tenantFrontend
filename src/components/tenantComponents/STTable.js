@@ -29,6 +29,11 @@ const TicketsContainer = styled.div`
   padding: 10px;
 `;
 
+const BoldTitle = styled.span`
+  font-weight: bold;
+  font-size: 25px;
+`;
+
 const ServiceTicketHistoryTable = (props) => {
   const [addTicketOpen, setAddTicketOpen] = useState();
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
@@ -67,9 +72,6 @@ const ServiceTicketHistoryTable = (props) => {
         showError(data, 3000);
       }
     }
-  
-
-
 
     const handleInfoTicket = (ticketData) => {
       setSelectedTicket(ticketData);
@@ -98,11 +100,26 @@ const ServiceTicketHistoryTable = (props) => {
           }
             </div>
         }];
+
+    const swiperStyle = {
+      margin: "2% 5% 0 5%" ,
+    }
+
+    const serviceTicketStyle = {
+      fontSize: "30px"
+    }
+
+    const materialTableStyle = {
+      margin: "2% 5% 0 5%" ,
+      fontSize: "15px",
+    }
+
   return (
 
     <TicketsContainer>
-      <Title>Service Tickets</Title>
+      <Title style= {serviceTicketStyle}>Service Tickets</Title>
       <Swiper
+      style={swiperStyle}
         spaceBetween={5}
         slidesPerView={5}
         modules={[Scrollbar, Mousewheel]}
@@ -117,9 +134,12 @@ const ServiceTicketHistoryTable = (props) => {
           </SwiperSlide>
         ))}
       </Swiper>
+
       <br style={{ marginTop: '20px' }} />
+
       <MaterialTable mt={90}
-        title="Service Tickets History"
+        style={materialTableStyle}
+        title={<BoldTitle>Service Tickets History</BoldTitle>}
         columns={columns}
         data={data}
         icons={tableIcons}
@@ -145,6 +165,7 @@ const ServiceTicketHistoryTable = (props) => {
           headerStyle: { background: 'lightgrey' },
         }}
       />
+
       <CustomPopup open={addTicketOpen} onClose={handleClosePopup} modal>
         <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData} />
       </CustomPopup>

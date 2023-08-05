@@ -22,7 +22,6 @@ function Home() {
     var data_2 = response_2.data;
     if (data_2) {
       setTicketData(data_2);
-      console.log(data_2)
     } else {
       console.log("Error getting all service tickets");
     }
@@ -69,7 +68,11 @@ function Home() {
                 <span class="currentlabel">Completed Tickets</span>
               </button>
                 </div>
-
+              { ticketData === [] ? 
+              <div>
+              <br/>
+              <h2>No service tickets added </h2>
+              </div> : 
                 <Swiper
                 autoHeight = {false}
                  
@@ -88,8 +91,7 @@ function Home() {
                   <Ticket STData={{idx,...ticket}}/>
                 </SwiperSlide>)}
               </Swiper>
-               {/* {ticketData.map((ticket, idx) => <Ticket key={ticket.id} STData={{ idx, ...ticket }} />)} */}
-
+                }
               </div> 
             </div>
           </section>
