@@ -14,7 +14,6 @@ import FirstLoginPage from "./pages/firstLogin.js";
 import Landlordprofilepage from "./pages/Landlordprofilepage.js";
 import Tenantprofilepage from "./pages/Tenantprofilepage.js";
 import UnitOwned from "./pages/unitOwned.js";
-import Overallrevenue from "./pages/Overallrevenue.js";
 //import NavBar from "./components/headers/NavBar";
 import { ErrorProvider } from './components/errorBox.js';
 import { SuccessProvider } from "./components/successBox.js";
