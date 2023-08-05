@@ -5,6 +5,7 @@ import "./loginStyle.css"
 import CustomPopup from '../components/landlordComponents/CustomPopup';
 import Passwordchange from '../components/tenantComponents/Passwordchange';
 import Editprofile from '../components/tenantComponents/Editprofile';
+import "./profilepage.css"
 
 const Tenantprofilepage = () => {
   // Replace these with actual user data retrieved from your backend or state management
