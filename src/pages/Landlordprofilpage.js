@@ -5,6 +5,7 @@ import "../components/headers/assets/css/style.css"
 import CustomPopup from '../components/landlordComponents/CustomPopup';
 import Passwordchange from '../components/tenantComponents/Passwordchange';
 import Editprofile from '../components/tenantComponents/Editprofile';
+import "./profilepage.css"
 
 
 const Landlordprofilepage = () => {
