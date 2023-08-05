@@ -36,12 +36,6 @@ const Landlordprofilepage = () => {
     setEditProfileOpen(false);
   };
 
-  const handleOverallRevenue = () => {
-    // Implement the overall revenue caluculator here
-    console.log('View changes in overall revenue');
-    navigate('/landlord/Overallrevenue')
-  };
-
   const handleTotalUnitsOwned = () => {
     // page showing table of all units owned
     console.log('View all units owned');
@@ -66,7 +60,6 @@ const Landlordprofilepage = () => {
         <div className="sidebar">
           <div className="button-container-profile">
               <button type='submit' onClick={handleEditProfile}>Edit Profile</button>
-              <button type='submit' onClick={handleOverallRevenue}>Overall Revenue</button>
               <button type='submit' onClick={handleTotalUnitsOwned}>Units Owned</button>
               <button type='submit' onClick={handleChangePassword}>Change Password</button>
           </div>
