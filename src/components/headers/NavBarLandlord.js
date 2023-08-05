@@ -48,7 +48,9 @@ const NavbarLandlord = () => {
             <div className="nav__item">
               <a href="/landlord/manageTenants" className="nav__link">Manage Tenants</a>
             </div>
-
+            <div className="nav__item">
+              <a href="/landlord/profilepage" className="nav__link">Profile Page</a>
+            </div>
               <div className="nav__icon-item">
                 <tableIcons.Notifications onClick={toggleNotifBar} style={notifOpen ? { color: 'lightgreen', marginRight: '20px' } : { marginRight: '20px' }} />
                 <tableIcons.Logout onClick={handleLogout} />
