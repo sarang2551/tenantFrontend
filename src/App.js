@@ -92,11 +92,6 @@ function App() {
             <UnitOwned/>
           </PrivateRoute>
         }/>
-        <Route exact path="/landlord/Overallrevenue" element={
-          <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
-            <Overallrevenue/>
-          </PrivateRoute>
-        }/>
       </Routes>
     </Router>
     </ErrorProvider>
