@@ -12,9 +12,9 @@ const OverallHover = () => {
   };
 
   return (
-    <div className="quotationcontainer">
+    <div className="overallcontainer">
       <button
-        className="quotationbutton"
+        className="overallbutton"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
