@@ -2,23 +2,26 @@ import React, { useState, useEffect } from 'react';
 import "./StepperButton.css";
 import axios from 'axios';
 
-const StepperButton = () => {
-  const [progressData, setProgressData] = useState([false, false]);
+const StepperButton = ({ticketInfo, currentStage}) => {
+  const [progressData, setProgressData] = useState();
 
   useEffect(() => {
   
     const fetchProgressData = async () => {
       try {
-        const response = await axios.get("http://localhost:8000//general/getServiceTicketInfo/{serviceticketID}"); 
+        const response = await axios.get(`http://localhost:8000//general/getServiceTicketInfo/${ticketInfo._id}`); 
         const data = response.data;
-        setProgressData(data); 
+        if (data.status === 200) {
+          setProgressData(data.serviceTicketObject.progressBar[currentStage]);
+        }
+
       } catch (error) {
         console.error('Error fetching progress data:', error);
       }
     };
 
     fetchProgressData();
-  }, []);
+  }, [progressData]);
 
   return (
     <div className="container">

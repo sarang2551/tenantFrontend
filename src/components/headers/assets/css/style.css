@@ -776,12 +776,18 @@ body {
 }
 
 .home-container3top{
-  height: 100px;
+  height: 700px;
   width: 600px;
   padding-bottom: 20px;
-  display: flex;
+  margin-top: 2.5%;
 
 
+
+
+}
+
+.home-container3top button {
+  margin-right: 20px;
 }
 .home-container3 {
 
@@ -1111,14 +1117,14 @@ body {
   border-radius: 0 0 0.325rem 0.325rem;
 }
 
-.currentbutton {
+.rentbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
+  height: 15%;
+  width: 100%;
   border: none;
   background: #468B97;
   cursor: pointer;
@@ -1132,14 +1138,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.currentlabel{
+.rentlabel{
   color: white;
 }
-.currentbutton:hover {
+.rentbutton:hover {
   background: #1D5B79;
 }
 
-.currentbutton:hover .svg-icon {
+.rentbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1156,14 +1162,14 @@ body {
 }
 
 
-.progressbutton {
+.quotationbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
+  height: 15%;
+  width: 100%;
   border: none;
   background: #468B97;
   cursor: pointer;
@@ -1177,14 +1183,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.progresslabel{
+.quotationlabel{
   color: white;
 }
-.progressbutton:hover {
+.quotationbutton:hover {
   background: #1D5B79;
 }
 
-.progressbutton:hover .svg-icon {
+.quotationbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1201,14 +1207,14 @@ body {
 }
 
 
-.completedbutton {
+.overallbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
+  height: 15%;
+  width: 100%;
   border: none;
   background: #468B97;
   cursor: pointer;
@@ -1222,14 +1228,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.completedlabel{
+.overalllabel{
   color: white;
 }
-.completedbutton:hover {
+.overallbutton:hover {
   background: #1D5B79;
 }
 
-.completedbutton:hover .svg-icon {
+.overallbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1244,3 +1250,4 @@ body {
   100% {
   }
 }
+
