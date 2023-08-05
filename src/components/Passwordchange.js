@@ -1,19 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import {useForm} from 'react-hook-form'
-import "./st_form_style.css"
+import "./tenantComponents/st_form_style.css"
 import axios from "axios"
-import"../landlordComponents/style_form.css";
+import"./landlordComponents/style_form.css";
 import { Grid, Typography } from "@material-ui/core";
-import tableIcons from "../tenantComponents/MaterialIconComponents";
-import { useError } from "../errorBox";
-import { useSuccess } from "../successBox";
-import { useNavigate } from "react-router-dom"; 
+import tableIcons from "./tenantComponents/MaterialIconComponents";
+import { useError } from "./errorBox";
+import { useSuccess } from "./successBox";
 
-const Passwordchange = ({onClose, onAddition}) => {
+
+const Passwordchange = ({onClose}) => {
     const { register, handleSubmit, watch, formState: { errors } } = useForm();
     const { showError } = useError();
     const { showSuccess } = useSuccess();
-    const navigate = useNavigate();
+
     const onSubmit = async(data)=>{
         const {password_first,password_second} = data
         if(password_first === password_second){
@@ -21,7 +21,7 @@ const Passwordchange = ({onClose, onAddition}) => {
             const response = await axios.put("http://localhost:8000/tenant/changePassword",{password:password_first,userID})
             if(response.status === 200){
                 showSuccess('Password has been successfuly changed', 3000);
-                navigate('/')
+                onClose()
             }else{
                 showError('Server error changing password', 3000);
                 }

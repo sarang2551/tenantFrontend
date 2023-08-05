@@ -3,7 +3,7 @@ import NavbarLandlord from '../components/headers/NavBarLandlord'
 import { useNavigate } from "react-router-dom";
 import "../components/headers/assets/css/style.css" 
 import CustomPopup from '../components/landlordComponents/CustomPopup';
-import Passwordchange from '../components/tenantComponents/Passwordchange';
+import Passwordchange from '../components/Passwordchange';
 import Editprofile from '../components/tenantComponents/Editprofile';
 import "./profilepage.css"
 import axios from 'axios';
