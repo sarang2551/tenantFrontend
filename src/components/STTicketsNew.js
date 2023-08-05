@@ -7,7 +7,7 @@ function Ticket({STData}) {
     <article className="ticket">
       <header className="ticket__wrapper">
         <div className="ticket__header">
-          {idx + 1} 🎟
+          {idx + 1} 🎟 
         </div>
       </header>
       <div className="ticket__divider">
