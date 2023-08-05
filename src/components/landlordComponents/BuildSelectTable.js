@@ -75,25 +75,29 @@ const BuildingManageTable = () => {
         }
     }
     const handleDeleteUnit = async (rowData) => {
-        /**TODO */
+        const idx = rowData.tableData.id
         if (rowData.tenantRef) {
+            
             const response = await axios.delete(`http://localhost:8000/landlord/deleteTenant/${rowData.tenantRef}`)
-            var data = response.data
-            if (data.status === 200) {
+            const res_data = response.data
+            if (res_data.status === 200) {
                 fetchData()
+                showSuccess("Deleted tenant",3000)
+                setData([...data.splice(0,idx),...data.splice(idx,data.length)])
             } else {
-              console.log("Error Deleting Tenant")
+              showError("Error Deleting Tenant",300)
             }
         }
         else {
             const response = await axios.delete(`http://localhost:8000/landlord/deleteUnit/${rowData._id}`)
-            var data = response.data
-            console.log(data)
-            if (data.status === 200) {
+            const res_data = response.data
+            
+            if (res_data.status === 200) {
                 fetchData()
-                console.log("No Tenant Attached to Unit.. Deleting Unit")
+                showSuccess("No Tenant Attached to Unit.. Deleting Unit",3000)
+                setData([...data.splice(0,idx),...data.splice(idx,data.length)])
             } else {
-              console.log("Error Deleting Unit")
+              showError("Error Deleting Unit",300)
             }
         }
     }
@@ -107,7 +111,7 @@ const BuildingManageTable = () => {
         try {
             fetchData()
         } catch (error) {
-            console.log("Error getting building information")
+            showError("Error getting building information",3000)
         }
     }, [])
     const columns = [

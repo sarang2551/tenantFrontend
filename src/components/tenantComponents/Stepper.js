@@ -23,8 +23,8 @@ const Stepper = ({ticketData}) => {
         const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
         var data = result.data
         if(result.status === 200){
-          console.log(data)
           setCurrentStep(data.stepNumber)
+          showSuccess("Updated Progress Successfully")
         } else {
         console.log(data.message) /**TODO: Show UI error component */
         showError(data.message, 3000);
@@ -85,6 +85,8 @@ const Stepper = ({ticketData}) => {
       <QuotationForm onSubmission={()=>setTenantAcceptQuotation(false)} ticketData={ticketData}/>: 
       userType === "tenant" ? <span><br/>Waiting for Landlord to add Quotation</span>:<></>
     } 
+    <showSuccess/>
+    <showError/>
       </div>
 
    );

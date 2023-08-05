@@ -7,12 +7,15 @@ import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import"./style_form.css";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     const { register, handleSubmit, watch, formState: { errors }, setValue} = useForm();
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No File Selected");
-  
+    const showError = useError()
+    const showSuccess = useSuccess()
     const fileupload = {
       width: "100px",
       height: "100px",
@@ -61,11 +64,12 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
           try {
             const result = await axios.post("http://localhost:8000/landlord/addTenants", tenantObject); 
             if (result.status === 200) {
+              showSuccess("Added Tenant successfully",3000)
               onClose();
               onAddition();
             }
           } catch (error) {
-            console.error("Error adding Tenant");
+            showError("Error adding Tenant",3000);
           }
         };
         
@@ -174,6 +178,8 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
           <input type="submit" />
         </Grid>
       </form>
+      <showError/>
+      <showSuccess/>
     </div>
   );
 };

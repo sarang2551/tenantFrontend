@@ -42,9 +42,7 @@ const NavbarLandlord = () => {
             <div className="nav__item">
               <a href="/landlord/serviceTicketPage" className="nav__link">Tenant Requests</a>
             </div>
-            <div className="nav__item">
-              <a href="#" className="nav__link">Quotations</a>
-            </div>
+            
             <div className="nav__item">
               <a href="/landlord/manageTenants" className="nav__link">Manage Tenants</a>
             </div>
