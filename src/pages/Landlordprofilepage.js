@@ -111,3 +111,4 @@ const Landlordprofilepage = () => {
 };
 
 export default Landlordprofilepage;
+

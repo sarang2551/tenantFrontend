@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import {useForm} from 'react-hook-form'
-import "./tenantComponents/st_form_style.css"
+// import "./tenantComponents/st_form_style.css"
 import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import "./landlordComponents/style_form.css"
@@ -18,8 +18,8 @@ const fileupload = {
     border: "2px solid rgba(49, 54, 56, 0.33)",
     background: "#F2F4F8",
 
-    width: "400px",
-    height: "400px",
+    width: "150px",
+    height: "150px",
 
     marginTop: "50px",
     marginLeft: "100px"
@@ -46,6 +46,8 @@ const fileupload = {
     border: "1px solid #ccc", /* Add a border around the text */
     borderRadius: "4px", /* Rounded corners for the border */
   }
+
+  
 
 
 const QuotationForm = ({onSubmission,ticketData})=>{
@@ -109,10 +111,9 @@ const QuotationForm = ({onSubmission,ticketData})=>{
         <button type="submit" onClick={()=>tenantSubmit(false)}>Reject Quotation</button>
        </form> : 
        <form onSubmit={handleSubmit(landlordSubmit)} >
-        <div className="input-with-icon">
-              <div style={fileupload} onClick={() => 
-                document.querySelector(".input-field").click()}>
-                <input type="file" className="input-field" hidden onChange={handleFileChange} />
+          <div className="input-with-icon">
+              <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
+                <input type="file" accept="image/*" className="input-field" hidden onChange={handleFileChange} multiple />
                 {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
               </div>
               <section style={fileinfo}>
@@ -126,7 +127,7 @@ const QuotationForm = ({onSubmission,ticketData})=>{
                       setImage(null);
                       setValue("images", null);
                     }}
-                  />
+                />
                 </span>
                 <br/>
                 <label> Quotation Amount: 

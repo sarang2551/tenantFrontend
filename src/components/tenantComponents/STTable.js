@@ -16,6 +16,7 @@ import styled from 'styled-components';
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import FeedbackForm from '../feedbackForm';
+import addTicket from "../headers/assets/images/addticket.png";
 
 
 const Title = styled.h2`
@@ -41,6 +42,25 @@ const ServiceTicketHistoryTable = (props) => {
   const [data,setData] = useState([])
   const { showError } = useError();
   const { showSuccess } = useSuccess();
+
+  const addticket= (
+    <div
+    style={{
+      display: "flex",
+      color: 'white',
+      alignItems: "center",
+      fontFamily: "Raleway",
+      backgroundColor: "#fbc02d",
+      fontSize: "20px",
+      border: "4px solid #fbc02d",
+      borderRadius: "10px", 
+      padding: "5px 10px", 
+    }}
+  >
+      <img src={addTicket} alt="Create ticket" style={{ marginRight: 8, height:20 }} />
+      <span>Create ticket</span>
+    </div>
+  );
 
   const [showFeedBack,setShowFeedback] = useState(false)
     const handleAddTicket = () => {
@@ -150,7 +170,7 @@ const ServiceTicketHistoryTable = (props) => {
             onClick: (event, rowData) => handleDeleteTicket(rowData),
           },
           {
-            icon: tableIcons.Add,
+            icon: () => addticket,
             tooltip: 'Add Ticket',
             isFreeAction: true,
             onClick: (event) => handleAddTicket(),
@@ -162,22 +182,27 @@ const ServiceTicketHistoryTable = (props) => {
           sorting: true,
           exportButton: true,
           exportAllData: true,
-          headerStyle: { background: 'lightgrey' },
+          headerStyle: { background: '#fff8e1' },
         }}
       />
 
-      <CustomPopup open={addTicketOpen} onClose={handleClosePopup} modal>
+      <Popup open={addTicketOpen} onClose={handleClosePopup} contentStyle={{
+          width: '26%', // Adjust the width to a smaller value
+          height: '44vh',
+          overflow: 'auto',
+          borderRadius: '15px',
+        }} modal>
         <ServiceTicketForm onClose={handleClosePopup} onAddition={fetchData} />
-      </CustomPopup>
+      </Popup>
 
       
-      <Popup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} contentStyle={{
+      <CustomPopup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} contentStyle={{
           width: '50%', // Set the desired width for the Popup (adjust as needed)
           height: '50vh', // Set the desired height for the Popup (adjust as needed)
           overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
         }} modal>
         <ServiceTicketCard _id = {selectedTicket._id} onPopupClose={()=>setInfoTicketOpen(false)}/>
-      </Popup>
+      </CustomPopup>
       <Popup open={showFeedBack} onClose={()=>setShowFeedback(false)} modal>
         <FeedbackForm ticketData={selectedTicket} onSubmission={()=>setShowFeedback(false)}/>
       </Popup>

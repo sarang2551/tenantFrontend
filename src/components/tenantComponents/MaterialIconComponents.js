@@ -21,6 +21,13 @@ import Location from '@mui/icons-material/LocationOnOutlined';
 import Camera from '@mui/icons-material/CameraAltOutlined';
 import Close from '@mui/icons-material/CloseOutlined';
 import Postal from '@mui/icons-material/ApprovalOutlined';
+import Person from '@mui/icons-material/Person';
+import ConfirmationNumber from '@mui/icons-material/ConfirmationNumber';
+import Description from '@mui/icons-material/Description';
+import Email from '@mui/icons-material/Email';
+import Call from '@mui/icons-material/Call';
+import Number from '@mui/icons-material/Numbers';
+import Rental from '@mui/icons-material/AttachMoney';
 
 
 const tableIcons = {
@@ -48,6 +55,13 @@ const tableIcons = {
   Camera: forwardRef((props, ref) => <Camera {...props} ref={ref} />),
   Close: forwardRef((props, ref) => <Close {...props} ref={ref} />),
   Postal: forwardRef((props, ref) => <Postal {...props} ref={ref} />),
+  Person: forwardRef((props, ref) => <Person {...props} ref={ref} />),
+  ConfirmationNumber: forwardRef((props, ref) => <ConfirmationNumber {...props} ref={ref} />),
+  Description: forwardRef((props, ref) => <Description {...props} ref={ref} />),
+  Email: forwardRef((props, ref) => <Email {...props} ref={ref} />),
+  Call: forwardRef((props, ref) => <Call {...props} ref={ref} />),
+  Number: forwardRef((props, ref) => <Number {...props} ref={ref} />),
+  Rental: forwardRef((props, ref) => <Rental {...props} ref={ref} />),
   
 };
 

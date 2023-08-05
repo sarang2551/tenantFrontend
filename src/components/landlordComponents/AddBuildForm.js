@@ -14,8 +14,8 @@ const AddBuildForm = ({ onClose, onAddition }) => {
   const [fileName, setFileName] = useState("No File Selected");
 
   const fileupload = {
-    width: "100px",
-    height: "100px",
+    width: "110px",
+    height: "110px",
     border: "2px solid rgba(49, 54, 56, 0.33)",
     background: "#F2F4F8",
     borderRadius: "30px",
@@ -28,7 +28,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
   const fileinfo = {
     color: "#535353",
     fontFamily: "KoHo",
-    fontSize: "20px",
+    fontSize: "25px",
     fontStyle: "normal",
     lineHeight: "normal",
     letterSpacing: "0.17px",
@@ -102,7 +102,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
           <div className="style-form-container">
             <tableIcons.Close onClick={onClose} />
           </div>
-          <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>
+          <Typography variant="h4" gutterBottom style={{ fontSize: "20px" }}>
             Add Building
           </Typography>
           <Grid item xs={20}>
@@ -140,7 +140,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
           <label>Attach Images</label>
           <div className="input-with-icon">
             <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
-              <input type="file" accept="png/*" className="input-field" hidden onChange={handleFileChange} multiple />
+              <input type="file" accept="image/*" className="input-field" hidden onChange={handleFileChange} multiple />
               {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
             </div>
             <section style={fileinfo}>
@@ -159,7 +159,7 @@ const AddBuildForm = ({ onClose, onAddition }) => {
             </section>
           </div>
         </Grid>
-        <Grid item xs={12} style={{ textAlign: "center" }}>
+        <Grid item xs={12} style={{ textAlign: "center" , marginTop:'5px'}}>
           <input type="submit" />
         </Grid>
       </form>

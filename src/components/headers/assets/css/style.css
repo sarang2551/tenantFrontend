@@ -981,7 +981,6 @@ body {
 .nav {
   border-bottom: 1px solid #ccc;
   margin-bottom: 10px; 
-  padding-right: 40%;
 }
 .nav__menu-wrapper {
   display: grid; 

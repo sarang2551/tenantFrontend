@@ -12,11 +12,10 @@ import"./style_form.css";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 
-
-
 const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState (false);
+    const [ popupData, setPopupData] = useState();
     const [data,setData] = useState([])
     const { showError } = useError();
     const { showSuccess } = useSuccess();
@@ -44,8 +43,14 @@ const LandlordServiceTicketTable = () => {
     const handleInfoTicket = (ticketData) => {
         setSelectedTicket(ticketData);
         setInfoTicketOpen(true)
-        
+
       };
+
+    const handleClosePopup= () => {
+        setInfoTicketOpen(false)
+        setPopupData();
+      }
+
     const columns = [
         { title: "Title", field: "title" },
         {title:"Unit", field:"unitName" },
@@ -83,7 +88,9 @@ const LandlordServiceTicketTable = () => {
      <Grid container spacing={0}>
       <Grid item xs={1}></Grid>
         <Grid item xs={10}>
+        <div style={{ overflow: "hidden" }}>
         <MaterialTable
+         mt={80}
           title="Service Tickets History"
           columns={columns}
           data={data}
@@ -95,15 +102,20 @@ const LandlordServiceTicketTable = () => {
             selection:true,
             exportButton:true,
             exportAllData:true,
-            headerStyle: { background: "lightgrey"}, 
+            headerStyle: { background: "#fff8e1"}, 
           }}
           onRowClick={(event, rowData) => handleInfoTicket(rowData)}
         />
+         </div>
         </Grid>
         <Grid item xs={1}>
         {selectedTicket && (
-          <CustomPopup open={infoTicketOpen} onClose={() => setInfoTicketOpen(false)} modal>
-          <ServiceTicketCard _id = {selectedTicket._id}/>
+          <CustomPopup open={infoTicketOpen} onClose={handleClosePopup} contentStyle={{
+            width: '50%', // Set the desired width for the Popup (adjust as needed)
+            height: '50vh', // Set the desired height for the Popup (adjust as needed)
+            overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
+          }} modal>
+          <ServiceTicketCard _id = {selectedTicket._id} onPopupClose={handleClosePopup} />
         </CustomPopup>
         )}
         </Grid>
