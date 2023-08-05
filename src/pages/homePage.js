@@ -5,8 +5,9 @@ import "../components/headers/assets/css/style.css";
 import "../components/headers/assets/css/STstyle.css"; 
 import Pie from '../components/Pie';
 import Ticket from '../components/STTicketsNew';
-
-
+import RentHover from '../components/tenantComponents/RentHover';
+import QuotationHover from '../components/tenantComponents/QuotationHover';
+import OverallHover from '../components/tenantComponents/OverallHover';
 
 
 function Home() { 
@@ -52,18 +53,9 @@ function Home() {
               
               <div class="home-container3">
                 <div class="home-container3top">
-                <button class="rentbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="rentlabel">Total Rent</span>
-              </button>
-              <button class="quotationbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="rentlabel">Total Quotation Amount</span>
-              </button>
-              <button class="overallbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="rentlabel">Overall</span>
-              </button>
+                  <RentHover/>
+                  <QuotationHover/>
+                  <OverallHover/>
                 </div>
 
 
