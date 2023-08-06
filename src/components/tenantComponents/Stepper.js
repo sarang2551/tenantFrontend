@@ -104,7 +104,7 @@ const Stepper = ({initialData}) => {
           </div>
 
       {!complete && ( //hide "next" for Awaiting quotation
-        <button
+        <Styledbutton
           className="btn"
           onClick={ticketData?.endDate ? ()=>{
             showError("Service ticket is finished",3000)
@@ -114,7 +114,7 @@ const Stepper = ({initialData}) => {
         >
 
           {ticketData?.endDate ? "Finish" : "Next"}
-        </button>
+        </Styledbutton>
 
       )}    
       {letLandlordAddQuotation?
