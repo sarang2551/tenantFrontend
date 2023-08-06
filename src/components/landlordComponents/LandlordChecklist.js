@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
 
 const Checklist = () => {
   const [tasks, setTasks] = useState([
@@ -15,16 +16,6 @@ const Checklist = () => {
     setOpenDropdownId((prevState) => (prevState === tenantId ? null : tenantId));
   };
 
-<<<<<<< HEAD
-  const totalDropdownHeight = tasks.reduce((totalHeight, task) => {
-    if (task.id === openDropdownId) {
-      return totalHeight + 40*3;
-    }
-    return totalHeight;
-  }, 0);
-
-  const handleTaskSelect = (tenantId, option) => {
-=======
   const handleTaskSelect = (tenantId, option) => {}
 
   const fetchData = async() =>{
@@ -37,7 +28,6 @@ const Checklist = () => {
   })
   // Function to handle checkbox state change
   const handleCheckboxChange = (taskId,tenantId,option) => {
->>>>>>> ba89c5736fdcfc3f0190fe5c7aabac5c3a821206
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === tenantId ? { ...task, selectedOption: option } : task
@@ -59,7 +49,7 @@ const Checklist = () => {
   }, []);
 
   return (
-    <div className="tasks" style={{ height: `${totalDropdownHeight}px` }}>
+    <div className="tasks" >
       <h1>Checklist</h1>
       {tasks.map((task) => (
         <div className="main-container" key={task.id}>
