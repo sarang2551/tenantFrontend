@@ -6,9 +6,11 @@ import QuotationForm from "../quotationForm";
 import StepperButton from "./StepperButton";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import { useNavigate } from "react-router-dom";
 
 const Stepper = ({initialData}) => {
     const [ticketData,setTicketData] = useState(initialData)
+    const navigate = useNavigate()
     const userType = sessionStorage.getItem("userType")
     const [currentStep, setCurrentStep] = useState(ticketData?.progressStage);
     const [complete, setComplete] = useState(false);
@@ -49,6 +51,7 @@ const Stepper = ({initialData}) => {
       }
       }catch(err){
         showError("This ticket has been deleted")
+        navigate("/serviceTicketPage")
       }
       
     }
