@@ -16,7 +16,11 @@ import styled from 'styled-components';
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import FeedbackForm from '../feedbackForm';
+
 import addTicket from "../headers/assets/images/addticket.png";
+
+import './TicketsColumn.css';
+
 
 
 const Title = styled.h2`
@@ -137,7 +141,23 @@ const ServiceTicketHistoryTable = (props) => {
   return (
 
     <TicketsContainer>
-      <Title style= {serviceTicketStyle}>Service Tickets</Title>
+
+      <Title>Service Tickets</Title>
+
+      <div class="Ticketscolumn">
+                <button class="currentbutton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+                <span class="rentlabel">Current Tickets :</span>
+              </button>
+              <button class="progressbutton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+                <span class="rentlabel">In-Progress Tickets :</span>
+              </button>
+              <button class="completebutton">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+                <span class="rentlabel">Completed Tickets :</span>
+              </button>
+                </div>
       <Swiper
       style={swiperStyle}
         spaceBetween={5}

@@ -22,7 +22,8 @@ const Stepper = ({ticketData}) => {
         const userType = sessionStorage.getItem("userType")
         const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
         var data = result.data
-        if(result.status === 200){
+        if(data.status === 200){
+
           setCurrentStep(data.stepNumber)
           showSuccess("Updated Progress Successfully")
         } else {
@@ -64,10 +65,10 @@ const Stepper = ({ticketData}) => {
             ))}
           </div>
           <div className= "Stepperbutton">
-            {currentStep !== 2 && <StepperButton/>} 
+            {currentStep !== 2 && <StepperButton tenantInfo={ticketData} currentStage={currentStep}/>} 
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
-      {!complete && currentStep !== 2 &&( //hide "finish" for Awaiting quotation
+      {!complete && currentStep !== 2 &&( //hide "next" for Awaiting quotation
         <button
           className="btn"
           onClick={() => {

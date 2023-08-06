@@ -27,21 +27,23 @@
   
   .tasks{
     width: 550px;
-    height: 500px;
+    height: 800px;
     position: absolute;
     top: 13%;
     left: 630px; 
     right: 0px;
     margin: 0px auto;
   }
+
   input[type=checkbox] {
     display: none;
   }
+
   .customLabel{
     background: #17594A;
     height: 69px;
     width: 100%;
-    display: block;
+    display: flex;
     color: #fff;
     text-transform: capitalize;
     font-weight: 500;
@@ -63,7 +65,7 @@
     font-weight: 100;
     color: #fff;
   }
-  label:before{
+  /* label:before{
     content:"";
     width: 20px;
     height: 20px;
@@ -74,7 +76,7 @@
     right: 20px;
     top: 30%;
     transition: border 0.7s ease
-  }
+  } */
   #label-1:checked ~ label[for=label-1],
   #label-2:checked ~ label[for=label-2],
   #label-3:checked ~ label[for=label-3],
@@ -97,3 +99,122 @@
   #label-5:checked ~ label[for=label-5]:before{
     background: url("https://i.imgur.com/eoPQ05r.png") no-repeat center center;
   }
+
+  
+
+
+
+
+
+/* Establish general rules for demo */
+.button-drop-container, .drop-pop button {
+  font-family: Open Sans;
+  font-size: 16px;
+  font-weight: 100;
+  text-align: left;
+  z-index: 1;
+}
+
+/* Base button styles */
+.drop-button {
+  padding: 18px 24px;
+  color: #ffffff;
+  margin-left: 170%;
+  border: 0px;
+  display: flex;
+  font-weight: 600;
+
+  width: auto;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 200ms;
+  z-index: 1;
+
+}
+
+/* Caret icon in drop button */
+.drop-button::after {
+  font-family: Epilogue;
+  content: "\f0d7";
+  padding-left: 5px;
+}
+
+Space between button groups 
+ .button-group{
+  margin-right: 10px;
+  font-size: 0;
+}
+/* Base styles for all immediate button group children */
+.button-group > * {
+  display: inline-block;
+  position: relative;
+  font-size: 16px;
+}
+
+
+/* Dropdown container styles*/
+.drop-pop {
+  width: 200px;
+  position: absolute;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, .4);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Buttons within dropdown container */
+.drop-pop button {
+  width: 100%;
+  background: transparent;
+  color: black;
+  border-width: 0px;
+  padding: 8px 24px;
+  box-shadow: none;
+}
+
+/* Hover style for buttons */
+.drop-button:hover,
+.drop-pop button:hover {
+  background: #dddddd;
+}
+
+
+
+
+/* Hide Checkbox */
+.drop-button-wrap input[type="checkbox"] {
+  width: 0px;
+  height: 0px;
+  margin: 0px;
+  display: block;
+  -webkit-appearance: none;
+}
+
+
+/* Dropdown container when hidden */
+.drop-button-wrap input[type="checkbox"] ~ .drop-pop {
+  visibility: hidden;
+  opacity: 0;
+  top: 0%;
+  transition: all 200ms;
+}
+
+/* Dropdown container when visible */
+.drop-button-wrap input[type="checkbox"]:checked ~ .drop-pop {
+  visibility: visible;
+  opacity: 1;
+  top: 100%;
+}
+
+.tenant-task-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: 20px;
+align-items: center;
+position: relative;
+}
+
+.tenant-info,
+.task-info {
+  margin-right: 10px; /* Adjust the spacing as needed */
+}
+
