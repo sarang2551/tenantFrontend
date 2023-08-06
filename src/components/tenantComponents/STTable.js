@@ -45,7 +45,7 @@ const ServiceTicketHistoryTable = (props) => {
   const [selectedTicket, setSelectedTicket] = useState (false);
   const [data,setData] = useState([]);
   const [currentFilter,setFilter] = useState("all");
-
+  const [showFeedBack,setShowFeedback] = useState(false)
   const { showError } = useError();
   const { showSuccess } = useSuccess();
 
@@ -68,7 +68,7 @@ const ServiceTicketHistoryTable = (props) => {
     </div>
   );
 
-  const [showFeedBack,setShowFeedback] = useState(false)
+  
     const handleAddTicket = () => {
       setAddTicketOpen(true)
     }

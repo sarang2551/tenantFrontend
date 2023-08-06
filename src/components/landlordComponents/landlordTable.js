@@ -11,18 +11,28 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import"./style_form.css";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import FeedbackForm from "../feedbackForm";
 
 const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState (false);
+    const [showFeedBack,setShowFeedback] = useState(false)
     const [ popupData, setPopupData] = useState();
     const [data,setData] = useState([])
     const { showError } = useError();
     const { showSuccess } = useSuccess();
 
-    const handleDeleteTicket = ()=>{
-      /**TODO */
-}
+    const handleDeleteTicket = async(rowData)=>{
+      const idx = rowData.tableData.id
+      const response = await axios.delete("http://localhost:8000/tenant/deleteServiceTicket",{data:rowData})
+      var res_data = response.data
+      if(res_data.status === 200){
+        setData([...data.splice(0,idx),...data.splice(idx,data.length)])
+      } else {
+        showError(data, 3000);
+      }
+    }
+
     const fetchData = async () => {
         try {
           const userID = sessionStorage.getItem("userID") 
@@ -30,7 +40,7 @@ const LandlordServiceTicketTable = () => {
           var data = response.data 
           setData(data);
         } catch (error) {
-          console.error('Error fetching data:', error); /**TODO: Display an error on the UI instead */
+          console.error('Error fetching data:', error); 
           showError(('Error fetching data:', error), 3000);
         }
       };
@@ -42,14 +52,19 @@ const LandlordServiceTicketTable = () => {
 
     const handleInfoTicket = (ticketData) => {
         setSelectedTicket(ticketData);
-        setInfoTicketOpen(true)
+        setInfoTicketOpen(true);
 
       };
 
     const handleClosePopup= () => {
-        setInfoTicketOpen(false)
+        setInfoTicketOpen(false);
         setPopupData();
       }
+    
+    const handleOpenFeedback = (rowData)=> {
+      setSelectedTicket(rowData)
+      setShowFeedback(true)
+    }
 
     const columns = [
         { title: "Title", field: "title" },
@@ -57,9 +72,12 @@ const LandlordServiceTicketTable = () => {
         {title:"Start Date", field:"startDate"},
         { title: "Status",render:(rowData)=>{
             return <div>
-            <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
-              Check Status</button>
-              {/* {infoTicketOpen && <ServiceTicketCard props = {rowData}/>} */}
+            {rowData.progressStage < 4 ? <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
+              Check Status</button> :
+              <button className="StatusInfo" onClick={()=>handleOpenFeedback(rowData)}>
+                Send Feedback
+              </button>
+            }
               </div>
         },},
         {title: "Actions", align:'center',
@@ -76,8 +94,6 @@ const LandlordServiceTicketTable = () => {
       </div>
       ),}
     ];
-
-      
 
   return (
     <div>
@@ -104,7 +120,7 @@ const LandlordServiceTicketTable = () => {
             exportAllData:true,
             headerStyle: { background: "#fff8e1"}, 
           }}
-          onRowClick={(event, rowData) => handleInfoTicket(rowData)}
+          
         />
          </div>
         </Grid>
@@ -118,6 +134,9 @@ const LandlordServiceTicketTable = () => {
           <ServiceTicketCard _id = {selectedTicket._id} onPopupClose={handleClosePopup} />
         </CustomPopup>
         )}
+       <Popup open={showFeedBack} onClose={()=>setShowFeedback(false)} modal>
+        <FeedbackForm ticketData={selectedTicket} onSubmission={()=>setShowFeedback(false)}/>
+      </Popup>
         </Grid>
       </Grid>
     </div>
