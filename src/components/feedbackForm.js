@@ -39,17 +39,51 @@ const FeedbackForm = ({ticketData, onSubmission}) => {
         <h5>Rate from 1 to 5 (1 being the worst and 5 being the best)</h5>
         <br/>
         <label> Time taken:
-        <input type="number" min="1" max="5" {...register("timeTaken",{required: true})} placeholder="1-5"/>
+        <div class="rating">
+      <input type="radio" id="timeTaken5" name="timeTaken" value="5" {...register("timeTaken",{required: true})} />
+      <label for="timeTaken5" title="5"></label>
+      <input type="radio" id="timeTaken4" name="timeTaken" value="4" {...register("timeTaken",{required: true})} />
+      <label for="timeTaken4" title="4"></label>
+      <input type="radio" id="timeTaken3" name="timeTaken" value="3" {...register("timeTaken", { required: true })} />
+    <label htmlFor="timeTaken3" title="3"></label>
+      <input type="radio" id="timeTaken2" name="timeTaken" value="2" {...register("timeTaken",{required: true})} />
+      <label for="timeTaken2" title="2"></label>
+      <input type="radio" id="timeTaken1" name="timeTaken" value="1" {...register("timeTaken",{required: true})} />
+      <label for="timeTaken1" title="1"></label>
+        </div>
         </label>
         <br/>
         <label> Cost:
-        <input type="number" min="1" max="5" {...register("cost",{required: true})} placeholder="1-5"/>
-        </label>
-        <br/>
-        <label> Quality of work:
-        <input type="number" min="1" max="5" {...register("quality",{required: true})} placeholder="1-5"/>
-        </label>
-        <br/>
+  <div className="rating">
+    <input type="radio" id="cost5" name="cost" value="5" {...register("cost", { required: true })} />
+    <label htmlFor="cost5" title="5"></label>
+    <input type="radio" id="cost4" name="cost" value="4" {...register("cost", { required: true })} />
+    <label htmlFor="cost4" title="4"></label>
+    <input type="radio" id="cost3" name="cost" value="3" {...register("cost", { required: true })} />
+    <label htmlFor="cost3" title="3"></label>
+    <input type="radio" id="cost2" name="cost" value="2" {...register("cost", { required: true })} />
+    <label htmlFor="cost2" title="2"></label>
+    <input type="radio" id="cost1" name="cost" value="1" {...register("cost", { required: true })} />
+    <label htmlFor="cost1" title="1"></label>
+  </div>
+</label>
+
+    <br/>
+    <label> Quality of work:
+  <div className="rating">
+    <input type="radio" id="quality5" name="quality" value="5" {...register("quality", { required: true })} />
+    <label htmlFor="quality5" title="5"></label>
+    <input type="radio" id="quality4" name="quality" value="4" {...register("quality", { required: true })} />
+    <label htmlFor="quality4" title="4"></label>
+    <input type="radio" id="quality3" name="quality" value="3" {...register("quality", { required: true })} />
+    <label htmlFor="quality3" title="3"></label>
+    <input type="radio" id="quality2" name="quality" value="2" {...register("quality", { required: true })} />
+    <label htmlFor="quality2" title="2"></label>
+    <input type="radio" id="quality1" name="quality" value="1" {...register("quality", { required: true })} />
+    <label htmlFor="quality1" title="1"></label>
+  </div>
+</label>
+  <br/>
         <button type="submit">Submit Feedback</button>
         {errors.timeTaken && <span>Pls specify a rating for time taken</span>}
         {errors.cost && <span>Pls specify a rating for cost</span>}
