@@ -23,15 +23,13 @@ const Stepper = ({ticketData}) => {
         const result = await axios.put(`http://localhost:8000/${userType}/updateServiceTicketProgress`,ticketData);
         var data = result.data
         if(data.status === 200){
-
           setCurrentStep(data.stepNumber)
-          showSuccess("Updated Progress Successfully")
+          showSuccess("Updated Progress Successfully",3000)
         } else {
-        console.log(data.message) /**TODO: Show UI error component */
         showError(data.message, 3000);
         }
       }catch(err){
-        console.log(`Error updating service ticket`) /**TODO: Show UI error component */
+        console.log(`Error updating service ticket`)
         showError(`Error updating service ticket`, 3000);
       }
       
@@ -65,13 +63,15 @@ const Stepper = ({ticketData}) => {
             ))}
           </div>
           <div className= "Stepperbutton">
-            {currentStep !== 2 && <StepperButton tenantInfo={ticketData} currentStage={currentStep}/>} 
+            <StepperButton progressData={ticketData.progressBar[currentStep]} />
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
-      {!complete && currentStep !== 2 &&( //hide "next" for Awaiting quotation
+      {!complete && ticketData.progressStage !== 1 &&( //hide "next" for Awaiting quotation
         <button
           className="btn"
-          onClick={() => {
+          onClick={ticketData.endDate ? ()=>{
+            showError("Service ticket is finished",3000)
+          }:() => {
             currentStep === steps.length ? setComplete(true) : updateServiceTicket();
           }}
         >

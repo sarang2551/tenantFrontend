@@ -101,12 +101,9 @@ const CloseButton = styled.button`
 const ServiceTicketCard = ({_id,onPopupClose}) => {
   const [images, setImages] = useState([]);
   const [ticketData, setTicketData] = useState({})
-  const userType = sessionStorage.getItem('userType')
-  const showTenantFeedback = userType === "tenant" && !ticketData.tenantFeedback
-  const showLandlordFeedback = userType === "landlord" && !ticketData.landlordFeedback
   const [loading,setLoading] = useState(true)
+
   const fetchData = async () => {
-      
     try {
       const res_data = await axios.get(`http://localhost:8000/general/getServiceTicketInfo/${_id}`)
       setTicketData(res_data.data)
@@ -159,8 +156,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
   const handlePopupClose= () => {
     onPopupClose();
   };
-
-      
+   
   return (
     <>
       {loading ? (
@@ -205,9 +201,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
                 <label>Landlord name: </label>
                 <span className="landlordName">{ticketData.landlordName}</span>
                 <br />
-                <label>Files Submitted:</label>
-                <span className="FromDataBase">{ticketData.documents}</span>
-                <br />
+                
                 {ticketData.progressStage < 4 && <label>Progress:</label>}
                 <StepperContainer>
                   <Stepper ticketData={ticketData} />
