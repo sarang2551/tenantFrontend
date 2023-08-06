@@ -37,7 +37,7 @@ const Landlordprofilepage = () => {
         userObject.profilePic = processedImage[0]
         setUser(userObject)
       } else {
-      showError("Error getting user data")
+      showError("Error getting user data",3000)
       }
     }catch(err){
         console.log(`Error getting userInfo: ${err}`)
@@ -92,14 +92,14 @@ const Landlordprofilepage = () => {
             <p>Phone number: {user.phoneNumber}</p>
             <p>Email: {user.email}</p> 
         </div>
-        <div className="sidebar">
-          <div className="button-container-profile">
+      </div>
+      <div className="sidebar">
+        <div className="button-container-profile">
               <button type='submit' onClick={handleEditProfile}>Edit Profile</button>
               <button type='submit' onClick={handleTotalUnitsOwned}>Units Owned</button>
               <button type='submit' onClick={handleChangePassword}>Change Password</button>
-          </div>
         </div>
-      </div>
+       </div>
       <CustomPopup open={addChangePassword} onClose={handleClosePopup} modal>
         <Passwordchange onClose={handleClosePopup}  />
       </CustomPopup>
@@ -111,3 +111,4 @@ const Landlordprofilepage = () => {
 };
 
 export default Landlordprofilepage;
+

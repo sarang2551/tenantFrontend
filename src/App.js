@@ -37,6 +37,12 @@ function App() {
           <FirstLoginPage/>
           </PrivateRoute>
         }/>
+
+        <Route exact path="/landlord/firstLogin" element={
+          <PrivateRoute desiredUser={"landlord"} isAuthenticated={isSignedIn}>
+          <FirstLoginPage/>
+          </PrivateRoute>
+        }/>
         
         <Route exact path="/serviceTicketPage" element={
           <PrivateRoute desiredUser={"tenant"} isAuthenticated={isSignedIn}>

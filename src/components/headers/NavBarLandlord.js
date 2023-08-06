@@ -17,9 +17,10 @@ import anacle from "./assets/images/anacle.jpg"
 
 
 const NavbarLandlord = () => { 
-
+  const navigate = useNavigate()
   const handleLogout = () => {
-    window.location.href = '/';
+    sessionStorage.clear()
+    navigate("/")
   };
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 
@@ -34,7 +35,7 @@ const NavbarLandlord = () => {
           <span className="nav__portal-text">Landlord Portal</span>
         </div>
         <div className="nav__menu">
-          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'100px' }}>
+          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'45px' }}>
             <div className="nav__item">
               <a href="/landlord/home" className="nav__link">Home</a>
               <div className="nav__dropdown with-icons"></div>

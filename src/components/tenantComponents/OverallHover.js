@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const OverallHover = () => {
+const OverallHover = ({Total}) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -34,7 +34,7 @@ const OverallHover = () => {
           </g>
         </svg>
         <span className="rentlabel">
-          {hovered ? '100' : 'Total Overall'}
+          {hovered ? Total : 'Total Overall'}
         </span>
       </button>
     </div>

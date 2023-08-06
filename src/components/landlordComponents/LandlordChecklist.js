@@ -15,6 +15,7 @@ const Checklist = () => {
     setOpenDropdownId((prevState) => (prevState === tenantId ? null : tenantId));
   };
 
+<<<<<<< HEAD
   const totalDropdownHeight = tasks.reduce((totalHeight, task) => {
     if (task.id === openDropdownId) {
       return totalHeight + 40*3;
@@ -23,6 +24,20 @@ const Checklist = () => {
   }, 0);
 
   const handleTaskSelect = (tenantId, option) => {
+=======
+  const handleTaskSelect = (tenantId, option) => {}
+
+  const fetchData = async() =>{
+    const userID = sessionStorage.getItem('userID')
+    const response  = await axios.get(`http://localhost:8000/landlord/getTenantList/${userID}`)
+    // use the data above
+  }
+  useEffect(()=>{
+    fetchData()
+  })
+  // Function to handle checkbox state change
+  const handleCheckboxChange = (taskId,tenantId,option) => {
+>>>>>>> ba89c5736fdcfc3f0190fe5c7aabac5c3a821206
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === tenantId ? { ...task, selectedOption: option } : task
@@ -86,6 +101,7 @@ const Checklist = () => {
       ))}
     </div>
   );
-};
+}
+
 
 export default Checklist;

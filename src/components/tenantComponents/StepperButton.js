@@ -1,39 +1,21 @@
-import React, { useState, useEffect } from 'react';
-import "./StepperButton.css";
-import axios from 'axios';
+import React from 'react';
+import "./StepperButton.css"
 
-const StepperButton = ({ticketInfo, currentStage}) => {
-  const [progressData, setProgressData] = useState();
-
-  useEffect(() => {
-  
-    const fetchProgressData = async () => {
-      try {
-        const response = await axios.get(`http://localhost:8000//general/getServiceTicketInfo/${ticketInfo._id}`); 
-        const data = response.data;
-        if (data.status === 200) {
-          setProgressData(data.serviceTicketObject.progressBar[currentStage]);
-        }
-
-      } catch (error) {
-        console.error('Error fetching progress data:', error);
-      }
-    };
-
-    fetchProgressData();
-  }, [progressData]);
+const StepperButton = ({progressData}) => {
 
   return (
     <div className="container">
       <div class="customCheckBoxHolder">
         <div
           class={`customCheckBox ${progressData[0] ? 'completed' : 'incomplete'}`}
+          style={progressData[0] ? {backgroundColor:"lightgreen"} : {backgroundColor:"red"}}
         >
           <div class="inner">Tenant</div>
         </div>
 
         <div
           class={`customCheckBox ${progressData[1] ? 'completed' : 'incomplete'}`}
+          style={progressData[1] ? {backgroundColor:"lightgreen"} : {backgroundColor:"red"}}
         >
           <div class="inner">Landlord</div>
         </div>

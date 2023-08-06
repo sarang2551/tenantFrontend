@@ -7,9 +7,6 @@
   
   .sidebar {
     background-color: #f0f0f0;
-    padding: 10px;
-    margin-left: auto; /* Add this line to push the sidebar to the right */
-    width: 300px; /* Adjust the width of the sidebar */
   }
   
   .profile-content {
@@ -17,6 +14,7 @@
     flex-direction: column;
     align-items: center;
     margin-left: 80px;
+    margin-right: 80px;
   }
   
   .profile-content h1{
@@ -31,7 +29,7 @@
     object-fit: cover;
     margin-bottom: 20px;
     margin-left: 80px;
-    margin-right: 40px;
+    margin-right: 80px;
   }
   
   .profile-details {
@@ -48,12 +46,18 @@
     font-size: 25px;
     margin-left: 80px;
     margin-bottom: 50px;
+    font-style: italic;
   }
   
   .button-container-profile {
     display: flex;
-    flex-direction: column;
-    gap: 40px; 
+    justify-content: center;
+    gap: 20px;
+    padding: 10px;
+    background-color: #f0f0f0;
+    position: fixed;
+    bottom: 0;
+    width: 100%; 
   }
   
   .button-container-profile button {
