@@ -12,6 +12,24 @@ import NavbarLandlord from "../components/headers/NavBarLandlord";
 import { useError } from "../components/errorBox";
 import { useSuccess } from "../components/successBox";
 import addBuilding from "../components/headers/assets/images/addbuilding.png";
+import styled from 'styled-components';
+
+const AddbuildingDiv = styled.div`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #ffe082;
+  font-size: 18px;
+  border: 4px solid #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726;  
+  }
+`;
 
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
@@ -21,22 +39,10 @@ const LandlordManageTenantsPage = () => {
     const { showSuccess } = useSuccess();
 
     const addbuilding= (
-      <div
-      style={{
-        display: "flex",
-        color: 'white',
-        alignItems: "center",
-        fontFamily: "Raleway",
-        backgroundColor: "#fbc02d",
-        fontSize: "20px",
-        border: "5px solid #fbc02d",
-        borderRadius: "10px", 
-        padding: "5px 10px", 
-      }}
-    >
+      <AddbuildingDiv>
         <img src={addBuilding} alt="Add Building" style={{ marginRight: 8, height: 20 }} />
         <span>Add Building</span>
-      </div>
+      </AddbuildingDiv>
     );
 
     const handleAddBuilding = async() =>{
