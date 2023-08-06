@@ -7,6 +7,19 @@ import StepperButton from "./StepperButton";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #80cbc4;
+  font-size: 18px;
+  border: 4px solid #80cbc4;
+  border-radius: 10px;
+`;
+
 
 const Stepper = ({initialData}) => {
     const [ticketData,setTicketData] = useState(initialData)
@@ -89,6 +102,7 @@ const Stepper = ({initialData}) => {
             {ticketData && <StepperButton progressData={ticketData?.progressBar[currentStep]} />}
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
+
       {!complete && ( //hide "next" for Awaiting quotation
         <button
           className="btn"
@@ -98,8 +112,10 @@ const Stepper = ({initialData}) => {
             currentStep === steps.length ? setComplete(true) : updateServiceTicket();
           }}
         >
+
           {ticketData?.endDate ? "Finish" : "Next"}
         </button>
+
       )}    
       {letLandlordAddQuotation?
       <QuotationForm onSubmission={()=>setLandlordAddQuotation(false)} ticketData={ticketData}/>:
