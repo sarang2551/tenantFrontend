@@ -9,11 +9,10 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NavbarLandlord from "../components/headers/NavBarLandlord";
-
 import CustomPopup from "../components/landlordComponents/CustomPopup";
-
 import { useError } from "../components/errorBox";
 import { useSuccess } from "../components/successBox";
+import addBuilding from "../components/headers/assets/images/addbuilding.png";
 
 const LandlordManageTenantsPage = () => {
     const navigate = useNavigate()
@@ -21,6 +20,26 @@ const LandlordManageTenantsPage = () => {
     const [buildFormOpen,setBuildFormOpen] = useState(false)
     const { showError } = useError();
     const { showSuccess } = useSuccess();
+
+    const addbuilding= (
+      <div
+      style={{
+        display: "flex",
+        color: 'white',
+        alignItems: "center",
+        fontFamily: "Raleway",
+        backgroundColor: "#fbc02d",
+        fontSize: "20px",
+        border: "5px solid #fbc02d",
+        borderRadius: "10px", 
+        padding: "5px 10px", 
+      }}
+    >
+        <img src={addBuilding} alt="Add Building" style={{ marginRight: 8, height: 20 }} />
+        <span>Add Building</span>
+      </div>
+    );
+
     const handleAddBuilding = async() =>{
         setBuildFormOpen(true)
     }
@@ -96,8 +115,9 @@ const LandlordManageTenantsPage = () => {
             icons={tableIcons}
             options = {{
                 sorting:true,
+                paging: true,
                 selection:true,
-                headerStyle: { background: "lightgrey"}, 
+                headerStyle: { background: "#fff8e1"}, 
                 exportButton:true,
                 exportAllData:true,
                 actionsColumnIndex:-1,
@@ -108,7 +128,7 @@ const LandlordManageTenantsPage = () => {
             }}
             actions={[
                 {
-                  icon: tableIcons.Add,
+                  icon:  () => addbuilding,
                   tooltip: "Add Building",
                   isFreeAction: true,
                   onClick: (event) => handleAddBuilding()
@@ -121,9 +141,14 @@ const LandlordManageTenantsPage = () => {
       </Grid>
       <Grid item xs={1}></Grid>
         </Grid>
-        <CustomPopup open={buildFormOpen} onClose={handleClosePopup} modal>
+        <Popup open={buildFormOpen} onClose={handleClosePopup} contentStyle={{
+          width: '24%', // Adjust the width to a smaller value
+          height: '40vh',
+          overflow: 'auto',
+          borderRadius: '15px',
+        }} modal>
         <AddBuildForm onClose={handleClosePopup} onAddition={fetchData} />
-        </CustomPopup>
+        </Popup>
     </div>
 </div>
     )

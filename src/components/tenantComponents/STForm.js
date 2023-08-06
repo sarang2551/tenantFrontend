@@ -124,51 +124,50 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
         <div className="style-form-container">
           <tableIcons.Close onClick={onClose} />
         </div>
-        <Typography variant="h4" gutterBottom style={{ fontSize: "18px" }}>
+        <Typography variant="h4" gutterBottom style={{ fontSize: "20px" }}>
           Add Service Ticket
         </Typography>
         <Grid item xs={20}>
-          <input 
-          
-          type='text' placeholder="Ticket Title" {...register("title", { required: true })} />
-          <input type='text' placeholder="Description" {...register("description", { required: true })} />
+        <div className="input-with-icon">
+            <tableIcons.ConfirmationNumber className="icon" />
+            <input
+              type="text"
+              placeholder="Ticket Title"
+              {...register("title", { required: true })}
+            />
+            {errors.ticket && <span>Ticket title is required</span>}
+          </div>
+          <div className="input-with-icon">
+            <tableIcons.Description className="icon" />
+            <input
+              type="text"
+              placeholder="Description"
+              {...register("description", { required: true })}
+            />
+            {errors.description && <span>Description is required</span>}
+          </div>
     
           <label>
             Landlord: <p id="landlord_name">{landlordName}</p>
             Unit: <p id="unit_name">{unitData}</p>
           </label>
           <label>Attach Images</label>
-          <div
-            className="input-with-icon"
-            onClick={() => document.querySelector(".input-field").click()}
-          >
-            <div style={fileupload}>
-              <input
-                type="file"
-                className="input-field"
-                hidden
-                onChange={handleFileChange}
-                multiple
-                accept="image/*"
-                {...register("images")}
-              />
-              {image ? (
-                <img src={image} alt="Preview" />
-              ) : (
-                <MdUploadFile color="#535353" size={50} />
-              )}
-            </div>
-            <section style={fileinfo}>
-              <AiFillFileImage color="#535353" />
-              <span>
-                {fileName}
-                <MdDelete
-                  color="#535353"
-                  onClick={() => {
-                    setFileName("No File Selected");
-                    setImage(null);
-                    setValue("images", null);
-                  }}
+            <div className="input-with-icon">
+              <div style={fileupload} onClick={() => document.querySelector(".input-field").click()}>
+                <input type="file" accept="png/*" className="input-field" hidden onChange={handleFileChange} multiple />
+                {image ? <img src={image} alt="Preview" /> : <MdUploadFile color="#535353" size={130} />}
+              </div>
+              <section style={fileinfo}>
+                <AiFillFileImage color="#535353" />
+                <span>
+                  {fileName}
+                  <MdDelete
+                    color="#535353"
+                    onClick={() => {
+                      setFileName("No File Selected");
+                      setImage(null);
+                      setValue("images", null);
+                    }}
                 />
               </span>
             </section>
