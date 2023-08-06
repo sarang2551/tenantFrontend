@@ -776,12 +776,14 @@ body {
 }
 
 .home-container3top{
-  height: 100px;
+  height: 700px;
   width: 600px;
   padding-bottom: 20px;
-  display: flex;
+  margin-top: 1%;
+}
 
-
+.home-container3top button {
+  margin-right: 20px;
 }
 .home-container3 {
 
@@ -1110,16 +1112,20 @@ body {
   border-top: 2px dashed #e9ebed;
   border-radius: 0 0 0.325rem 0.325rem;
 }
+.rentcontainer{
+  height:40%;
+  margin-bottom: -20%;
+}
 
-.currentbutton {
+.rentbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
-  border: none;
+  height: 50%;
+  width: 100%;
+
   background: #468B97;
   cursor: pointer;
   margin-right: 5px;
@@ -1132,14 +1138,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.currentlabel{
+.rentlabel{
   color: white;
 }
-.currentbutton:hover {
+.rentbutton:hover {
   background: #1D5B79;
 }
 
-.currentbutton:hover .svg-icon {
+.rentbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1156,14 +1162,18 @@ body {
 }
 
 
-.progressbutton {
+.quotationcontainer{
+  height:40%;
+  margin-bottom: -20%;
+}
+.quotationbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
+  height: 50%;
+  width: 100%;
   border: none;
   background: #468B97;
   cursor: pointer;
@@ -1177,14 +1187,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.progresslabel{
+.quotationlabel{
   color: white;
 }
-.progressbutton:hover {
+.quotationbutton:hover {
   background: #1D5B79;
 }
 
-.progressbutton:hover .svg-icon {
+.quotationbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1200,15 +1210,18 @@ body {
   }
 }
 
+.overallcontainer{
+  height:40%;
+}
 
-.completedbutton {
+.overallbutton {
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 9px 12px;
   gap: 8px;
-  height: 40px;
-  width: 201px;
+  height: 50%;
+  width: 100%;
   border: none;
   background: #468B97;
   cursor: pointer;
@@ -1222,14 +1235,14 @@ body {
   font-family: sans-serif;
   letter-spacing: 1px;
 }
-.completedlabel{
+.overalllabel{
   color: white;
 }
-.completedbutton:hover {
+.overallbutton:hover {
   background: #1D5B79;
 }
 
-.completedbutton:hover .svg-icon {
+.overallbutton:hover .svg-icon {
   animation: slope 1s linear infinite;
 }
 
@@ -1244,3 +1257,4 @@ body {
   100% {
   }
 }
+

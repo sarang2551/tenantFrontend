@@ -1,0 +1,147 @@
+.Ticketscolumn{
+    height: 300px;
+    width: 750px;
+    align-items: center;
+    margin-top: -7%;
+    margin-bottom: -5%;
+    display: flex;
+    margin-left: 23%;
+  }
+
+.currentbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 12px;
+    gap: 8px;
+    height: 15%;
+    width: 100%;
+    border: none;
+    background: #468B97;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .ticketlabel {
+    line-height: 22px;
+    font-size: 17px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .currentlabel{
+    color: white;
+  }
+  .currentbutton:hover {
+    background: #1D5B79;
+  }
+  
+  .currentbutton:hover .svg-icon {
+    animation: slope 1s linear infinite;
+  }
+  
+  @keyframes slope {
+    0% {
+    }
+  
+    50% {
+      transform: rotate(10deg);
+    }
+  
+    100% {
+    }
+  }
+  
+  .progressbutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 12px;
+    gap: 8px;
+    height: 15%;
+    width: 100%;
+    border: none;
+    background: #468B97;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .ticketlabel {
+    line-height: 22px;
+    font-size: 17px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .progresslabel{
+    color: white;
+  }
+  .progressbutton:hover {
+    background: #1D5B79;
+  }
+  
+  .progressbutton:hover .svg-icon {
+    animation: slope 1s linear infinite;
+  }
+  
+  @keyframes slope {
+    0% {
+    }
+  
+    50% {
+      transform: rotate(10deg);
+    }
+  
+    100% {
+    }
+  }
+  
+  
+  
+  .completebutton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 9px 12px;
+    gap: 8px;
+    height: 15%;
+    width: 100%;
+    border: none;
+    background: #468B97;
+    cursor: pointer;
+    margin-right: 5px;
+  }
+  
+  .ticketlabel {
+    line-height: 22px;
+    font-size: 17px;
+    color: #fff;
+    font-family: sans-serif;
+    letter-spacing: 1px;
+  }
+  
+  .completelabel{
+    color: white;
+  }
+  .completebutton:hover {
+    background: #1D5B79;
+  }
+  
+  .completebutton:hover .svg-icon {
+    animation: slope 1s linear infinite;
+  }
+  
+  @keyframes slope {
+    0% {
+    }
+  
+    50% {
+      transform: rotate(10deg);
+    }
+  
+    100% {
+    }
+  }
+  

@@ -5,11 +5,16 @@ import "../components/headers/assets/css/style.css";
 import "../components/headers/assets/css/STstyle.css"; 
 import Pie from '../components/Pie';
 import Ticket from '../components/STTicketsNew';
+
+import RentHover from '../components/tenantComponents/RentHover';
+import QuotationHover from '../components/tenantComponents/QuotationHover';
+import OverallHover from '../components/tenantComponents/OverallHover';
 import {Swiper, SwiperSlide} from "swiper/react";
 import "swiper/css"
 import 'swiper/css/scrollbar';
 import {Scrollbar,Mousewheel} from "swiper/modules";
 import { useError } from '../components/errorBox';
+
 
 
 function Home() { 
@@ -53,45 +58,10 @@ function Home() {
             <div class="home-main">
               <div class="home-container3">
                 <div class="home-container3top">
-                <button class="currentbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="currentlabel">Current Tickets</span>
-              </button>
-              <button class="progressbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="currentlabel">In-Progress Tickets</span>
-              </button>
-              <button class="completedbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="currentlabel">Completed Tickets</span>
-              </button>
+                  <RentHover/>
+                  <QuotationHover/>
+                  <OverallHover/>
                 </div>
-              { ticketData.length === 0 ? 
-              <div>
-              <br/>
-              <h2>No service tickets added </h2>
-              </div> : 
-              <div>
-                <Swiper
-                autoHeight = {false}
-                 
-                spaceBetween={200}
-                slidesPerView={2}
-                modules={[Scrollbar,Mousewheel]}
-                mousewheel={{
-                  enable: true,
-                  sensitivity: 10,}
-                }
-                scrollbar={{ draggable: true }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-              >
-                {ticketData.map((ticket,idx)=><SwiperSlide>
-                  <Ticket STData={{idx,...ticket}}/>
-                </SwiperSlide>)}
-              </Swiper>
-              </div>
-                }
               </div> 
             </div>
           </section>
@@ -102,3 +72,4 @@ function Home() {
 }
 
 export default Home;
+
