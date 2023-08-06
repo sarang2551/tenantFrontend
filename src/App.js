@@ -12,6 +12,7 @@ import PrivateRoute from "./components/PrivateRoute.js";
 import FirstLoginPage from "./pages/firstLogin.js";
 import Landlordprofilepage from "./pages/Landlordprofilepage.js";
 import Tenantprofilepage from "./pages/Tenantprofilepage.js";
+import AccessDenied from "./components/accessDenied.js";
 //import NavBar from "./components/headers/NavBar";
 import { ErrorProvider } from './components/errorBox.js';
 import { SuccessProvider } from "./components/successBox.js";
@@ -84,6 +85,9 @@ function App() {
           <PrivateRoute desiredUser={"tenant"} isAuthenticated={isSignedIn}>
             <Tenantprofilepage/>
           </PrivateRoute>
+        }/>
+        <Route exact path="/accessDenied" element={
+            <AccessDenied/>
         }/>
       </Routes>
     </Router>

@@ -6,7 +6,7 @@ function PrivateRoute({ isAuthenticated ,desiredUser , children }) {
   const currentUserType = sessionStorage.getItem('userType');
   isAuthenticated = currentUserType === desiredUser 
   if (!isAuthenticated) {
-    return <Navigate to="/" replace /> /**TODO: Show an error instead of straight away rerouting */
+    return <Navigate to="/accessDenied"/> /**TODO: Show an error instead of straight away rerouting */
   }
   return children
 }
