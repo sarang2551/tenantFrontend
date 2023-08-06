@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const QuotationHover = () => {
+const QuotationHover = ({TotalQuotation}) => {
   const [hovered, setHovered] = useState(false);
 
   const handleMouseEnter = () => {
@@ -34,7 +34,7 @@ const QuotationHover = () => {
           </g>
         </svg>
         <span className="rentlabel">
-          {hovered ? '100' : 'Total Quotation'}
+          {hovered ? TotalQuotation : 'Total Quotation'}
         </span>
       </button>
     </div>

@@ -4,31 +4,36 @@ import axios from "axios";
 import "../components/headers/assets/css/style.css"; 
 import "../components/headers/assets/css/STstyle.css"; 
 import Pie from '../components/Pie';
-import Ticket from '../components/STTicketsNew';
-
 import RentHover from '../components/tenantComponents/RentHover';
 import QuotationHover from '../components/tenantComponents/QuotationHover';
 import OverallHover from '../components/tenantComponents/OverallHover';
-import {Swiper, SwiperSlide} from "swiper/react";
-import "swiper/css"
-import 'swiper/css/scrollbar';
-import {Scrollbar,Mousewheel} from "swiper/modules";
 import { useError } from '../components/errorBox';
 
 
 
 function Home() { 
+
   const [ticketData, setTicketData] = useState([]);
+  const [r_q_data,setRQData] = useState({
+    TotalRent:0,
+    TotalQuotation:0,
+  })
   const showError = useError()
   const getSTData = async () => {
-    const userID = sessionStorage.getItem('userID');
-    const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`);
-    var data_2 = response_2.data;
-    if (data_2) {
-      setTicketData(data_2);
-    } else {
-      showError("Error getting all service tickets",3000);
-    }
+  const userID = sessionStorage.getItem('userID');
+  const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`);
+  var data_2 = response_2.data;
+  if (data_2) {
+    setTicketData(data_2);
+  } else {
+    showError("Error getting all service tickets",3000);
+  }
+  const response = await axios.get(`http://localhost:8000/tenant/getRent&Quotation/${userID}`);
+  if(response.status === 200){
+    setRQData(response.data)
+  }else{
+    showError("Error getting rent and quotation data")
+  }
   }
   
   useEffect(() => {
@@ -58,9 +63,9 @@ function Home() {
             <div class="home-main">
               <div class="home-container3">
                 <div class="home-container3top">
-                  <RentHover/>
-                  <QuotationHover/>
-                  <OverallHover/>
+                  <RentHover TotalRent={r_q_data.TotalRent}/>
+                  <QuotationHover TotalQuotation={r_q_data.TotalQuotation}/>
+                  <OverallHover Total={r_q_data.TotalRent+r_q_data.TotalQuotation}/>
                 </div>
               </div> 
             </div>

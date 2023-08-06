@@ -17,9 +17,10 @@ import anacle from "./assets/images/anacle.jpg"
 
 
 const NavbarLandlord = () => { 
-
+  const navigate = useNavigate()
   const handleLogout = () => {
-    window.location.href = '/';
+    sessionStorage.clear()
+    navigate("/")
   };
     const  [notifOpen, setNotifOpen] = useState(false) 
     const toggleNotifBar = () =>{ 

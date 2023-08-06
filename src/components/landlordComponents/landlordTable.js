@@ -12,6 +12,11 @@ import"./style_form.css";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import FeedbackForm from "../feedbackForm";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Scrollbar,Mousewheel} from "swiper/modules"
+import "swiper/css"
+import 'swiper/css/scrollbar';
+import Ticket from "../STTicketsNew";
 
 
 const LandlordServiceTicketTable = () => {
@@ -45,6 +50,11 @@ const LandlordServiceTicketTable = () => {
           showError(('Error fetching data:', error), 3000);
         }
       };
+
+      const swiperStyle = {
+        margin: "2% 5% 0 5%" ,
+      }
+
       var filterd_data = data.filter((ticket) => {
         if (currentFilter === 'all') {
           return true; // Show all items
@@ -130,6 +140,22 @@ const LandlordServiceTicketTable = () => {
                 <span class="rentlabel">Completed Tickets :</span>
               </button>
                 </div>
+       <Swiper
+        style={swiperStyle}
+        spaceBetween={5}
+        slidesPerView={5}
+        modules={[Scrollbar, Mousewheel]}
+        mousewheel={{ enable: true, sensitivity: 10 }}
+        scrollbar={{ draggable: true }}
+        onSlideChange={() => console.log('slide change')}
+        onSwiper={(swiper) => console.log(swiper)}
+      >
+        {filterd_data.map((ticketData, idx) => (
+          <SwiperSlide key={idx}>
+            <Ticket STData={{ idx, ...ticketData }} />
+          </SwiperSlide>
+        ))}
+      </Swiper>
     <div className = "App" >
         <h2 style={{textAlign:"center",fontFamily:"sans-serif",fontSize:25,marginTop:50}}>
             Service Tickets
