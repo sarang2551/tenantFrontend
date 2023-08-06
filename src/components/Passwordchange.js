@@ -18,7 +18,8 @@ const Passwordchange = ({onClose}) => {
         const {password_first,password_second} = data
         if(password_first === password_second){
             const userID = sessionStorage.getItem('userID')
-            const response = await axios.put("http://localhost:8000/tenant/changePassword",{password:password_first,userID})
+            const userType = sessionStorage.getItem('userType') 
+            const response = await axios.put(`http://localhost:8000/${userType}/changePassword`,{password:password_first,userID})
             if(response.status === 200){
                 showSuccess('Password has been successfuly changed', 3000);
                 onClose()
@@ -40,7 +41,6 @@ const Passwordchange = ({onClose}) => {
         </Typography>
         <br></br>
         <Grid item xs={20}>
-        <input type="password" placeholder="Old password" {...register('password_first', { required: true })}></input> 
         <input type="password" placeholder="New password" {...register('password_first', { required: true })}></input>
         <input type="password" placeholder="Confirm password" {...register('password_second', { required: true })}></input>
         </Grid>
