@@ -100,7 +100,6 @@ const Tenantprofilepage = () => {
       <div className="sidebar">
         <div className="button-container-profile">
             <button type='submit' onClick={handleEditProfile}>Edit Profile</button>
-            <button type='submit' onClick={handleUnitsRented}>Units Rented</button>
             <button type='submit' onClick={handleChangePassword}>Change Password</button>
         </div>
        </div>
