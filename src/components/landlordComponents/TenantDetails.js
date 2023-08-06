@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import {useForm} from 'react-hook-form'
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
   const [tenantData, setTenantData] = useState(undefined)
-  const { register, handleSubmit } = useForm();
-  console.log(unitDetails)
+  const { register, handleSubmit, setValue } = useForm();
+  const {showError} = useError()
+  const {showSuccess} = useSuccess()
   const onSubmit = async (data) => {
     const {tenantName, email, contact, images} = data
-    console.log("Updating Tenant Details")
-    console.log(unitDetails)
     const editTenant = async() => {
       const imageList = [];
       for (let i = 0; i < images.length; i++) {
@@ -30,11 +31,12 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
         const result = await axios.put(`http://localhost:8000/landlord/editTenant/${unitDetails.tenantRef}`, tenantObject);
         const data = result.data
         if (data.status === 200) {
+          showSuccess("Editted successfully",3000)
           onClose();
           onAddition();
         }
       } catch (error) {
-        console.error("Error editing tenant info")
+        showError("Error editing tenant info",3000)
       }
 
     }
@@ -59,11 +61,13 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
     if (unitDetails.tenantRef) {
         const response = await axios.get(`http://localhost:8000/landlord/getTenantInfo/${unitDetails.tenantRef}`)
         var data = response.data
-        console.log(data.tenantInfo)
         if (data.status === 200) {
+            setValue("tenantName",data.tenantInfo.tenantName)
+            setValue("email",data.tenantInfo.email)
+            setValue("contact",data.tenantInfo.contact)
             setTenantData(data.tenantInfo)
         } else {
-            console.log("error getting tenant data for unit details")
+            showError("error getting tenant data for unit details")
         }
     }
 
@@ -72,7 +76,7 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
       try {
           fetchData()
       } catch (err) {
-          console.log("Error getting unit data")
+          showError("Server error getting unit data")
       }
   }, [])
 
@@ -80,11 +84,11 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)} >
       <div>
-        <input type="text" id="tenantName" placeholder="TenantName" {...register("tenantName", { required: false })} />
+        <input type="text" id="tenantName" defaultValue={tenantData?.tenantName} placeholder="TenantName" {...register("tenantName", { required: false })} />
         <br />
-        <input type="text" id="email" placeholder="Email" {...register("email", { required: false })} />
+        <input type="text" id="email" defaultValue={tenantData?.email} placeholder="Email" {...register("email", { required: false })} />
         <br />
-        <input type="text" id="number" placeholder="Contact Number" {...register("contact", { required: false })} />
+        <input type="text" id="number" defaultValue={tenantData?.contact} placeholder="Contact Number" {...register("contact", { required: false })} />
         <br />
         Attach Tenant Image (optional)
         <br />

@@ -231,9 +231,9 @@ const BuildingManageTable = () => {
             </Popup>
           </Grid>
           <Grid item xs={1}>
-            <CustomPopup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} modal>
+            <Popup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} modal>
                 <TenantDetailsForm unitDetails={selectedUnitDetails} onClose={handleCloseTenantDetailsPopUp} onAddition={fetchData} />
-            </CustomPopup>
+            </Popup>
           </Grid>
         </Grid>
         </div>

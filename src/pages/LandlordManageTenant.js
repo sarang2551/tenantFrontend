@@ -9,7 +9,6 @@ import Grid from '@material-ui/core/Grid'
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import NavbarLandlord from "../components/headers/NavBarLandlord";
-import CustomPopup from "../components/landlordComponents/CustomPopup";
 import { useError } from "../components/errorBox";
 import { useSuccess } from "../components/successBox";
 import addBuilding from "../components/headers/assets/images/addbuilding.png";

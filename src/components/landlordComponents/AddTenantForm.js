@@ -14,8 +14,8 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     const { register, handleSubmit, watch, formState: { errors }, setValue} = useForm();
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No File Selected");
-    const showError = useError()
-    const showSuccess = useSuccess()
+    const {showError} = useError()
+    const {showSuccess} = useSuccess()
     const fileupload = {
       width: "120px",
       height: "120px",
@@ -41,16 +41,17 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     
     const onSubmit = async(data)=>{
         const {images,tenantName, email, contact} = data // data collected from form
-        const userID = "64873c12bd2e5989a5e90e1c" /** TODO: Get from user session */
-        console.log("Sending unit details")
-        console.log(unitDetails)
+        const userID = sessionStorage.getItem('userID') 
         const {unitNumber,_id} = unitDetails
-        const addTenant = async()=>{
+        const addTenant = async() => {
           const imageList = [];
-          for (let i = 0; i < images.length; i++) {
-            const base64Image = await convertToBase64(images[i]);
-            imageList.push(base64Image);
+          if(images){
+            for (let i = 0; i < images.length; i++) {
+              const base64Image = await convertToBase64(images[i]);
+              imageList.push(base64Image);
+            }
           }
+          
           const tenantObject = {
             email,
             contact,
