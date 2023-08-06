@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
+import axios from 'axios';
+
 
 const Checklist = () => {
   const [tasks, setTasks] = useState([
@@ -7,7 +9,7 @@ const Checklist = () => {
     { id: 'tenant-3', tenant: 'Tenant 3', task: 'Fan strange noise', selectedOption: null },
     { id: 'tenant-4', tenant: 'Tenant 4', task: 'loose screws on the door', selectedOption: null },
   ]);
-
+  
   const [openDropdownId, setOpenDropdownId] = useState(null);
   const dropdownRef = useRef();
 
@@ -16,6 +18,16 @@ const Checklist = () => {
   };
 
   const handleTaskSelect = (tenantId, option) => {
+  const fetchData = async() =>{
+    const userID = sessionStorage.getItem('userID')
+    const response  = await axios.get(`http://localhost:8000/landlord/getTenantList/${userID}`)
+    // use the data above
+  }
+  useEffect(()=>{
+    fetchData()
+  })
+  // Function to handle checkbox state change
+  const handleCheckboxChange = (taskId) => {
     setTasks((prevTasks) =>
       prevTasks.map((task) =>
         task.id === tenantId ? { ...task, selectedOption: option } : task

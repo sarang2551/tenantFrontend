@@ -43,12 +43,7 @@ const Navbar = () => {
                 </a>
               </div>
               <div className="nav__item">
-                <a href="/tenant/unitPage" className="nav__link">
-                  Unit
-                </a>
-              </div>
-              <div className="nav__item">
-                <a href="#" className="nav__link">
+                <a href="/tenant/profilepage" className="nav__link">
                   Profile
                 </a>
               </div>

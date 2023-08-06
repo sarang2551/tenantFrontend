@@ -7,9 +7,12 @@ import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import"./style_form.css";
-
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const AddUnitForm = ({onClose,onAddition,buildingID})=>{
+    const showError = useError()
+    const showSuccess = useSuccess()
     const { register, handleSubmit, watch, formState: { errors }, setValue} = useForm();
 
     const [image, setImage] = useState(null);
@@ -61,11 +64,12 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
                   try {
                     const result = await axios.post("http://localhost:8000/landlord/addUnit", unitObject); 
                     if (result.status === 200) {
+                      showSuccess("Successfully added unit")
                       onClose();
                       onAddition();
                     }
                   } catch (error) {
-                    console.error("Error updating service ticket:", error);
+                    showError("Error updating service ticket");
                   }
 
                 };
