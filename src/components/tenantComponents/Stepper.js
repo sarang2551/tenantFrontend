@@ -8,12 +8,14 @@ import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 
 
-const Stepper = ({ticketData}) => {
+const Stepper = ({initialData}) => {
+    const [ticketData,setTicketData] = useState(initialData)
     const userType = sessionStorage.getItem("userType")
     const [currentStep, setCurrentStep] = useState(ticketData.progressStage);
     const [complete, setComplete] = useState(false);
-    const [letLandlordAddQuotation,setLandlordAddQuotation] = useState(!ticketData.quotationDocument && userType === "landlord" && ticketData.progressStage == 1)
-    const [letTenantAcceptQuotation,setTenantAcceptQuotation] = useState(!!ticketData.quotationDocument && userType === "tenant" && ticketData.progressStage == 1)
+    const [letLandlordAddQuotation,setLandlordAddQuotation] = useState(ticketData.quotationAmount === undefined && userType === "landlord" && ticketData.progressStage == 1)
+    const [letTenantAcceptQuotation,setTenantAcceptQuotation] = useState(ticketData.quotationAmount !== undefined && userType === "tenant" && ticketData.progressStage == 1)
+    
     const { showError } = useError();
     const { showSuccess } = useSuccess();
     
@@ -29,18 +31,32 @@ const Stepper = ({ticketData}) => {
         showError(data.message, 3000);
         }
       }catch(err){
-        console.log(`Error updating service ticket`)
+        console.log(`Error updating service ticket ${err}`)
         showError(`Error updating service ticket`, 3000);
       }
       
     }
-
+    const fetchData = async()=>{
+      const serviceTicketID = ticketData._id
+      const response = await axios.get(`http://localhost:8000/general/getServiceTicketInfo/${serviceTicketID}`)
+      if(response.status === 200){
+        const data = response.data
+        setLandlordAddQuotation(data.quotationAmount === undefined && userType === "landlord" && data.progressStage == 1)
+        setTenantAcceptQuotation(data.quotationAmount !== undefined && userType === "tenant" && data.progressStage == 1)
+        setTicketData(data)
+      }else{
+        showError(response.data.message)
+      }
+    }
+    useEffect(()=>{
+      fetchData()
+    })
 
     const steps = ["Processing request" , 
     userType === "tenant"?
-    ticketData.quotation ? 
+    ticketData.quotationAmount ? 
       "Accept/Reject Quotation": "Awaiting Quotation":
-    ticketData.quotation ? 
+    ticketData.quotationAmount ? 
     "Awaiting Acceptance/Rejection" : "Submit Quotation Below"
     , 
     "Work In Progress" , "Completed"];
@@ -66,7 +82,7 @@ const Stepper = ({ticketData}) => {
             <StepperButton progressData={ticketData.progressBar[currentStep]} />
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
-      {!complete && ticketData.progressStage !== 1 &&( //hide "next" for Awaiting quotation
+      {!complete && ticketData.quotationAmount !== undefined  &&( //hide "next" for Awaiting quotation
         <button
           className="btn"
           onClick={ticketData.endDate ? ()=>{
@@ -80,11 +96,11 @@ const Stepper = ({ticketData}) => {
       )}    
       {letLandlordAddQuotation?
       <QuotationForm onSubmission={()=>setLandlordAddQuotation(false)} ticketData={ticketData}/>:
-      userType === "landlord"?<span><br/>Awaiting response from tenant</span>:<></>
+      userType === "landlord" && ticketData.progressStage === 1?<span><br/>Awaiting response from tenant</span>:<></>
       }
       {letTenantAcceptQuotation? 
       <QuotationForm onSubmission={()=>setTenantAcceptQuotation(false)} ticketData={ticketData}/>: 
-      userType === "tenant" ? <span><br/>Waiting for Landlord to add Quotation</span>:<></>
+      userType === "tenant" && ticketData.progressStage === 1? <span><br/>Waiting for Landlord to add Quotation</span>:<></>
     } 
     <showSuccess/>
     <showError/>

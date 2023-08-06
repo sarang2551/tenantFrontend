@@ -126,7 +126,6 @@ const ServiceTicketCard = ({ticketData,onPopupClose}) => {
   useEffect(() => {
     fetchData().then(()=>{
         setLoading(false)
-        console.log(loading)
     })
     
   }, [ticketData]);
@@ -190,7 +189,7 @@ const ServiceTicketCard = ({ticketData,onPopupClose}) => {
                 
                 {ticketData.progressStage < 4 && <label>Progress:</label>}
                 <StepperContainer>
-                  <Stepper ticketData={ticketData} />
+                  <Stepper initialData={ticketData} />
                 </StepperContainer>
               </div>
               <CloseButton onClick={handlePopupClose}>Close</CloseButton>
@@ -202,10 +201,6 @@ const ServiceTicketCard = ({ticketData,onPopupClose}) => {
   );
 
 };
-
-//<div >
-//<ClimbingBoxLoader size={45} loading={loading} color="#36d7b7" style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}/> 
-//</div>
 
 export default ServiceTicketCard;
 

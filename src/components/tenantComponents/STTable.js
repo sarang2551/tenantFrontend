@@ -124,7 +124,7 @@ const ServiceTicketHistoryTable = (props) => {
     useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
-      }, [data]);
+      });
 
     const columns = [
       { title: "Title", field: "title" },
