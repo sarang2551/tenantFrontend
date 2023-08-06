@@ -238,7 +238,7 @@ const BuildingManageTable = () => {
           <Grid item xs={1}>
             <Popup open={openUnitForm} onClose={handleCloseUnitForm} contentStyle={{
                   width: '24%', // Adjust the width to a smaller value
-                  height: '44vh',
+                  height: '50vh',
                   overflow: 'auto',
                   borderRadius: '15px',
                 }} modal>
@@ -248,7 +248,7 @@ const BuildingManageTable = () => {
           <Grid item xs={1}>
             <Popup open={AddTenant} onClose={handleCloseAddTenant} contentStyle={{
                   width: '24%', // Adjust the width to a smaller value
-                  height: '43vh',
+                  height: '50vh',
                   overflow: 'auto',
                   borderRadius: '15px',
                 }} modal>
@@ -256,7 +256,6 @@ const BuildingManageTable = () => {
             </Popup>
           </Grid>
           <Grid item xs={1}>
-            <Popup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} modal>
             <Popup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} contentStyle={{
                   width: '24%', // Adjust the width to a smaller value
                   height: '30vh',

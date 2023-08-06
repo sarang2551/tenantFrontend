@@ -80,7 +80,7 @@ const Stepper = ({ticketData}) => {
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
       {!complete && ticketData.progressStage !== 1 &&( //hide "next" for Awaiting quotation
-        <button
+        <Styledbutton
           className="btn"
           onClick={ticketData.endDate ? ()=>{
             showError("Service ticket is finished",3000)

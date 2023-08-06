@@ -12,6 +12,12 @@ import"./style_form.css";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import styled from 'styled-components'; 
+import FeedbackForm from "../feedbackForm";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Scrollbar,Mousewheel} from "swiper/modules"
+import "swiper/css"
+import 'swiper/css/scrollbar';
+import Ticket from "../STTicketsNew";
 
 const Styledbutton = styled.button`
   display: flex;
@@ -29,12 +35,6 @@ const Styledbutton = styled.button`
     border: 4px solid #ffa726;  
   }
 `;
-import FeedbackForm from "../feedbackForm";
-import {Swiper, SwiperSlide} from "swiper/react";
-import {Scrollbar,Mousewheel} from "swiper/modules"
-import "swiper/css"
-import 'swiper/css/scrollbar';
-import Ticket from "../STTicketsNew";
 
 
 const LandlordServiceTicketTable = () => {
@@ -115,9 +115,9 @@ const LandlordServiceTicketTable = () => {
             return <div>
             {rowData.progressStage < 4 ? <Styledbutton className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
               Check Status</Styledbutton> :
-              <button className="StatusInfo" onClick={()=>handleOpenFeedback(rowData)}>
+              <Styledbutton className="StatusInfo" onClick={()=>handleOpenFeedback(rowData)}>
                 Send Feedback
-              </button>
+              </Styledbutton>
             }
               </div>
         },},
