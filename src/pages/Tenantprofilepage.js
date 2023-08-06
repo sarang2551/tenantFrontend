@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/headers/NavBar'
 import { useNavigate } from "react-router-dom"; 
 import "./loginStyle.css"
@@ -6,20 +6,30 @@ import CustomPopup from '../components/landlordComponents/CustomPopup';
 import Passwordchange from '.././components/Passwordchange';
 import Editprofile from '../components/tenantComponents/Editprofile';
 import "./profilepage.css"
+import axios from 'axios';
+import { useError } from '../components/errorBox';
+import { useSuccess } from '../components/successBox';
 
 const Tenantprofilepage = () => {
   // Replace these with actual user data retrieved from your backend or state management
   const [addChangePassword, setChangePasswordOpen] = useState();
   const [addEditProfile, setEditProfileOpen] = useState();
+  const {showSuccess} = useSuccess()
+  const {showError} = useError()
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: 'john_doe',
-    phonenumber:'XXXXXXXXX',
-    email: 'john.doe@example.com',
-    profilePicture: 'https://randomuser.me/api/portraits/men/70.jpg',
-  });
+  const [user, setUser] = useState({});
 
-
+  const convertToImage = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const objectURL = URL.createObjectURL(blob);
+      return objectURL;
+    } catch (error) {
+      console.error('Error converting image:', error);
+      return null;
+    }
+  };
   const handleChangePassword = () => {
     setChangePasswordOpen(true)
   }
@@ -42,6 +52,30 @@ const Tenantprofilepage = () => {
     navigate('/tenant/unitPage')
   };
 
+  const fetchData = async() => {
+      try{
+        const userID = sessionStorage.getItem('userID')
+        const response = await axios.get(`http://localhost:8000/landlord/getTenantInfo/${userID}`)
+        var data = response.data
+        if(data.status === 200){
+          const userObject = data.tenantInfo
+          console.log(userObject)
+          const processedImage = await Promise.all([userObject?.profilePic].map(convertToImage));
+          userObject.profilePic = processedImage[0]
+          setUser(userObject)
+        } else {
+          showError("Response error getting profile information. Contact admin",3000)
+        }
+      }catch(err){
+        console.log(err)
+        showError(`Server error getting profile information. Contact admin`,3000)
+      }
+  }
+
+  useEffect(()=>{
+    fetchData()
+  }, [user])
+
   return (
     <div>
     <Navbar/>
@@ -50,11 +84,16 @@ const Tenantprofilepage = () => {
             <h1>{user.username}</h1>
         </div>
         <div>
-            <img src={user.profilePicture} alt="Profile" className="profile-picture" />
+        {user.profilePic ?
+            <img src={user.profilePic} alt="Profile" className="profile-picture" /> : 
+            <div>
+            <h3>No profile pic submitted</h3>
+            </div>
+            }
         </div>
         <div class="profile-details"> 
-            <p>User ID: {user.username}</p>
-            <p>Phone number: {user.phonenumber}</p>
+            <p>Username: {user.username}</p>
+            <p>Phone number: {user.phoneNumber}</p>
             <p>Email: {user.email}</p> 
         </div>
         <div className="sidebar">

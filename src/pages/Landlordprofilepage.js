@@ -37,7 +37,7 @@ const Landlordprofilepage = () => {
         userObject.profilePic = processedImage[0]
         setUser(userObject)
       } else {
-      showError("Error getting user data")
+      showError("Error getting user data",3000)
       }
     }catch(err){
         console.log(`Error getting userInfo: ${err}`)
