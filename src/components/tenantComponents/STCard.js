@@ -10,6 +10,20 @@ import styled from 'styled-components';
 import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdClose } from 'react-icons/md';
 
+const StyledForm = styled.div`
+  font-family: "Raleway", Raleway;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
+`;
+
 const PopupWrapper = styled.div`
   font-family: 'Raleway', Raleway;
   display: flex;
@@ -36,68 +50,50 @@ const PopupContent = styled.div`
   flex-direction: column;
   align-items: center;
 `;
-
-const CloseButton = styled(MdClose)`
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-  font-size: 24px;
-`;
-
 const ImagesContainer = styled.div`
   position: relative;
   width: 100%;
+  height: 400px; // You can adjust this height to suit your design
   overflow: hidden;
 `;
 
 const Image = styled.img`
-  width: 100%;
-  height: auto;
-  border-radius: 10px;
+  object-fit: contain;
+  max-width: 100%;
+  max-height: 100%;
+  display: block;
+  margin: 0 auto; // Centering the image horizontally
 `;
 
-const StatusContainer = styled.div`
+const ContentContainer = styled.div`
+  flex: 1;
+  padding: 0 10px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  margin-top: 20px;
-
-  .adminmsg {
-    font-size: 24px;
-    color: #333;
-  }
-
-  .Status {
-    margin-top: 10px;
-    font-size: 16px;
-    color: #666;
-    text-align: center;
-
-    label {
-      font-weight: bold;
-    }
-
-    .ticketNameInfo {
-      margin-left: 10px;
-    }
-
-    .DescriptionInfo {
-      margin-left: 10px;
-    }
-
-    .landlordName {
-      margin-left: 10px;
-    }
-
-    .FromDataBase {
-      margin-left: 10px;
-    }
-  }
 `;
 
+
 const StepperContainer = styled.div`
+  margin-top: 0px;
+`;
+
+const CloseButton = styled.button`
+  background: #9ad3de;
+  border: 0;
+  border-radius: 7px;
+  padding: 10px 30px;
+  font-size: 18px;
+  color: #ffffff;
+  cursor: pointer;
   margin-top: 20px;
+
+  &:focus {
+    outline: none;
+  }
+
+  &:hover {
+    background: #b4e1ea;
+  }
 `;
 
 
@@ -160,7 +156,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
      
   };
 
-  const handlePopupClose = () => {
+  const handlePopupClose= () => {
     onPopupClose();
   };
 
@@ -175,9 +171,9 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
           style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
         />
       ) : (
+        <StyledForm>
         <PopupWrapper>
           <PopupContent>
-            <CloseButton onClick={handlePopupClose} />
             <ImagesContainer>
               {images.length > 0 && (
                 <Slider>
@@ -192,11 +188,10 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
                 </Slider>
               )}
             </ImagesContainer>
-            <StatusContainer>
+            <ContentContainer>
               <div className="adminmsg">
                 <h1>Service Ticket Status</h1>
               </div>
-
               <div className="Status">
                 <label>Ticket Name:</label>
                 <span className="ticketNameInfo">{ticketData.title}</span>
@@ -215,13 +210,14 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
                 <br />
                 {ticketData.progressStage < 4 && <label>Progress:</label>}
                 <StepperContainer>
-                  {ticketData.progressStage < 4 && <Stepper ticketData={ticketData} />}
+                  <Stepper ticketData={ticketData} />
                 </StepperContainer>
               </div>
-            </StatusContainer>
-            <CloseButton onClick={handlePopupClose}>Close</CloseButton>
+              <CloseButton onClick={handlePopupClose}>Close</CloseButton>
+            </ContentContainer>
           </PopupContent>
         </PopupWrapper>
+        </StyledForm>
       )}
     </>
   );
