@@ -124,7 +124,7 @@ const ServiceTicketHistoryTable = (props) => {
     useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
-      }, [data]);
+      });
 
     const columns = [
       { title: "Title", field: "title" },
@@ -241,7 +241,7 @@ const ServiceTicketHistoryTable = (props) => {
           height: '50vh', // Set the desired height for the Popup (adjust as needed)
           overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions
         }} modal>
-        <ServiceTicketCard _id = {selectedTicket._id} onPopupClose={()=>setInfoTicketOpen(false)}/>
+        <ServiceTicketCard ticketData = {selectedTicket} onPopupClose={()=>setInfoTicketOpen(false)}/>
       </CustomPopup>
       <Popup open={showFeedBack} onClose={()=>setShowFeedback(false)} modal>
         <FeedbackForm ticketData={selectedTicket} onSubmission={()=>setShowFeedback(false)}/>

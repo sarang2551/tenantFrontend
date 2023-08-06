@@ -13,7 +13,7 @@ import { useError } from '../components/errorBox';
 
 function Home() { 
 
-  const [ticketData, setTicketData] = useState([]);
+  //const [ticketData, setTicketData] = useState([]);
   const [r_q_data,setRQData] = useState({
     TotalRent:0,
     TotalQuotation:0,
@@ -21,13 +21,13 @@ function Home() {
   const showError = useError()
   const getSTData = async () => {
   const userID = sessionStorage.getItem('userID');
-  const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`);
-  var data_2 = response_2.data;
-  if (data_2) {
-    setTicketData(data_2);
-  } else {
-    showError("Error getting all service tickets",3000);
-  }
+  // const response_2 = await axios.get(`http://localhost:8000/tenant/getAllServiceTickets/${userID}`);
+  // var data_2 = response_2.data;
+  // if (data_2) {
+  //   setTicketData(data_2);
+  // } else {
+  //   showError("Error getting all service tickets",3000);
+  // }
   const response = await axios.get(`http://localhost:8000/tenant/getRent&Quotation/${userID}`);
   if(response.status === 200){
     setRQData(response.data)
@@ -46,9 +46,9 @@ function Home() {
       <div class="container hero"> 
         <div class="hero__left"> 
           <section class="home-collection">
-            {ticketData.length === 0 ? <></>:<div class="home-content">
+            <div class="home-content">
               <Pie/>
-            </div>}
+            </div>
             <div class="home-container4">
               {/* <div class="home-container5">
                     <span class="home-text08">Description</span>

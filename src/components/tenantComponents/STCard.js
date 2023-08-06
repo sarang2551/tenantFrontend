@@ -2,13 +2,12 @@ import React, { useState, useEffect} from 'react';
 import Slider from 'react-animated-slider';
 import 'react-animated-slider/build/horizontal.css';
 import Stepper from "./Stepper";
-import FeedbackForm from '../feedbackForm';
+import { useError } from '../errorBox';
 import axios from 'axios';
 import {ClimbingBoxLoader} from 'react-spinners';
 import "../landlordComponents/style_form.css";
 import styled from 'styled-components'; 
-import tableIcons from "../tenantComponents/MaterialIconComponents";
-import { MdClose } from 'react-icons/md';
+
 
 const StyledForm = styled.div`
   font-family: "Raleway", Raleway;
@@ -98,18 +97,26 @@ const CloseButton = styled.button`
 
 
 
-const ServiceTicketCard = ({_id,onPopupClose}) => {
+const ServiceTicketCard = ({ticketData,onPopupClose}) => {
+
+  const {showError} = useError()
   const [images, setImages] = useState([]);
-  const [ticketData, setTicketData] = useState({})
+
   const [loading,setLoading] = useState(true)
 
   const fetchData = async () => {
     try {
-      const res_data = await axios.get(`http://localhost:8000/general/getServiceTicketInfo/${_id}`)
-      setTicketData(res_data.data)
-      const imageUrls = ticketData.images; 
-      const processedImages = await Promise.all(imageUrls.map(convertToImage));
-      setImages(processedImages);
+      //const res_data = await axios.get(`http://localhost:8000/general/getServiceTicketInfo/${ticketData._id}`)
+      //setTicketData(res_data.data)
+      const res_data = await axios.get(`http://localhost:8000/general/getSTImages/${ticketData._id}`)
+      if(res_data.status === 200){
+        const imageUrls = res_data.data; 
+        const processedImages = await Promise.all(imageUrls.map(convertToImage));
+        setImages(processedImages);
+      } else{
+        showError("Error retrieving ticket images")
+      }
+      
       
     } catch (error) {
       console.error('Error fetching images:', error);
@@ -135,55 +142,33 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
     }
   };
 
-  const imageStyles = {
-    objectFit:'contain',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    minWidth: '100%',
-    minHeight: '100%',
-  };
-
-
-  const sliderContainerStyles = {
-    position:'relative',
-    width: '100%',
-    overflow:'hidden',
-     
-  };
-
   const handlePopupClose= () => {
     onPopupClose();
   };
    
   return (
     <>
-      {loading ? (
-        <ClimbingBoxLoader
-          size={45}
-          loading={loading}
-          color="#36d7b7"
-          style={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }}
-        />
-      ) : (
         <StyledForm>
         <PopupWrapper>
           <PopupContent>
-            <ImagesContainer>
-              {images.length > 0 && (
-                <Slider>
-                  {images.map((imageUrl, index) => (
-                    <div key={index}>
-                      <div className="slider-image">
-                        <Image src={imageUrl} alt={`Image ${index}`} />
-                        <div className="center"></div>
-                      </div>
-                    </div>
-                  ))}
-                </Slider>
-              )}
-            </ImagesContainer>
+            {loading ? 
+            <ClimbingBoxLoader
+          size={45}
+          color="#36d7b7"
+        /> : images.length > 0 ?
+
+          <Slider>
+            {images.map((imageUrl, index) => (
+              <div key={index}>
+                <div className="slider-image">
+                  <Image src={imageUrl} alt={`Image ${index}`} />
+                  <div className="center"></div>
+                </div>
+              </div>
+            ))}
+          </Slider>
+       : <span>No images for this ticket</span>
+        }
             <ContentContainer>
               <div className="adminmsg">
                 <h1>Service Ticket Status</h1>
@@ -204,7 +189,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
                 
                 {ticketData.progressStage < 4 && <label>Progress:</label>}
                 <StepperContainer>
-                  <Stepper ticketData={ticketData} />
+                  <Stepper initialData={ticketData} />
                 </StepperContainer>
               </div>
               <CloseButton onClick={handlePopupClose}>Close</CloseButton>
@@ -212,15 +197,10 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
           </PopupContent>
         </PopupWrapper>
         </StyledForm>
-      )}
     </>
   );
 
 };
-
-//<div >
-//<ClimbingBoxLoader size={45} loading={loading} color="#36d7b7" style={{position: "absolute", top: "50%", left: "50%", transform: "translate(-50%, -50%)"}}/> 
-//</div>
 
 export default ServiceTicketCard;
 
