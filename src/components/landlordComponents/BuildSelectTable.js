@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import addUnit from "../headers/assets/images/addunit.png";
 
 
 const BuildingManageTable = () => {
@@ -39,12 +40,31 @@ const BuildingManageTable = () => {
     const { showError } = useError();
     const { showSuccess } = useSuccess();
 
+    const addunit= (
+      <div
+      style={{
+        display: "flex",
+        color: 'white',
+        alignItems: "center",
+        fontFamily: "Raleway",
+        backgroundColor: "#fbc02d",
+        fontSize: "20px",
+        border: "4px solid #fbc02d",
+        borderRadius: "10px", 
+        padding: "5px 10px", 
+      }}
+    >
+        <img src={addUnit} alt="Add Unit" style={{ marginRight: 8, height:17 }} />
+        <span>Add Unit</span>
+      </div>
+    );
+
     const handleOpenUnitDetailsPopUp = (rowData) => {
         setSelectedUnitDetails(rowData)
         setUnitDetailsPopup(true)
     }
-    const handleCloseUnitDetailsPopUp = (dataFromChild) => {
-        setPopupData(dataFromChild);
+    const handleCloseUnitDetailsPopUp = () => {
+        setPopupData();
         setUnitDetailsPopup(false);
     };
     const handleOpenTenantDetailsPopUp = (rowData) => {
@@ -75,25 +95,29 @@ const BuildingManageTable = () => {
         }
     }
     const handleDeleteUnit = async (rowData) => {
-        /**TODO */
+        const idx = rowData.tableData.id
         if (rowData.tenantRef) {
+            
             const response = await axios.delete(`http://localhost:8000/landlord/deleteTenant/${rowData.tenantRef}`)
-            var data = response.data
-            if (data.status === 200) {
+            const res_data = response.data
+            if (res_data.status === 200) {
                 fetchData()
+                showSuccess("Deleted tenant",3000)
+                setData([...data.splice(0,idx),...data.splice(idx,data.length)])
             } else {
-              console.log("Error Deleting Tenant")
+              showError("Error Deleting Tenant",300)
             }
         }
         else {
             const response = await axios.delete(`http://localhost:8000/landlord/deleteUnit/${rowData._id}`)
-            var data = response.data
-            console.log(data)
-            if (data.status === 200) {
+            const res_data = response.data
+            
+            if (res_data.status === 200) {
                 fetchData()
-                console.log("No Tenant Attached to Unit.. Deleting Unit")
+                showSuccess("No Tenant Attached to Unit.. Deleting Unit",3000)
+                setData([...data.splice(0,idx),...data.splice(idx,data.length)])
             } else {
-              console.log("Error Deleting Unit")
+              showError("Error Deleting Unit",300)
             }
         }
     }
@@ -107,7 +131,7 @@ const BuildingManageTable = () => {
         try {
             fetchData()
         } catch (error) {
-            console.log("Error getting building information")
+            showError("Error getting building information",3000)
         }
     }, [])
     const columns = [
@@ -153,7 +177,7 @@ const BuildingManageTable = () => {
                   onClick: (event, rowData) => handleDeleteUnit(rowData),
                 },
                 {
-                  icon: tableIcons.Add,
+                  icon: () => addunit,
                   tooltip: "Add Unit",
                   isFreeAction: true,
                   onClick: (event) => handleAddUnit(),
@@ -164,7 +188,7 @@ const BuildingManageTable = () => {
               options = {{
                 sorting:true,
                 selection:true,
-                headerStyle: { background: "lightgrey"}, 
+                headerStyle: { background: "#fff8e1"}, 
                 exportButton:true,
                 exportAllData:true,
                 actionsColumnIndex:-1,
@@ -187,14 +211,24 @@ const BuildingManageTable = () => {
         )}
           </Grid>
           <Grid item xs={1}>
-            <CustomPopup open={openUnitForm} onClose={handleCloseUnitForm} modal>
+            <Popup open={openUnitForm} onClose={handleCloseUnitForm} contentStyle={{
+                  width: '24%', // Adjust the width to a smaller value
+                  height: '44vh',
+                  overflow: 'auto',
+                  borderRadius: '15px',
+                }} modal>
               <AddUnitForm onClose={handleCloseUnitForm} onAddition={fetchData} buildingID={_id}/>
-            </CustomPopup>
+            </Popup>
           </Grid>
           <Grid item xs={1}>
-            <CustomPopup open={AddTenant} onClose={handleCloseAddTenant} modal>
+            <Popup open={AddTenant} onClose={handleCloseAddTenant} contentStyle={{
+                  width: '24%', // Adjust the width to a smaller value
+                  height: '43vh',
+                  overflow: 'auto',
+                  borderRadius: '15px',
+                }} modal>
               <AddTenantForm unitDetails={selectedUnitDetails} onClose={handleCloseAddTenant} onAddition={fetchData}/>
-            </CustomPopup>
+            </Popup>
           </Grid>
           <Grid item xs={1}>
             <CustomPopup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} modal>

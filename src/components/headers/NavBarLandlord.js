@@ -34,7 +34,7 @@ const NavbarLandlord = () => {
           <span className="nav__portal-text">Landlord Portal</span>
         </div>
         <div className="nav__menu">
-          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'100px' }}>
+          <div className="nav__menu-list flex" style={{ justifyContent: 'left', marginLeft:'45px' }}>
             <div className="nav__item">
               <a href="/landlord/home" className="nav__link">Home</a>
               <div className="nav__dropdown with-icons"></div>
@@ -42,9 +42,7 @@ const NavbarLandlord = () => {
             <div className="nav__item">
               <a href="/landlord/serviceTicketPage" className="nav__link">Tenant Requests</a>
             </div>
-            <div className="nav__item">
-              <a href="#" className="nav__link">Quotations</a>
-            </div>
+            
             <div className="nav__item">
               <a href="/landlord/manageTenants" className="nav__link">Manage Tenants</a>
             </div>

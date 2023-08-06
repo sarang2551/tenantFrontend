@@ -1,24 +1,53 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarLandlord from '../components/headers/NavBarLandlord' 
 import { useNavigate } from "react-router-dom";
 import "../components/headers/assets/css/style.css" 
 import CustomPopup from '../components/landlordComponents/CustomPopup';
-import Passwordchange from '../components/tenantComponents/Passwordchange';
+import Passwordchange from '../components/Passwordchange';
 import Editprofile from '../components/tenantComponents/Editprofile';
 import "./profilepage.css"
-
+import axios from 'axios';
+import { useError } from '../components/errorBox';
 
 const Landlordprofilepage = () => {
   // Replace these with actual user data retrieved from your backend or state management
   const [addChangePassword, setChangePasswordOpen] = useState();
   const [addEditProfile, setEditProfileOpen] = useState();
   const navigate = useNavigate();
-  const [user, setUser] = useState({
-    username: 'john_doe',
-    phonenumber:'XXXXXXXXX',
-    email: 'john.doe@example.com',
-    profilePicture: 'https://randomuser.me/api/portraits/men/15.jpg',
-  });
+  const showError = useError()
+  const [user, setUser] = useState({});
+  const convertToImage = async (imageUrl) => {
+    try {
+      const response = await fetch(imageUrl);
+      const blob = await response.blob();
+      const objectURL = URL.createObjectURL(blob);
+      return objectURL;
+    } catch (error) {
+      console.error('Error converting image:', error);
+      return null;
+    }
+  };
+  const fetchData = async () => {
+    try{
+      const userID = sessionStorage.getItem('userID');
+      const response  = await axios.get(`http://localhost:8000/landlord/getUserInfo/${userID}`)
+      if(response.status === 200){
+        const userObject = response.data.userData
+        const processedImage = await Promise.all([userObject?.profilePic].map(convertToImage));
+        userObject.profilePic = processedImage[0]
+        setUser(userObject)
+      } else {
+      showError("Error getting user data",3000)
+      }
+    }catch(err){
+        console.log(`Error getting userInfo: ${err}`)
+    }
+    
+  }
+
+  useEffect(()=>{
+    fetchData()
+  },[])
 
   const handleChangePassword = () => {
     setChangePasswordOpen(true)
@@ -34,6 +63,7 @@ const Landlordprofilepage = () => {
 
   const handleClosePopupEP = () => {
     setEditProfileOpen(false);
+    fetchData()
   };
 
   const handleTotalUnitsOwned = () => {
@@ -47,14 +77,19 @@ const Landlordprofilepage = () => {
     <NavbarLandlord/>
     <div class="profile-container"> 
         <div class="profile-content">
-            <h1>{user.username}</h1>
+            <h2>{user.username}</h2>
         </div>
         <div>
-            <img src={user.profilePicture} alt="Profile" className="profile-picture" />
+            {user.profilePic ?
+            <img src={user.profilePic} alt="Profile" className="profile-picture" /> : 
+            <div>
+            <h3>No profile pic submitted</h3>
+            </div>
+            }
         </div>
         <div class="profile-details"> 
-            <p>User ID: {user.username}</p>
-            <p>Phone number: {user.phonenumber}</p>
+            <p>Username: {user.username}</p>
+            <p>Phone number: {user.phoneNumber}</p>
             <p>Email: {user.email}</p> 
         </div>
         <div className="sidebar">
@@ -76,3 +111,4 @@ const Landlordprofilepage = () => {
 };
 
 export default Landlordprofilepage;
+
