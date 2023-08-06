@@ -137,7 +137,7 @@ const UnitDetailsForm = ({ buildingName, unitDetails, onPopupClose }) => {
           {unitDetails.tenantRef && (
             <TenantDetailsContainer>
               <Text>Tenant name: {tenantData?.tenantName}</Text>
-              <Text>Tenant Contact Number: {tenantData?.contactNumber}</Text>
+              <Text>Tenant Contact Number: {tenantData?.contact}</Text>
               </TenantDetailsContainer>
           )}
           <CloseButton onClick={handleClosePopup}>Close</CloseButton>

@@ -6,6 +6,19 @@ import QuotationForm from "../quotationForm";
 import StepperButton from "./StepperButton";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import styled from "styled-components";
+
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #80cbc4;
+  font-size: 18px;
+  border: 4px solid #80cbc4;
+  border-radius: 10px;
+`;
+
 
 
 const Stepper = ({ticketData}) => {
@@ -76,7 +89,7 @@ const Stepper = ({ticketData}) => {
           }}
         >
           {ticketData.endDate ? "Finish" : "Next"}
-        </button>
+        </Styledbutton>
       )}    
       {letLandlordAddQuotation?
       <QuotationForm onSubmission={()=>setLandlordAddQuotation(false)} ticketData={ticketData}/>:

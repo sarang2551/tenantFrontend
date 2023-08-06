@@ -11,6 +11,24 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import"./style_form.css";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import styled from 'styled-components'; 
+
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #ffe082;
+  font-size: 18px;
+  border: 4px solid #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726;  
+  }
+`;
 import FeedbackForm from "../feedbackForm";
 import {Swiper, SwiperSlide} from "swiper/react";
 import {Scrollbar,Mousewheel} from "swiper/modules"
@@ -95,8 +113,8 @@ const LandlordServiceTicketTable = () => {
         {title:"Start Date", field:"startDate"},
         { title: "Status",render:(rowData)=>{
             return <div>
-            {rowData.progressStage < 4 ? <button className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
-              Check Status</button> :
+            {rowData.progressStage < 4 ? <Styledbutton className='StatusInfo' onClick={()=>handleInfoTicket(data[rowData.tableData.id])}>
+              Check Status</Styledbutton> :
               <button className="StatusInfo" onClick={()=>handleOpenFeedback(rowData)}>
                 Send Feedback
               </button>
@@ -184,7 +202,7 @@ const LandlordServiceTicketTable = () => {
         </Grid>
         <Grid item xs={1}>
         {selectedTicket && (
-          <CustomPopup open={infoTicketOpen} onClose={handleClosePopup} contentStyle={{
+          <CustomPopup open={infoTicketOpen} onPopupClose={handleClosePopup} contentStyle={{
             width: '50%', // Set the desired width for the Popup (adjust as needed)
             height: '50vh', // Set the desired height for the Popup (adjust as needed)
             overflow: 'auto', // Add overflow:auto to enable scrolling if the content overflows the Popup's dimensions

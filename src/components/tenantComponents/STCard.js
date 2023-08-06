@@ -49,10 +49,13 @@ const PopupContent = styled.div`
   flex-direction: column;
   align-items: center;
 `;
+
 const ImagesContainer = styled.div`
-  position: relative;
+  display: flex;
+  align-items: center; // Center vertically
+  justify-content: center; // Center horizontally
   width: 100%;
-  height: 400px; // You can adjust this height to suit your design
+  height: 100%;
   overflow: hidden;
 `;
 

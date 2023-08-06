@@ -21,12 +21,44 @@ import addTicket from "../headers/assets/images/addticket.png";
 
 import './TicketsColumn.css';
 
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color:  #ffe082;
+  font-size: 18px;
+  border: 4px solid  #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
 
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726;  
+  }
+`;
+
+const AddticketDiv = styled.div`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color:  #ffe082;
+  font-size: 18px;
+  border: 4px solid  #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726;  
+  }
+`;
 
 const Title = styled.h2`
   text-align: center;
   font-family: sans-serif;
-  font-size: 25px;
+  font-size: 20px;
   margin-top: 20px;
 `;
 
@@ -50,22 +82,10 @@ const ServiceTicketHistoryTable = (props) => {
   const { showSuccess } = useSuccess();
 
   const addticket= (
-    <div
-    style={{
-      display: "flex",
-      color: 'white',
-      alignItems: "center",
-      fontFamily: "Raleway",
-      backgroundColor: "#fbc02d",
-      fontSize: "20px",
-      border: "4px solid #fbc02d",
-      borderRadius: "10px", 
-      padding: "5px 10px", 
-    }}
-  >
+    <AddticketDiv>
       <img src={addTicket} alt="Create ticket" style={{ marginRight: 8, height:20 }} />
       <span>Create ticket</span>
-    </div>
+    </AddticketDiv>
   );
 
   
@@ -131,11 +151,11 @@ const ServiceTicketHistoryTable = (props) => {
       { title:"Date", field:"startDate"},
       { title: "Unit", field: "Status Check", render:(rowData)=>
       <div>
-        {rowData.progressStage < 4? <button className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
-            >Check Status</button> : 
-            <button onClick={()=>handleOpenFeedback(rowData)}>
+        {rowData.progressStage < 4? <Styledbutton className='StatusInfo' onClick={() => handleInfoTicket(rowData)}
+            >Check Status</Styledbutton> : 
+            <Styledbutton onClick={()=>handleOpenFeedback(rowData)}>
               Submit Feedback
-            </button>
+            </Styledbutton>
           }
             </div>
         }];
@@ -152,6 +172,10 @@ const ServiceTicketHistoryTable = (props) => {
       margin: "2% 5% 0 5%" ,
       fontSize: "15px",
     }
+
+    const TicketsColumn = styled.div`
+    margin-top: 40px; /* Adjust this value as needed */
+    `;
 
   return (
 
@@ -228,7 +252,7 @@ const ServiceTicketHistoryTable = (props) => {
 
       <Popup open={addTicketOpen} onClose={handleClosePopup} contentStyle={{
           width: '26%', // Adjust the width to a smaller value
-          height: '44vh',
+          height: '50vh',
           overflow: 'auto',
           borderRadius: '15px',
         }} modal>

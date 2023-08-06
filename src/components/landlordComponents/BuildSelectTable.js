@@ -17,6 +17,41 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import addUnit from "../headers/assets/images/addunit.png";
+import styled from "styled-components";
+
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #ffe082;
+  font-size: 18px;
+  border: 4px solid #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726; 
+  }
+`;
+
+const AddUnitDiv = styled.div`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #ffe082;
+  fontSize: 20px;
+  border: 4px solid #ffe082;
+  border-radius: 10px;
+  padding: 5px 10px;
+
+  &:hover {
+    background-color: #ffa726;  
+    border: 4px solid #ffa726;  
+  }
+`;
 
 
 const BuildingManageTable = () => {
@@ -40,23 +75,13 @@ const BuildingManageTable = () => {
     const { showError } = useError();
     const { showSuccess } = useSuccess();
 
+
+
     const addunit= (
-      <div
-      style={{
-        display: "flex",
-        color: 'white',
-        alignItems: "center",
-        fontFamily: "Raleway",
-        backgroundColor: "#fbc02d",
-        fontSize: "20px",
-        border: "4px solid #fbc02d",
-        borderRadius: "10px", 
-        padding: "5px 10px", 
-      }}
-    >
+      <AddUnitDiv>
         <img src={addUnit} alt="Add Unit" style={{ marginRight: 8, height:17 }} />
         <span>Add Unit</span>
-      </div>
+        </AddUnitDiv>
     );
 
     const handleOpenUnitDetailsPopUp = (rowData) => {
@@ -139,8 +164,8 @@ const BuildingManageTable = () => {
     { title: "More details", render:(rowData)=><button onClick={()=>handleOpenUnitDetailsPopUp(rowData)}>Unit details</button>
       },
     {title:"Tenant",field:"tenantRef",render:(rowData)=>rowData.tenantRef?
-    <button onClick={() => handleOpenTenantDetailsPopUp(rowData)}>Edit Tenant</button>:
-    <button onClick={()=>handleOpenAddTenant(rowData)}>Add Tenant</button>},
+    <Styledbutton onClick={() => handleOpenTenantDetailsPopUp(rowData)}>Edit Tenant</Styledbutton>:
+    <Styledbutton onClick={()=>handleOpenAddTenant(rowData)}>Add Tenant</Styledbutton>},
     {title: "Actions", align:'center',
     field: "actions",
     sorting: false,
@@ -232,6 +257,12 @@ const BuildingManageTable = () => {
           </Grid>
           <Grid item xs={1}>
             <Popup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} modal>
+            <Popup open={openTenantDetailsPopup} onClose={handleCloseTenantDetailsPopUp} contentStyle={{
+                  width: '24%', // Adjust the width to a smaller value
+                  height: '30vh',
+                  overflow: 'auto',
+                  borderRadius: '15px',
+                }} modal>
                 <TenantDetailsForm unitDetails={selectedUnitDetails} onClose={handleCloseTenantDetailsPopUp} onAddition={fetchData} />
             </Popup>
           </Grid>
