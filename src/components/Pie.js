@@ -57,11 +57,15 @@ function Pie() {
 
 
   return (
+    <div>
+    <label> Service Ticket Progress Stage Chart
     <div className="Piechart">
 
       <div style={{ width: 500 }}>
         <PieChart chartData={userData} />
       </div>
+    </div>
+    </label>
     </div>
   );
 }

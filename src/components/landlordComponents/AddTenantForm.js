@@ -7,12 +7,15 @@ import tableIcons from "../tenantComponents/MaterialIconComponents";
 import { MdUploadFile, MdDelete } from 'react-icons/md';
 import { AiFillFileImage } from 'react-icons/ai';
 import"./style_form.css";
+import { useError } from "../errorBox";
+import { useSuccess } from "../successBox";
 
 const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     const { register, handleSubmit, watch, formState: { errors }, setValue} = useForm();
     const [image, setImage] = useState(null);
     const [fileName, setFileName] = useState("No File Selected");
-  
+    const showError = useError()
+    const showSuccess = useSuccess()
     const fileupload = {
       width: "100px",
       height: "100px",
@@ -37,7 +40,7 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
     };
     
     const onSubmit = async(data)=>{
-        const {images,tenantName} = data // data collected from form
+        const {images,tenantName, email, contact} = data // data collected from form
         const userID = "64873c12bd2e5989a5e90e1c" /** TODO: Get from user session */
         console.log("Sending unit details")
         console.log(unitDetails)
@@ -49,6 +52,8 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
             imageList.push(base64Image);
           }
           const tenantObject = {
+            email,
+            contact,
             tenantName,
             unitNumber,
             unitRef:_id,
@@ -59,11 +64,12 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
           try {
             const result = await axios.post("http://localhost:8000/landlord/addTenants", tenantObject); 
             if (result.status === 200) {
+              showSuccess("Added Tenant successfully",3000)
               onClose();
               onAddition();
             }
           } catch (error) {
-            console.error("Error adding Tenant");
+            showError("Error adding Tenant",3000);
           }
         };
         
@@ -108,6 +114,22 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
               {...register("tenantName", { required: true })}
             />
             {errors.tenantName && <span>Tenant Name is required</span>}
+          </div>
+          <div className="input-with-icon">
+          <tableIcons.Home className="icon" />
+            <input
+              type="text"
+              placeholder="Email"
+              {...register("email", { required: true })}
+            />
+          </div>
+          <div className="input-with-icon">
+          <tableIcons.Home className="icon" />
+            <input
+              type="text"
+              placeholder="Contact Number"
+              {...register("contact", { required: true })}
+            />
           </div>
 
           <div className="input-with-icon">
@@ -156,6 +178,8 @@ const AddTenantForm = ({unitDetails,onClose,onAddition})=>{
           <input type="submit" />
         </Grid>
       </form>
+      <showError/>
+      <showSuccess/>
     </div>
   );
 };
