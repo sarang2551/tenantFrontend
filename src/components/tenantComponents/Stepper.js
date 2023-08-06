@@ -66,7 +66,7 @@ const Stepper = ({ticketData}) => {
             <StepperButton progressData={ticketData.progressBar[currentStep]} />
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
-      {!complete && ( //hide "next" for Awaiting quotation
+      {!complete && ticketData.progressStage !== 1 &&( //hide "next" for Awaiting quotation
         <button
           className="btn"
           onClick={ticketData.endDate ? ()=>{

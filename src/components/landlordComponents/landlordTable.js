@@ -13,11 +13,12 @@ import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
 import FeedbackForm from "../feedbackForm";
 
+
 const LandlordServiceTicketTable = () => {
     const [infoTicketOpen, setInfoTicketOpen] = useState(false);
     const [selectedTicket, setSelectedTicket] = useState (false);
     const [showFeedBack,setShowFeedback] = useState(false)
-    const [ popupData, setPopupData] = useState();
+    const [ currentFilter,setFilter] = useState('all');
     const [data,setData] = useState([])
     const { showError } = useError();
     const { showSuccess } = useSuccess();
@@ -44,6 +45,19 @@ const LandlordServiceTicketTable = () => {
           showError(('Error fetching data:', error), 3000);
         }
       };
+      var filterd_data = data.filter((ticket) => {
+        if (currentFilter === 'all') {
+          return true; // Show all items
+        } else if (currentFilter === 'current') {
+          return ticket.progressStage == 0 || ticket.progressStage == 1; // Change 'status' to the relevant property in your data
+        } else if (currentFilter === 'inProgress') {
+          return ticket.progressStage == 2 || ticket.progressStage == 3; // Change 'status' to the relevant property in your data
+        } else if (currentFilter === 'completed') {
+          return ticket.progressStage >= 4; // Change 'status' to the relevant property in your data
+        } else {
+          return false; // Invalid filter, don't show any items
+        }
+      });
 
       useEffect(() => {
         // Fetch data from the API endpoint
@@ -58,7 +72,6 @@ const LandlordServiceTicketTable = () => {
 
     const handleClosePopup= () => {
         setInfoTicketOpen(false);
-        setPopupData();
       }
     
     const handleOpenFeedback = (rowData)=> {
@@ -97,9 +110,29 @@ const LandlordServiceTicketTable = () => {
 
   return (
     <div>
+      <br/>
+      <br/>
+      <div class="Ticketscolumn">
+        <button class="currentbutton" onClick={()=>setFilter("all")}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+              <span class="rentlabel">All Tickets</span>
+            </button>
+         <button class="currentbutton" onClick={()=>setFilter("current")}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+              <span class="rentlabel">Current Tickets :</span>
+          </button>
+              <button class="progressbutton" onClick={()=>setFilter("inProgress")}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+                <span class="rentlabel">In-Progress Tickets :</span>
+              </button>
+              <button class="completebutton" onClick={()=>setFilter("completed")}>
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+                <span class="rentlabel">Completed Tickets :</span>
+              </button>
+                </div>
     <div className = "App" >
         <h2 style={{textAlign:"center",fontFamily:"sans-serif",fontSize:25,marginTop:50}}>
-            Service Tickets History
+            Service Tickets
         </h2>
      <Grid container spacing={0}>
       <Grid item xs={1}></Grid>
@@ -109,13 +142,12 @@ const LandlordServiceTicketTable = () => {
          mt={80}
           title="Service Tickets History"
           columns={columns}
-          data={data}
+          data={filterd_data}
           icons={tableIcons}
           options={{
             search: true,
             paging: true,
             sorting: true,
-            selection:true,
             exportButton:true,
             exportAllData:true,
             headerStyle: { background: "#fff8e1"}, 

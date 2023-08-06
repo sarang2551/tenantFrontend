@@ -102,8 +102,8 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
   const [images, setImages] = useState([]);
   const [ticketData, setTicketData] = useState({})
   const [loading,setLoading] = useState(true)
+
   const fetchData = async () => {
-      
     try {
       const res_data = await axios.get(`http://localhost:8000/general/getServiceTicketInfo/${_id}`)
       setTicketData(res_data.data)
@@ -156,8 +156,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
   const handlePopupClose= () => {
     onPopupClose();
   };
-
-      
+   
   return (
     <>
       {loading ? (
