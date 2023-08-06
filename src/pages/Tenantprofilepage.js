@@ -96,15 +96,14 @@ const Tenantprofilepage = () => {
             <p>Phone number: {user.phoneNumber}</p>
             <p>Email: {user.email}</p> 
         </div>
-        <div className="sidebar">
-          <div className="button-container-profile">
+      </div>
+      <div className="sidebar">
+        <div className="button-container-profile">
             <button type='submit' onClick={handleEditProfile}>Edit Profile</button>
             <button type='submit' onClick={handleUnitsRented}>Units Rented</button>
             <button type='submit' onClick={handleChangePassword}>Change Password</button>
-          </div>
-          
         </div>
-      </div>
+       </div>
       <CustomPopup open={addChangePassword} onClose={handleClosePopupCP} modal>
         <Passwordchange onClose={handleClosePopupCP}  />
       </CustomPopup>
