@@ -96,7 +96,7 @@ const Landlordprofilepage = () => {
       <div className="sidebar">
         <div className="button-container-profile">
               <button type='submit' onClick={handleEditProfile}>Edit Profile</button>
-              <button type='submit' onClick={handleTotalUnitsOwned}>Units Owned</button>
+              
               <button type='submit' onClick={handleChangePassword}>Change Password</button>
         </div>
        </div>
