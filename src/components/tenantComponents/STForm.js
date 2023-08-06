@@ -18,8 +18,8 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
   const [unitData,setUnitData] = useState() 
 
   const fileupload = {
-    width: "100px",
-    height: "100px",
+    width: "90px",
+    height: "90px",
     border: "2px solid rgba(49, 54, 56, 0.33)",
     background: "#F2F4F8",
     borderRadius: "30px",
@@ -173,7 +173,7 @@ const ServiceTicketForm = ({onClose, onAddition}) => {
             </section>
           </div>
           </Grid>
-        <Grid item xs={12} style={{ textAlign: "center" }}>
+        <Grid item xs={12} style={{ textAlign: "center", marginTop:"20px" }}>
           <input type="submit" />
         </Grid>
       </form>

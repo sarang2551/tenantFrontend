@@ -6,9 +6,24 @@ import QuotationForm from "../quotationForm";
 import StepperButton from "./StepperButton";
 import { useError } from "../errorBox";
 import { useSuccess } from "../successBox";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+
+const Styledbutton = styled.button`
+  display: flex;
+  color: white;
+  align-items: center;
+  font-family: Raleway;
+  background-color: #80cbc4;
+  font-size: 18px;
+  border: 4px solid #80cbc4;
+  border-radius: 10px;
+`;
+
 
 const Stepper = ({initialData}) => {
     const [ticketData,setTicketData] = useState(initialData)
+    const navigate = useNavigate()
     const userType = sessionStorage.getItem("userType")
     const [currentStep, setCurrentStep] = useState(ticketData?.progressStage);
     const [complete, setComplete] = useState(false);
@@ -49,6 +64,7 @@ const Stepper = ({initialData}) => {
       }
       }catch(err){
         showError("This ticket has been deleted")
+        navigate("/serviceTicketPage")
       }
       
     }
@@ -86,8 +102,9 @@ const Stepper = ({initialData}) => {
             {ticketData && <StepperButton progressData={ticketData?.progressBar[currentStep]} />}
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
+
       {!complete && ( //hide "next" for Awaiting quotation
-        <button
+        <Styledbutton
           className="btn"
           onClick={ticketData?.endDate ? ()=>{
             showError("Service ticket is finished",3000)
@@ -95,8 +112,10 @@ const Stepper = ({initialData}) => {
             currentStep === steps.length ? setComplete(true) : updateServiceTicket();
           }}
         >
+
           {ticketData?.endDate ? "Finish" : "Next"}
-        </button>
+        </Styledbutton>
+
       )}    
       {letLandlordAddQuotation?
       <QuotationForm onSubmission={()=>setLandlordAddQuotation(false)} ticketData={ticketData}/>:
