@@ -43,7 +43,9 @@ const ServiceTicketHistoryTable = (props) => {
   const [addTicketOpen, setAddTicketOpen] = useState();
   const [infoTicketOpen, setInfoTicketOpen] = useState(false);
   const [selectedTicket, setSelectedTicket] = useState (false);
-  const [data,setData] = useState([])
+  const [data,setData] = useState([]);
+  const [currentFilter,setFilter] = useState("all");
+
   const { showError } = useError();
   const { showSuccess } = useSuccess();
 
@@ -85,6 +87,7 @@ const ServiceTicketHistoryTable = (props) => {
         showError(('Error fetching data:', error), 3000);
       }
     };
+
     const handleDeleteTicket = async(rowData) => {
       const idx = rowData.tableData.id
       const response = await axios.delete("http://localhost:8000/tenant/deleteServiceTicket",{data:rowData})
@@ -92,7 +95,6 @@ const ServiceTicketHistoryTable = (props) => {
       if(res_data.status === 200){
         setData([...data.splice(0,idx),...data.splice(idx,data.length)])
       } else {
-        console.log(data) /** TODO: Add UI Error component */
         showError(data, 3000);
       }
     }
@@ -100,12 +102,25 @@ const ServiceTicketHistoryTable = (props) => {
     const handleInfoTicket = (ticketData) => {
       setSelectedTicket(ticketData);
       setInfoTicketOpen(true)
-
     }
     const handleOpenFeedback = (rowData)=> {
       setSelectedTicket(rowData)
       setShowFeedback(true)
     }
+    var filterd_data = data.filter((ticket) => {
+      if (currentFilter === 'all') {
+        return true; // Show all items
+      } else if (currentFilter === 'current') {
+        return ticket.progressStage == 0 || ticket.progressStage == 1; // Change 'status' to the relevant property in your data
+      } else if (currentFilter === 'inProgress') {
+        return ticket.progressStage == 2 || ticket.progressStage == 3; // Change 'status' to the relevant property in your data
+      } else if (currentFilter === 'completed') {
+        return ticket.progressStage >= 4; // Change 'status' to the relevant property in your data
+      } else {
+        return false; // Invalid filter, don't show any items
+      }
+    });
+
     useEffect(() => {
         // Fetch data from the API endpoint
         fetchData();
@@ -145,15 +160,19 @@ const ServiceTicketHistoryTable = (props) => {
       <Title>Service Tickets</Title>
 
       <div class="Ticketscolumn">
-                <button class="currentbutton">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
-                <span class="rentlabel">Current Tickets :</span>
-              </button>
-              <button class="progressbutton">
+        <button class="currentbutton" onClick={()=>setFilter("all")}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+              <span class="rentlabel">All Tickets</span>
+            </button>
+         <button class="currentbutton" onClick={()=>setFilter("current")}>
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
+              <span class="rentlabel">Current Tickets :</span>
+          </button>
+              <button class="progressbutton" onClick={()=>setFilter("inProgress")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
                 <span class="rentlabel">In-Progress Tickets :</span>
               </button>
-              <button class="completebutton">
+              <button class="completebutton" onClick={()=>setFilter("completed")}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" height="24" fill="none" class="svg-icon"><g stroke-width="2" stroke-linecap="round" stroke="#fff"><rect y="5" x="4" width="16" rx="2" height="16"></rect><path d="m8 3v4"></path><path d="m16 3v4"></path><path d="m4 11h16"></path></g></svg>
                 <span class="rentlabel">Completed Tickets :</span>
               </button>
@@ -168,7 +187,7 @@ const ServiceTicketHistoryTable = (props) => {
         onSlideChange={() => console.log('slide change')}
         onSwiper={(swiper) => console.log(swiper)}
       >
-        {data.map((ticketData, idx) => (
+        {filterd_data.map((ticketData, idx) => (
           <SwiperSlide key={idx}>
             <Ticket STData={{ idx, ...ticketData }} />
           </SwiperSlide>
@@ -181,7 +200,7 @@ const ServiceTicketHistoryTable = (props) => {
         style={materialTableStyle}
         title={<BoldTitle>Service Tickets History</BoldTitle>}
         columns={columns}
-        data={data}
+        data={filterd_data}
         icons={tableIcons}
         actions={[
           {

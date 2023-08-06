@@ -101,9 +101,6 @@ const CloseButton = styled.button`
 const ServiceTicketCard = ({_id,onPopupClose}) => {
   const [images, setImages] = useState([]);
   const [ticketData, setTicketData] = useState({})
-  const userType = sessionStorage.getItem('userType')
-  const showTenantFeedback = userType === "tenant" && !ticketData.tenantFeedback
-  const showLandlordFeedback = userType === "landlord" && !ticketData.landlordFeedback
   const [loading,setLoading] = useState(true)
   const fetchData = async () => {
       
