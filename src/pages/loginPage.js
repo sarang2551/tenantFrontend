@@ -21,9 +21,14 @@ const LoginPage = ()=>{
                 if(response.status === 200){
                     sessionStorage.setItem("userID",data.userID)
                     sessionStorage.setItem("userType",userType)
-                    if(userType === "tenant") sessionStorage.setItem("tenantName",data.tenantName)
-                    if(data.firstLogin && userType === "tenant"){
-                      navigate('/tenant/firstLogin')
+                    if(userType === "tenant") {
+                      sessionStorage.setItem("tenantName",data.tenantName)
+                    } 
+                    else {
+                      sessionStorage.setItem("landlordName",data.landlordName)
+                    }
+                    if(data.firstLogin){
+                      navigate(`/${userType}/firstLogin`)
                       showSuccess('Successfully logged in', 2000);
                     }else{
                       navigate(`/${userType}/home`)
