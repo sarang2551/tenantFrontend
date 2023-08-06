@@ -205,9 +205,7 @@ const ServiceTicketCard = ({_id,onPopupClose}) => {
                 <label>Landlord name: </label>
                 <span className="landlordName">{ticketData.landlordName}</span>
                 <br />
-                <label>Files Submitted:</label>
-                <span className="FromDataBase">{ticketData.documents}</span>
-                <br />
+                
                 {ticketData.progressStage < 4 && <label>Progress:</label>}
                 <StepperContainer>
                   <Stepper ticketData={ticketData} />

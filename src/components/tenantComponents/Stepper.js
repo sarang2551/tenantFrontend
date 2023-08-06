@@ -27,11 +27,11 @@ const Stepper = ({ticketData}) => {
           setCurrentStep(data.stepNumber)
           showSuccess("Updated Progress Successfully")
         } else {
-        console.log(data.message) /**TODO: Show UI error component */
+        console.log(data.message) 
         showError(data.message, 3000);
         }
       }catch(err){
-        console.log(`Error updating service ticket`) /**TODO: Show UI error component */
+        console.log(`Error updating service ticket`)
         showError(`Error updating service ticket`, 3000);
       }
       
@@ -65,7 +65,7 @@ const Stepper = ({ticketData}) => {
             ))}
           </div>
           <div className= "Stepperbutton">
-            {currentStep !== 2 && <StepperButton tenantInfo={ticketData} currentStage={currentStep}/>} 
+            {currentStep !== 2 && <StepperButton progressData={ticketData.progressBar[currentStep]} />} 
             {/* hide Stepperbutton for awaiting quotation */}
           </div>
       {!complete && currentStep !== 2 &&( //hide "next" for Awaiting quotation
