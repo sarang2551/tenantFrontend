@@ -47,11 +47,13 @@ const AddUnitForm = ({onClose,onAddition,buildingID})=>{
         const addUnit = async()=>{
             const imageList = [];
             const userID = sessionStorage.getItem('userID')
-                  for (let i = 0; i < images.length; i++) {
-                    const base64Image = await convertToBase64(images[i]);
-                    imageList.push(base64Image);
+                  if (images) {
+                    for (let i = 0; i < images.length; i++) {
+                      const base64Image = await convertToBase64(images[i]);
+                      imageList.push(base64Image);
+                    }
                   }
-                
+
                   const unitObject = {
                     unitName,
                     unitNumber,

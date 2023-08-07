@@ -197,11 +197,6 @@ const BuildingManageTable = () => {
               columns={columns}
               actions={[
                 {
-                  icon: tableIcons.Delete,
-                  tooltip: "Delete Tenant",
-                  onClick: (event, rowData) => handleDeleteUnit(rowData),
-                },
-                {
                   icon: () => addunit,
                   tooltip: "Add Unit",
                   isFreeAction: true,
@@ -212,7 +207,6 @@ const BuildingManageTable = () => {
               style={{ zIndex: 999 }}
               options = {{
                 sorting:true,
-                selection:true,
                 headerStyle: { background: "#fff8e1"}, 
                 exportButton:true,
                 exportAllData:true,

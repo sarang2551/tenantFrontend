@@ -15,9 +15,11 @@ const TenantDetailsForm = ({ unitDetails, onClose, onAddition }) => {
     const {tenantName, email, contact, images} = data
     const editTenant = async() => {
       const imageList = [];
-      for (let i = 0; i < images.length; i++) {
-        const base64Image = await convertToBase64(images[i]);
-        imageList.push(base64Image); 
+      if (images) {
+        for (let i = 0; i < images.length; i++) {
+          const base64Image = await convertToBase64(images[i]);
+          imageList.push(base64Image); 
+        }
       }
 
       const tenantObject = {
