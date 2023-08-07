@@ -44,9 +44,11 @@ const AddBuildForm = ({ onClose, onAddition }) => {
     const addBuilding = async () => {
       const imageList = [];
 
-      for (let i = 0; i < data.images.length; i++) {
-        const base64Image = await convertToBase64(data.images[i]);
-        imageList.push(base64Image);
+      if (data.images) {
+        for (let i = 0; i < data.images.length; i++) {
+          const base64Image = await convertToBase64(data.images[i]);
+          imageList.push(base64Image);
+        }
       }
 
       const buildingObject = {
