@@ -27,6 +27,12 @@ const Editprofile = ({onClose}) => {
       });
     };
 
+    const validatePhoneNumber = (value) => {
+      // A simple example of phone number validation (accepts only numbers with 8 digits)
+      const isValidPhoneNumber = /^\d{8}$/.test(value);
+      return isValidPhoneNumber || 'Invalid phone number';
+    };
+
     const handleFileChange = (e) => {
       if (e.target.files[0]) {
         setValue("profilePic", e.target.files);
@@ -67,7 +73,7 @@ const Editprofile = ({onClose}) => {
         <Grid item xs={20}>
         <input type="text" placeholder="username" {...register('username', { required: false })}></input> 
        
-        <input type="text" placeholder="Phone number" {...register('phoneNumber', { required: false })}></input>
+        <input type="text" placeholder="Phone number" {...register('phoneNumber', { required: false, validate: validatePhoneNumber })}></input>
         
         <input type="email" placeholder="Email address" {...register('email', { required: false })}></input>
         
